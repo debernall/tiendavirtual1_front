@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,10 +62,10 @@
 					<td><label>Nombre Completo:</label></td><br>
 					<td><input type="text" name="nombre_completo"></td>
 					<td><label>Contraseña:</label></td>
-					<td><input type="text" name="contraseña"></td><br>
+					<td><input type="text" name="contraseÃ±a"></td><br>
 				</tr>	
 				<tr>
-					<td><label>Correo Electónico:</label></td>
+					<td><label>Correo Electrónico:</label></td>
 					<td><input type="text" name="email"></td>
 				</tr>
 			</table>
