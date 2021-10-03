@@ -19,6 +19,15 @@ table.regitro {
     width: 33%;
     margin: auto;
 }
+
+.regitro {
+    display: block !important;
+}
+
+.logged-in .regitro {
+    display: none !important;
+}
+
 .regitro1 {
   width: 93%;
 }
@@ -51,13 +60,13 @@ button:hover {
   opacity: 0.8;
 }
 
-/*fin estilo login*/
-/*.cuadro-ventas {
+/*fin estilo login
+.cuadro-ventas {
     display: none !important;
 }
-
+/*
 .logged-in .cuadro-ventas {
-    display: block !important;
+    display: none !important;
 }*/
 		.navbar-nav1>li {
     margin: 0em 0px 3px 0;

@@ -16,21 +16,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.parser.ParseException;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import co.edu.unbosque.tiendavirtual1_front.model.Usuarios;
 
 /**
  * Ingresar implementation class Ingresar
  */
-@WebServlet("/Ingresar")
-public class Ingresar extends HttpServlet {
+@WebServlet("/FormUsuarios")
+public class FormUsuarios extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Ingresar() {
+    public FormUsuarios() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,10 +41,22 @@ public class Ingresar extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		String ingresar = request.getParameter("Ingresar");
-		if(ingresar != null) {
-			login(request, response);
+		String consultar = request.getParameter("Consultar");
+		//String crear = request.getParameter("Crear");
+		//String actualizar = request.getParameter("Actualizar");
+		//String borrar = request.getParameter("Borrar");
+		if(consultar != null) {
+			consultar(request, response);
+		}/*
+		if(crear != null) {
+			crear(request, response);
 		}
+		if(actualizar != null) {
+			actualizar(request,response);
+		}
+		if(borrar != null) {
+			borrar(request,response);
+		}*/
 	}
 
 	/**
@@ -56,25 +67,39 @@ public class Ingresar extends HttpServlet {
 		doGet(request, response);
 	}
 	
+	public void consultar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Long cedula = Long.parseLong(request.getParameter("cedula"));
+		PrintWriter writer = response.getWriter();
+		try {
+			Usuarios usuario2 = TestJSONusuarios.getJSON1(cedula);
+			writer.println("\nEl usuario consultado es: "+usuario2.toString());
+		}catch (Exception e) {
+			writer.println("\nNo se ha podido consultar el usuario con cedula "+cedula);
+			writer.println("\nError "+e);
+		}finally {
+			writer.close();
+		}
+	}
+	
 	public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Usuarios usuarios = new Usuarios();
 		usuarios.setUsuario(request.getParameter("usuario"));
 		usuarios.setPassword(request.getParameter("password"));
-		ArrayList<String> arrayuser = new ArrayList<String>();
 		//PrintWriter writer = response.getWriter();
 		//String pagina = "/inicio2.jsp";
 		if(usuarios.getUsuario().equals("admininicial") && usuarios.getPassword().equals("admin123456")) {
 			//writer.println("Ha ingresado!"+usuarios.getUsuario()+usuarios.getPassword());
-			String usuario = "hola mundo";
-			request.setAttribute("usuario", usuario);
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+			//RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
 			//dispatcher.forward(request, response);
 		}else {
 			try {
-				String respuesta = TestJSONusuarios.postJSON1(usuarios);
-				request.setAttribute("usuario", respuesta);
-				request.getRequestDispatcher("index.jsp").forward(request, response);
-				
+				int respuesta = TestJSONusuarios.postJSON1(usuarios);
+				/*if (respuesta == 200) {
+					System.out.println("\nHa ingresado exitosamente!");
+				}
+				else {
+					System.out.println("\nUsuario y contraseña incorrectos");
+				}*/
 			}
 			catch (Exception e) {
 				e.printStackTrace();

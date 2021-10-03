@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,8 +11,12 @@
 </head>
 <body>
 <h1>Bienvenido a Tienda Los chicos del Barrio</h1>
-
-	<form method="post" action="./Ingresar">
+	
+	<form action="./Ingresar" method="post" <%
+	if(request.getAttribute("usuario") != null){
+		%>style="display:none"<%
+	}
+	%>>
 		<table class="regitro">
 			<tr>
 				 <td><label class="regitro1" for="uname"><b>Usuario</b></label></td>
@@ -23,11 +29,17 @@
 
 		</table>
 			<div class="log">
-     		 <button type="submit" class="signupbtn" value="Ingresar" name="Ingresar">Login</button>
+     		 <button type="submit" class="signupbtn" value="Ingresar" name="Ingresar">Ingresar</button>
     		</div>
 	</form> 
 
-<div class="cuadro-ventas" id="navbarResponsive">
+<div class="cuadro-ventas" id="navbarResponsive" <%
+	if(request.getAttribute("usuario") != null){
+		%>style="display:block"<%		
+	}else{
+		%>style="display:none"<%
+	}
+%>>
           <ul class="navbar-nav1 ml-auto">
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" onClick="mostrar('interaccion-1');">Usuarios</a> 
@@ -51,6 +63,7 @@
   </div>
     <section  id="interaccion-1" class="oculto info-1"> 
     <h3>Usuarios</h3>
+    	<form method="post" action="./FormUsuarios">
 			<table class="Usuarios">
 				<tr>
 					<td><label>Cédula:</label></td>
@@ -70,30 +83,31 @@
 				</tr>
 			</table>
 			<br>
-		<script type="text/javascript">
-		function mostrar(name){
-			closeAll();
-			let el = document.getElementById(name);
-			el.style.height = 'auto';
-			irA(name);
-		}
-		function closeAll(){
-			let info = document.getElementsByClassName('oculto');
-			for(i = 0; i < info.length; i++){
-				info[i].style.height = '0';
-			} 
-		}
-		function irA(name){
-			let el = document.getElementById(name);
-			window.smoothScroll(el, 1000);
-		}
-		</script>
+			<script type="text/javascript">
+			function mostrar(name){
+				closeAll();
+				let el = document.getElementById(name);
+				el.style.height = 'auto';
+				irA(name);
+			}
+			function closeAll(){
+				let info = document.getElementsByClassName('oculto');
+				for(i = 0; i < info.length; i++){
+					info[i].style.height = '0';
+				} 
+			}
+			function irA(name){
+				let el = document.getElementById(name);
+				window.smoothScroll(el, 1000);
+			}
+			</script>
 			<div class="botones">
-					<button name="Consultar" type="button">Consulta</button>
+					<button name="Consultar" type="submit">Consulta</button>
 					<button name="Crear" type="button">Crear</button>
 					<button name="Actualizar" type="button">Actualizar</button>
 					<button name="Borrar" type="button">Borrar</button>
 			</div>
+		</form> 
     </section>
     <section  id="interaccion-2" class="oculto info-2"> 
      <h3>Clientes</h3>
@@ -135,7 +149,7 @@
 		}
 		</script> 
 			<div class="botones">
-					<button name="Consultar" type="button">Consulta</button>
+					<button name="Consultar" type="submit" value="Consultar">Consulta</button>
 					<button name="Crear" type="button">Crear</button>
 					<button name="Actualizar" type="button">Actualizar</button>
 					<button name="Borrar" type="button">Borrar</button>

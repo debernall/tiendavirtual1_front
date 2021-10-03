@@ -16,7 +16,7 @@ public class Usuarios implements Serializable {
 	private long cedula_usuario;
 	private String nombre_usuario;
 	private String email_usuario;
-	@Column(unique = true, nullable = false)
+	@Column(unique = true)
 	private String usuario;
 	private String password;
 	
