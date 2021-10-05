@@ -10,24 +10,43 @@
 <body>
 <h1>Bienvenido a Tienda Los chicos del Barrio</h1>
 
-	<form method="get" action="./t_servlet">
+	<form action="./Ingresar" method="post" <%
+	if(request.getAttribute("usuario") != null){
+		%>style="display:none"<%
+	}
+	%>>
 		<table class="regitro">
 			<tr>
 				 <td><label class="regitro1" for="uname"><b>Usuario</b></label></td>
-   				 <td><input class="regitro1" type="text" placeholder="Ingresa el usuario" name="uname" required></td>
+   				 <td><input class="regitro1" type="text" placeholder="Ingresa el usuario" name="usuario" required></td>
 			</tr>
 			<tr>
 				<td><label class="regitro1" for="passt"><b>Contraseña</b></label></td>
-				<td><input class="regitro1" type="password" placeholder="Ingresa la contraseña" name="passt" required></td>
+				<td><input class="regitro1" type="password" placeholder="Ingresa la contraseña" name="password" required></td>
 			</tr>
 
 		</table>
 			<div class="log">
-     		 <button type="submit" class="signupbtn">Login</button>
+     		 <button type="submit" class="signupbtn" value="Ingresar" name="Ingresar">Ingresar</button>
     		</div>
 	</form> 
-
-<div class="cuadro-ventas" id="navbarResponsive">
+	<%if(request.getAttribute("usuario") != null){
+		%>
+			<script>alert('Ingreso exitoso');</script>
+		<%
+	}else{
+		%>
+			<script>alert('Ingreso fallido');</script>
+		<%
+	} %>
+	
+<div class="cuadro-ventas" id="navbarResponsive" <%
+	if(request.getAttribute("usuario") != null){
+		%>style="display:block"<%		
+	}else{
+		%>style="display:none"<%
+	}
+%>>
           <ul class="navbar-nav1 ml-auto">
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" onClick="mostrar('interaccion-1');">Usuarios</a> 
@@ -51,6 +70,7 @@
   </div>
     <section  id="interaccion-1" class="oculto info-1"> 
     <h3>Usuarios</h3>
+	    <form method="post" action="./FormUsuarios">
 			<table class="Usuarios">
 				<tr>
 					<td><label>Cédula:</label></td>
@@ -70,6 +90,7 @@
 				</tr>
 			</table>
 			<br>
+		</form>
 		<script type="text/javascript">
 		function mostrar(name){
 			closeAll();

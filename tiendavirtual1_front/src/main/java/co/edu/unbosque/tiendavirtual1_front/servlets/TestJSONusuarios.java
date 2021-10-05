@@ -93,37 +93,7 @@ public class TestJSONusuarios {
 		return respuesta;
 		
 	}
-	/*
-	public static int postJSON1(Usuarios usuario) throws IOException{
-		url = new URL(sitio+"usuarios/login?");
-		
-		HttpURLConnection http;
-		http = (HttpURLConnection)url.openConnection();
-		try {
-			http.setRequestMethod("POST");
-		} catch(ProtocolException e) {
-			e.printStackTrace();
-		}
-		http.setDoOutput(true);
-		http.setRequestProperty("Accept", "application/json");
-		http.setRequestProperty("Content-Type", "application/json");
-		String data = "{"
-				+"\"cedula_usuario\":"+ usuario.getCedula_usuario()
-				+", \"nombre_usuario\":\""+ usuario.getNombre_usuario()
-				+"\" , \"email_usuario\":\""+ usuario.getEmail_usuario()
-				+"\" , \"usuario\":\""+ usuario.getUsuario()
-				+"\" , \"password\":\""+ usuario.getPassword()
-				+"\"}";
-		System.out.println(data);
-		byte[] out = data.getBytes(StandardCharsets.UTF_8);
-		OutputStream stream = http.getOutputStream();
-		stream.write(out);
-		int respuesta = http.getResponseCode();
-		http.disconnect();
-		return respuesta;
-		
-	}
-*/
+	
 	public static String postJSON1(Usuarios usuarios) throws IOException, ParseException {
 		url = new URL(sitio+"usuarios/login");
 		HttpURLConnection http;

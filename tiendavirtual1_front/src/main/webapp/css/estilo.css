@@ -51,14 +51,14 @@ button:hover {
   opacity: 0.8;
 }
 
-/*fin estilo login*/
+/*fin estilo login
 .cuadro-ventas {
     display: none !important;
 }
 
 .logged-in .cuadro-ventas {
     display: block !important;
-}
+}*/
 		.navbar-nav1>li {
     margin: 0em 0px 3px 0;
     padding: 0px 0px;
