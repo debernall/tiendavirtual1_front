@@ -20,7 +20,7 @@ import org.json.simple.parser.ParseException;
 import co.edu.unbosque.tiendavirtual1_front.model.Usuarios;
 
 
-public class TestJSONusuarios {
+public class UsuarioTestJSON {
 	
 	private static URL url;
 	private static String sitio = "http://localhost:5000/";
@@ -117,7 +117,6 @@ public class TestJSONusuarios {
 		byte[] out = data.getBytes(StandardCharsets.UTF_8);
 		OutputStream stream = http.getOutputStream();
 		stream.write(out);
-		int respuesta = http.getResponseCode();
 		String respuesta3 = new String();
 		try(BufferedReader br = new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
 			StringBuilder response = new StringBuilder();
@@ -129,65 +128,18 @@ public class TestJSONusuarios {
 			System.out.println(respuestatxt);
 			JSONParser jsonParser = new JSONParser();
 			JSONObject respuesta2 = (JSONObject) jsonParser.parse(respuestatxt);
-			respuesta3 = (String) respuesta2.get("status");
-			
+			respuesta3 = (String) respuesta2.get("status");	
+			if(respuesta3.equals("true")) {
+				respuesta3 = "true";
+			}else {
+				respuesta3 = "false";
+			}
 		}
-		
 		http.disconnect();
+		System.out.println(respuesta3);
 		return respuesta3;
 	}
 	
-	public static Usuarios getJSON1(long cedula) throws IOException, ParseException {
-		url = new URL(sitio+"usuarios/consultar");
-		HttpURLConnection http;
-		http = (HttpURLConnection)url.openConnection();
-		try {
-			http.setRequestMethod("GET");
-		} catch(ProtocolException e) {
-			e.printStackTrace();
-		}
-		http.setDoOutput(true);
-		http.setRequestProperty("Accept", "application/json");
-		http.setRequestProperty("Content-Type", "application/json; utf-8");
-		String data = "{"
-				+"\"cedula_usuario\":"+ cedula
-				+"}";
-		System.out.println(data);
-		byte[] out = data.getBytes(StandardCharsets.UTF_8);
-		OutputStream stream = http.getOutputStream();
-		stream.write(out);
-		System.out.println("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy1yyyy");
-		stream.flush();
-		stream.close();
-		InputStream resp = http.getInputStream();
-		System.out.println("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy2");
-		byte[] jsonuser = resp.readAllBytes();
-		String json = "";
-		for (int i = 0; i<jsonuser.length ; i++) {
-			json += (char)jsonuser[i];
-		}
-		System.out.println("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy3");
-		ArrayList<Usuarios> lista = new ArrayList<Usuarios>();
-		lista = parsingUsuarios(json);
-		Usuarios usuarios2 = lista.get(0);	
-		System.out.println("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy4");
-		http.disconnect();
-		System.out.println("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy5");
-		/*
-		try(BufferedReader br = new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
-			System.out.println("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
-			StringBuilder response = new StringBuilder();
-		    String responseLine = null;
-		    while ((responseLine = br.readLine()) != null) {
-		    	response.append(responseLine.trim());
-				}
-				System.out.println(response.toString());
-				System.out.println("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
-			}
-			*/
-
-		return usuarios2;
-	}
 
 
 }

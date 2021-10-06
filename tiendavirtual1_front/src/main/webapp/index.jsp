@@ -5,13 +5,14 @@
 <head>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/estilo.css"/>
 <meta charset="UTF-8"/>
-<title>Pagina de ejemplo</title>
+<title>TIENDA VIRTUAL</title>
 </head>
 <body>
+<% boolean login = false;%>
 <h1>Bienvenido a Tienda Los chicos del Barrio</h1>
 
-	<form action="./Ingresar" method="post" <%
-	if(request.getAttribute("usuario") != null){
+	<form action="./UsuarioServlet" method="post" <%
+	if(request.getAttribute("estado") == "true" && login == false){
 		%>style="display:none"<%
 	}
 	%>>
@@ -30,18 +31,19 @@
      		 <button type="submit" class="signupbtn" value="Ingresar" name="Ingresar">Ingresar</button>
     		</div>
 	</form> 
-	<%if(request.getAttribute("usuario") != null){
+	<%if(request.getAttribute("estado") == "true" && login == false){
+		login = true;
 		%>
 			<script>alert('Ingreso exitoso');</script>
 		<%
-	}else{
+	}else if (request.getAttribute("estado") == "false" && login == false) {
 		%>
-			<script>alert('Ingreso fallido');</script>
+			<script>alert('Usuario o contraseña errados, intente de nuevo');</script>
 		<%
 	} %>
 	
 <div class="cuadro-ventas" id="navbarResponsive" <%
-	if(request.getAttribute("usuario") != null){
+	if(login == true){
 		%>style="display:block"<%		
 	}else{
 		%>style="display:none"<%
@@ -70,19 +72,19 @@
   </div>
     <section  id="interaccion-1" class="oculto info-1"> 
     <h3>Usuarios</h3>
-	    <form method="post" action="./FormUsuarios">
+	    <form method="post" action="./UsuarioServlet">
 			<table class="Usuarios">
 				<tr>
 					<td><label>Cédula:</label></td>
-					<td><input type="text" name="cedula"></td>
+					<td><input type="number" name="cedula"></td>
 					<td><label>Usuario:</label></td>
 					<td><input type="text" name="usuario"></td>
 				</tr>	
 				<tr>
 					<td><label>Nombre Completo:</label></td><br>
-					<td><input type="text" name="nombre_completo"></td>
+					<td><input type="text" name="nombre"></td>
 					<td><label>Contraseña:</label></td>
-					<td><input type="text" name="contraseña"></td><br>
+					<td><input type="text" name="password"></td><br>
 				</tr>	
 				<tr>
 					<td><label>Correo Electónico:</label></td>
@@ -90,7 +92,7 @@
 				</tr>
 			</table>
 			<br>
-		</form>
+		
 		<script type="text/javascript">
 		function mostrar(name){
 			closeAll();
@@ -111,11 +113,27 @@
 		</script>
 			<div class="botones">
 					<button name="Consultar" type="button">Consulta</button>
-					<button name="Crear" type="button">Crear</button>
+					<button type="submit" name="Crear" >Crear</button>
 					<button name="Actualizar" type="button">Actualizar</button>
 					<button name="Borrar" type="button">Borrar</button>
 			</div>
+		</form>
     </section>
+    	<%if(request.getAttribute("status_crear") == "true"){
+		%>
+			<script>alert('Usuario ingresado de manera exitosa');</script>
+		<%
+	}else if (request.getAttribute("status_crear") == "false") {
+		%>
+			<script>alert('Usuario o contraseña errados, intente de nuevo');</script>
+		<%
+	}else if (request.getAttribute("status_crear") == "vacio") {
+		%> 
+			<script>alert('Faltan datos del usuario');</script>
+			
+		<%
+	} %>
+    
     <section  id="interaccion-2" class="oculto info-2"> 
      <h3>Clientes</h3>
 			<table class="Clientes">
