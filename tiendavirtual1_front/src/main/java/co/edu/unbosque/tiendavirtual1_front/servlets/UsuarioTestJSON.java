@@ -140,6 +140,52 @@ public class UsuarioTestJSON {
 		return respuesta3;
 	}
 	
+	public static Usuarios getJSON1(long cedula) throws IOException, ParseException {
+		url = new URL(sitio+"usuarios/consultar");
+		HttpURLConnection http;
+		http = (HttpURLConnection)url.openConnection();
+		try {
+			http.setRequestMethod("POST");
+		} catch(ProtocolException e) {
+			e.printStackTrace();
+		}
+		http.setDoOutput(true);
+		http.setRequestProperty("Accept", "application/json");
+		http.setRequestProperty("Content-Type", "application/json");
+		Usuarios usprueba = new Usuarios();
+		usprueba.setCedula_usuario(cedula);
+		String data = "{"
+				+"\"cedula_usuario\":"+ usprueba.getCedula_usuario()
+				+", \"nombre_usuario\":\""+ usprueba.getNombre_usuario()
+				+"\" , \"email_usuario\":\""+ usprueba.getEmail_usuario()
+				+"\" , \"usuario\":\""+ usprueba.getUsuario()
+				+"\" , \"password\":\""+ usprueba.getPassword()
+				+"\"}";
+		System.out.println(data);
+		byte[] out = data.getBytes(StandardCharsets.UTF_8);
+		OutputStream stream = http.getOutputStream();
+		stream.write(out);
+		Usuarios usuario = new Usuarios();
+		try(BufferedReader br = new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
+			StringBuilder response = new StringBuilder();
+			String responseLine = null;
+			while ((responseLine = br.readLine()) != null) {
+				response.append(responseLine.trim());
+			}
+			String respuestatxt = response.toString();
+			System.out.println(respuestatxt);
+			JSONParser jsonParser = new JSONParser();
+			JSONObject respuesta2 = (JSONObject) jsonParser.parse(respuestatxt);
+			usuario.setCedula_usuario((long) respuesta2.get("cedula_usuario"));
+			usuario.setNombre_usuario((String) respuesta2.get("nombre_usuario"));
+			usuario.setEmail_usuario((String) respuesta2.get("email_usuario"));
+			usuario.setUsuario((String) respuesta2.get("usuario"));
+			usuario.setPassword((String) respuesta2.get("password"));
+		}
+		http.disconnect();
+		System.out.println(usuario.toString());
+		return usuario;
+	}
 
 
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import='co.edu.unbosque.tiendavirtual1_front.model.Usuarios'  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,7 +85,7 @@
 					<td><label>Nombre Completo:</label></td><br>
 					<td><input type="text" name="nombre"></td>
 					<td><label>Contraseña:</label></td>
-					<td><input type="text" name="password"></td><br>
+					<td><input type="password" name="password"></td><br>
 				</tr>	
 				<tr>
 					<td><label>Correo Electónico:</label></td>
@@ -112,14 +113,14 @@
 		}
 		</script>
 			<div class="botones">
-					<button name="Consultar" type="button">Consulta</button>
+					<button name="Consultar" type="submit">Consulta</button>
 					<button type="submit" name="Crear" >Crear</button>
 					<button name="Actualizar" type="button">Actualizar</button>
 					<button name="Borrar" type="button">Borrar</button>
 			</div>
 		</form>
     </section>
-    	<%if(request.getAttribute("status_crear") == "true"){
+    <%if(request.getAttribute("status_crear") == "true"){
 		%>
 			<script>alert('Usuario ingresado de manera exitosa');</script>
 		<%
@@ -132,7 +133,12 @@
 			<script>alert('Faltan datos del usuario');</script>
 			
 		<%
-	} %>
+	}else if (request.getAttribute("status_consultar") == "true") {
+		%>
+			<script>alert("Consulta usuario exitosa");</script>
+		<%
+	}%>
+
     
     <section  id="interaccion-2" class="oculto info-2"> 
      <h3>Clientes</h3>

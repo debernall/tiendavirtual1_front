@@ -33,11 +33,15 @@ public class UsuarioServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {;
 		String ingresar = request.getParameter("Ingresar");
 		String crear = request.getParameter("Crear");
+		String consultar = request.getParameter("Consultar");
 		if(ingresar != null) {
 			login(request, response);
 		}
 		if(crear != null) {
 			crear(request,response);
+		}
+		if(consultar != null) {
+			consultar(request,response);
 		}
 	}
 
@@ -72,30 +76,60 @@ public class UsuarioServlet extends HttpServlet {
 			request.getParameter("usuario") == "" ||
 			request.getParameter("password") == "") {
 			request.setAttribute("status_crear", "vacio");
+			request.setAttribute("estado", "true");
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}else {
-		Usuarios usuarios = new Usuarios();
-		usuarios.setCedula_usuario(Long.parseLong(request.getParameter("cedula")));
-		usuarios.setNombre_usuario(request.getParameter("nombre"));
-		usuarios.setEmail_usuario(request.getParameter("email"));
-		usuarios.setUsuario(request.getParameter("usuario"));
-		usuarios.setPassword(request.getParameter("password"));
-		try {
-			int respuesta = UsuarioTestJSON.postJSON(usuarios);
-			if (respuesta==200) {
-					request.setAttribute("estado", "true");
-					request.setAttribute("status_crear", "true");
-					request.getRequestDispatcher("index.jsp").forward(request, response);
-			}else {
-					request.setAttribute("estado", "true");
-					request.setAttribute("status_crear", "false");
-					request.getRequestDispatcher("index.jsp").forward(request, response);
+			Usuarios usuarios = new Usuarios();
+			usuarios.setCedula_usuario(Long.parseLong(request.getParameter("cedula")));
+			usuarios.setNombre_usuario(request.getParameter("nombre"));
+			usuarios.setEmail_usuario(request.getParameter("email"));
+			usuarios.setUsuario(request.getParameter("usuario"));
+			usuarios.setPassword(request.getParameter("password"));
+			try {
+				int respuesta = UsuarioTestJSON.postJSON(usuarios);
+				if (respuesta==200) {
+						request.setAttribute("estado", "true");
+						request.setAttribute("status_crear", "true");
+						request.getRequestDispatcher("index.jsp").forward(request, response);
+				}else {
+						request.setAttribute("estado", "true");
+						request.setAttribute("status_crear", "false");
+						request.getRequestDispatcher("index.jsp").forward(request, response);
+				}
+				
 			}
-			
+			catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-		catch (Exception e) {
-			e.printStackTrace();
+	}
+	
+	public void consultar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		long cedula = Long.parseLong(request.getParameter("cedula"));
+		Usuarios respuesta = new Usuarios();
+		if (request.getParameter("cedula") == "") {
+			request.setAttribute("estado", "true");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
+		else {
+		
+			try {
+				respuesta = (Usuarios) UsuarioTestJSON.getJSON1(cedula);
+				long id = respuesta.getCedula_usuario();
+				if (id != 0) {
+						request.setAttribute("estado", "true");
+						request.setAttribute("status_consultar", "true");
+						request.setAttribute("cedula", id);
+						request.setAttribute("nombre", respuesta.getNombre_usuario());
+						request.setAttribute("email", respuesta.getEmail_usuario());
+						request.setAttribute("usuario", respuesta.getUsuario());
+						request.setAttribute("password", respuesta.getPassword());
+						request.getRequestDispatcher("index.jsp").forward(request, response);
+				}				
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
