@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Bean;
 import co.edu.unbosque.tiendavirtual1_front.model.Usuarios;
 
 /**
- * Ingresar implementation class Ingresar
+ * UsuarioServlet implementation class UsuarioServlet
  */
 @WebServlet("/FormUsuarios")
 public class FormUsuarios extends HttpServlet {
@@ -71,7 +71,7 @@ public class FormUsuarios extends HttpServlet {
 		Long cedula = Long.parseLong(request.getParameter("cedula"));
 		PrintWriter writer = response.getWriter();
 		try {
-			Usuarios usuario2 = TestJSONusuarios.getJSON1(cedula);
+			Usuarios usuario2 = UsuarioTestJSON.getJSON1(cedula);
 			writer.println("\nEl usuario consultado es: "+usuario2.toString());
 		}catch (Exception e) {
 			writer.println("\nNo se ha podido consultar el usuario con cedula "+cedula);
@@ -93,7 +93,7 @@ public class FormUsuarios extends HttpServlet {
 			//dispatcher.forward(request, response);
 		}else {
 			try {
-				int respuesta = TestJSONusuarios.postJSON1(usuarios);
+				int respuesta = UsuarioTestJSON.postJSON1(usuarios);
 				/*if (respuesta == 200) {
 					System.out.println("\nHa ingresado exitosamente!");
 				}
