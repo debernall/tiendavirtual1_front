@@ -1,14 +1,14 @@
 body {
-	font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
-	color: Black;
-	background-color: #EAF2F8;
-}
+			font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+			color: Black;
+			background-color: #fcfdfe;
+			}
 h1 {
     text-align: center;
 }
 h3{
 text-align: center;
-color: #04AA6D;
+color: #34AA6D;
 }
 /* estilo login*/
 form {
@@ -18,13 +18,18 @@ table.regitro {
     border: 1px solid #ccc;
     width: 33%;
     margin: auto;
-    aling-items: center;
-    justify-content: center;
 }
+
+.regitro {
+    display: block !important;
+}
+
+.logged-in .regitro {
+    display: none !important;
+}
+
 .regitro1 {
   width: 93%;
-
-
 }
 /* Full-width inputs */
 input {
@@ -59,9 +64,9 @@ button:hover {
 .cuadro-ventas {
     display: none !important;
 }
-
+/*
 .logged-in .cuadro-ventas {
-    display: block !important;
+    display: none !important;
 }*/
 		.navbar-nav1>li {
     margin: 0em 0px 3px 0;
@@ -166,19 +171,11 @@ div#navbarResponsive{
 table.Usuarios {
     margin: auto;
 }
-table.ventas {
-    width: 90%; 
+table.Clientes {
+    margin: auto;
 }
-table.ventas2 {
-    width: 90%;
-    padding-left: 30px;
-}
-table.totalventas {
-    float: right;
-    margin-right: 121px;
-}
-button.consultaVentas {
-    width: 100%;
+table.Proveedores {
+    margin: auto;
 }
 .botones {
     margin-left: 9%;
