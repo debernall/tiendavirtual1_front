@@ -83,6 +83,21 @@
 			<script>alert('Faltan datos del usuario');</script>
 		<%
 	  }
+	  else if(request.getAttribute("status_borrar") == "true"){
+			%>
+				<script>alert('Datos del usuario borrados');</script>
+			<% 
+	  }
+	  else if(request.getAttribute("status_borrar") == "false"){
+			  %>
+				<script>alert('Usuario inexistente');</script>
+			<%
+	  }
+	  else if(request.getAttribute("status_borrar") == "empty"){
+			  %>
+				<script>alert('No ingresó un número de cédula');</script>
+			<%
+	  }
 	  else if(login == true){
 		  %><script>alert('Ingreso exitoso');</script>
 		  <%
@@ -198,7 +213,7 @@
 					<button name="Consultar" type="submit">Consulta</button>
 					<button type="submit" name="Crear" >Crear</button>
 					<button name="Actualizar" type="submit">Actualizar</button>
-					<button name="Borrar" type="button">Borrar</button>
+					<button name="Borrar" type="submit">Borrar</button>
 			</div>
 		</form>
     </section>

@@ -35,6 +35,7 @@ public class UsuarioServlet extends HttpServlet {
 		String crear = request.getParameter("Crear");
 		String consultar = request.getParameter("Consultar");
 		String actualizar = request.getParameter("Actualizar");
+		String borrar = request.getParameter("Borrar");
 		if(ingresar != null) {
 			login(request, response);
 		}
@@ -46,6 +47,9 @@ public class UsuarioServlet extends HttpServlet {
 		}
 		if(actualizar != null) {
 			actualizar(request,response);
+		}
+		if(borrar != null) {
+			borrar(request,response);
 		}
 	}
 
@@ -175,6 +179,29 @@ public class UsuarioServlet extends HttpServlet {
 			catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
+	}
+	public void borrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("status_form", "usuarios");
+		long cedula = 0;
+		try {
+			cedula =  Long.parseLong(request.getParameter("cedula"));
+			int respuesta = UsuarioTestJSON.getJSON2(cedula);
+			if (respuesta == 200) {
+				request.setAttribute("estado", "true");
+				request.setAttribute("status_borrar", "true");
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+			}
+			else {
+				request.setAttribute("estado", "true");
+				request.setAttribute("status_borrar", "false");
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+			}
+		}catch(Exception e) {
+			cedula = 0;
+			request.setAttribute("estado", "true");
+			request.setAttribute("status_consultar", "empty");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 	}
 }

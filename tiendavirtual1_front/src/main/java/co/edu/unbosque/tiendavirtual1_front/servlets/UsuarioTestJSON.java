@@ -186,6 +186,36 @@ public class UsuarioTestJSON {
 		System.out.println(usuario.toString());
 		return usuario;
 	}
-
+	
+	public static int getJSON2(long cedula) throws IOException, ParseException {
+		url = new URL(sitio+"usuarios/eliminar");
+		HttpURLConnection http;
+		http = (HttpURLConnection)url.openConnection();
+		try {
+			http.setRequestMethod("DELETE");
+		} catch(ProtocolException e) {
+			e.printStackTrace();
+		}
+		http.setDoOutput(true);
+		http.setRequestProperty("Accept", "application/json");
+		http.setRequestProperty("Content-Type", "application/json");
+		Usuarios usprueba = new Usuarios();
+		usprueba.setCedula_usuario(cedula);
+		String data = "{"
+				+"\"cedula_usuario\":"+ usprueba.getCedula_usuario()
+				+", \"nombre_usuario\":\""+ usprueba.getNombre_usuario()
+				+"\" , \"email_usuario\":\""+ usprueba.getEmail_usuario()
+				+"\" , \"usuario\":\""+ usprueba.getUsuario()
+				+"\" , \"password\":\""+ usprueba.getPassword()
+				+"\"}";
+		System.out.println(data);
+		byte[] out = data.getBytes(StandardCharsets.UTF_8);
+		OutputStream stream = http.getOutputStream();
+		stream.write(out);
+		int respuesta = http.getResponseCode();
+		System.out.println(respuesta);
+		http.disconnect();
+		return respuesta;
+	}
 
 }
