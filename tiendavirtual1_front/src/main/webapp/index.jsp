@@ -70,6 +70,19 @@
 			<script>alert('No ingresó un número de cédula');</script>
 		<%
 	  }
+	  else if(request.getAttribute("status_actualizar") == "true"){
+		  %>
+			<script>alert('Usuario actualizado de manera exitosa');</script>
+		<%
+	  }else if(request.getAttribute("status_actualizar") == "false"){
+		  %>
+			<script>alert('Datos incorrectos');</script>
+		<%
+	  }else if(request.getAttribute("status_actualizar") == "empty"){
+		  %>
+			<script>alert('Faltan datos del usuario');</script>
+		<%
+	  }
 	  else if(login == true){
 		  %><script>alert('Ingreso exitoso');</script>
 		  <%
@@ -184,7 +197,7 @@
 			<div class="botones">
 					<button name="Consultar" type="submit">Consulta</button>
 					<button type="submit" name="Crear" >Crear</button>
-					<button name="Actualizar" type="button">Actualizar</button>
+					<button name="Actualizar" type="submit">Actualizar</button>
 					<button name="Borrar" type="button">Borrar</button>
 			</div>
 		</form>

@@ -34,6 +34,7 @@ public class UsuarioServlet extends HttpServlet {
 		String ingresar = request.getParameter("Ingresar");
 		String crear = request.getParameter("Crear");
 		String consultar = request.getParameter("Consultar");
+		String actualizar = request.getParameter("Actualizar");
 		if(ingresar != null) {
 			login(request, response);
 		}
@@ -42,6 +43,9 @@ public class UsuarioServlet extends HttpServlet {
 		}
 		if(consultar != null) {
 			consultar(request,response);
+		}
+		if(actualizar != null) {
+			actualizar(request,response);
 		}
 	}
 
@@ -135,6 +139,42 @@ public class UsuarioServlet extends HttpServlet {
 			request.setAttribute("estado", "true");
 			request.setAttribute("status_consultar", "empty_id");
 			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
+	}
+	
+	public void actualizar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("status_form", "usuarios");
+		if (request.getParameter("cedula") == "" || 
+			request.getParameter("nombre") == "" ||
+			request.getParameter("email") == "" ||
+			request.getParameter("usuario") == "" ||
+			request.getParameter("password") == "") {
+			request.setAttribute("status_actualizar", "empty");
+			request.setAttribute("estado", "true");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}else {
+			Usuarios usuarios = new Usuarios();
+			usuarios.setCedula_usuario(Long.parseLong(request.getParameter("cedula")));
+			usuarios.setNombre_usuario(request.getParameter("nombre"));
+			usuarios.setEmail_usuario(request.getParameter("email"));
+			usuarios.setUsuario(request.getParameter("usuario"));
+			usuarios.setPassword(request.getParameter("password"));
+			try {
+				int respuesta = UsuarioTestJSON.postJSON(usuarios);
+				if (respuesta==200) {
+						request.setAttribute("estado", "true");
+						request.setAttribute("status_actualizar", "true");
+						request.getRequestDispatcher("index.jsp").forward(request, response);
+				}else {
+						request.setAttribute("estado", "true");
+						request.setAttribute("status_actualizar", "false");
+						request.getRequestDispatcher("index.jsp").forward(request, response);
+				}
+				
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }
