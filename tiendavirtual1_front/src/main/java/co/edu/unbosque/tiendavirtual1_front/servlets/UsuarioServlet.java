@@ -70,12 +70,13 @@ public class UsuarioServlet extends HttpServlet {
 	}
 	
 	public void crear(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("status_form", "usuarios");
 		if (request.getParameter("cedula") == "" || 
 			request.getParameter("nombre") == "" ||
 			request.getParameter("email") == "" ||
 			request.getParameter("usuario") == "" ||
 			request.getParameter("password") == "") {
-			request.setAttribute("status_crear", "vacio");
+			request.setAttribute("status_crear", "empty");
 			request.setAttribute("estado", "true");
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}else {
@@ -105,14 +106,11 @@ public class UsuarioServlet extends HttpServlet {
 	}
 	
 	public void consultar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		long cedula = Long.parseLong(request.getParameter("cedula"));
-		Usuarios respuesta = new Usuarios();
-		if (request.getParameter("cedula") == "") {
-			request.setAttribute("estado", "true");
-			request.getRequestDispatcher("index.jsp").forward(request, response);
-		}
-		else {
-		
+		request.setAttribute("status_form", "usuarios");
+		long cedula = 0;
+		try {
+			cedula =  Long.parseLong(request.getParameter("cedula"));
+			Usuarios respuesta = new Usuarios();	
 			try {
 				respuesta = (Usuarios) UsuarioTestJSON.getJSON1(cedula);
 				long id = respuesta.getCedula_usuario();
@@ -125,12 +123,18 @@ public class UsuarioServlet extends HttpServlet {
 						request.setAttribute("usuario", respuesta.getUsuario());
 						request.setAttribute("password", respuesta.getPassword());
 						request.getRequestDispatcher("index.jsp").forward(request, response);
-				}				
+				}
 			}
 			catch (Exception e) {
-				e.printStackTrace();
+				request.setAttribute("estado", "true");
+				request.setAttribute("status_consultar", "empty");
+				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
+		}catch(Exception e) {
+			cedula = 0;
+			request.setAttribute("estado", "true");
+			request.setAttribute("status_consultar", "empty_id");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 	}
-	
 }

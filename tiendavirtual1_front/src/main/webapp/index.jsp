@@ -32,17 +32,49 @@
      		 <button type="submit" class="signupbtn" value="Ingresar" name="Ingresar">Ingresar</button>
     		</div>
 	</form> 
-	<%if(request.getAttribute("estado") == "true" && login == false){
+	<%if(request.getAttribute("estado") == "true"){
 		login = true;
-		%>
-			<script>alert('Ingreso exitoso');</script>
-		<%
-	}else if (request.getAttribute("estado") == "false" && login == false) {
+	}else if (request.getAttribute("estado") == "false") {
 		%>
 			<script>alert('Usuario o contraseña errados, intente de nuevo');</script>
 		<%
 	} %>
 	
+	<%String status_crear = request.getParameter("status_crear"); 
+	  String status_consultar = request.getParameter("status_consultar");
+	  if(request.getAttribute("status_crear") == "true"){
+		  %>
+			<script>alert('Usuario ingresado de manera exitosa');</script>
+		<%
+	  }else if(request.getAttribute("status_crear") == "false"){
+		  %>
+			<script>alert('Datos incorrectos');</script>
+		<%
+	  }else if(request.getAttribute("status_crear") == "empty"){
+		  %>
+			<script>alert('Faltan datos del usuario');</script>
+		<%
+	  }
+	  else if(request.getAttribute("status_consultar") == "true"){
+		%>
+			<script>alert('Consulta usuario exitosa');</script>
+		<% 
+	  }
+	  else if(request.getAttribute("status_consultar") == "empty"){
+		  %>
+			<script>alert('Usuario inexistente');</script>
+		<%
+	  }
+	  else if(request.getAttribute("status_consultar") == "empty_id"){
+		  %>
+			<script>alert('No ingresó un número de cédula');</script>
+		<%
+	  }
+	  else if(login == true){
+		  %><script>alert('Ingreso exitoso');</script>
+		  <%
+		}
+		%>	
 <div class="cuadro-ventas" id="navbarResponsive" <%
 	if(login == true){
 		%>style="display:block"<%		
@@ -71,25 +103,62 @@
             </li>
            </ul>
   </div>
+
     <section  id="interaccion-1" class="oculto info-1"> 
     <h3>Usuarios</h3>
 	    <form method="post" action="./UsuarioServlet">
 			<table class="Usuarios">
 				<tr>
 					<td><label>Cédula:</label></td>
-					<td><input type="number" name="cedula"></td>
+					<td><input type="number" name="cedula" 
+					<%
+						if(request.getAttribute("status_consultar") == "true"){
+							%> 
+							value=<%= request.getAttribute("cedula")%> 
+							<%
+						}
+					%>
+					></td>
 					<td><label>Usuario:</label></td>
-					<td><input type="text" name="usuario"></td>
+					<td><input type="text" name="usuario" <%
+						if(request.getAttribute("status_consultar") == "true"){
+							%> 
+							value=<%= request.getAttribute("usuario")%> 
+							<%
+						}
+					%>
+					></td>
 				</tr>	
 				<tr>
 					<td><label>Nombre Completo:</label></td><br>
-					<td><input type="text" name="nombre"></td>
+					<td><input type="text" name="nombre" <%
+						if(request.getAttribute("status_consultar") == "true"){
+							%> 
+							value=<%= request.getAttribute("nombre")%> 
+							<%
+						}
+					%>
+					></td>
 					<td><label>Contraseña:</label></td>
-					<td><input type="password" name="password"></td><br>
+					<td><input type="password" name="password" <%
+						if(request.getAttribute("status_consultar") == "true"){
+							%> 
+							value=<%= request.getAttribute("password")%> 
+							<%
+						}
+					%>
+					></td><br>
 				</tr>	
 				<tr>
 					<td><label>Correo Electónico:</label></td>
-					<td><input type="text" name="email"></td>
+					<td><input type="text" name="email" <%
+						if(request.getAttribute("status_consultar") == "true"){
+							%> 
+							value=<%= request.getAttribute("email")%> 
+							<%
+						}
+					%>
+					></td>
 				</tr>
 			</table>
 			<br>
@@ -120,26 +189,14 @@
 			</div>
 		</form>
     </section>
-    <%if(request.getAttribute("status_crear") == "true"){
-		%>
-			<script>alert('Usuario ingresado de manera exitosa');</script>
-		<%
-	}else if (request.getAttribute("status_crear") == "false") {
-		%>
-			<script>alert('Usuario o contraseña errados, intente de nuevo');</script>
-		<%
-	}else if (request.getAttribute("status_crear") == "vacio") {
-		%> 
-			<script>alert('Faltan datos del usuario');</script>
-			
-		<%
-	}else if (request.getAttribute("status_consultar") == "true") {
-		%>
-			<script>alert("Consulta usuario exitosa");</script>
-		<%
-	}%>
 
-    
+
+    <%
+		if(request.getAttribute("status_form") == "usuarios"){
+			%> <script> window.onload = mostrar('interaccion-1') </script>
+			<%
+		}
+	%>
     <section  id="interaccion-2" class="oculto info-2"> 
      <h3>Clientes</h3>
 			<table class="Clientes">
