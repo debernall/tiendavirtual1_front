@@ -1,7 +1,9 @@
-package co.edu.unbosque.tiendavirtual1_front;
+package co.edu.unbosque.tiendavirtual1_front.servlets;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
@@ -17,6 +19,7 @@ import org.json.simple.parser.ParseException;
 
 import co.edu.unbosque.tiendavirtual1_front.model.Productos;
 
+
 public class TestJSONproductos {
 	
 	private static URL url;
@@ -27,7 +30,9 @@ public class TestJSONproductos {
 		HttpURLConnection http = (HttpURLConnection)url.openConnection();
 		http.setRequestMethod("GET");
 		http.setRequestProperty("Accept", "application/json");
+		System.out.println("antes del get input stream");
 		InputStream respuesta = http.getInputStream();
+		System.out.println("despues del get input stream");
 		byte[] inp = respuesta.readAllBytes();
 		String json = "";
 		for (int i = 0; i<inp.length ; i++) {
@@ -60,9 +65,8 @@ public class TestJSONproductos {
 		
 	}
 	
-	public static int postJSON(Productos producto) throws IOException{
-		url = new URL(sitio+"productos/guardar");
-		
+	public static Productos getJSON1(long codigo) throws IOException, ParseException {
+		url = new URL(sitio+"productos/consultar");
 		HttpURLConnection http;
 		http = (HttpURLConnection)url.openConnection();
 		try {
@@ -73,21 +77,32 @@ public class TestJSONproductos {
 		http.setDoOutput(true);
 		http.setRequestProperty("Accept", "application/json");
 		http.setRequestProperty("Content-Type", "application/json");
+		Productos proprueba = new Productos();
+		proprueba.setCodigo_producto(codigo);
 		String data = "{"
-				+"\"codigo_producto\":\""+ producto.getCodigo_producto()
-				+"\"nombre_producto\":\""+ producto.getNombre_producto()
-				+"\"NITproveedor\":\""+ producto.getNITproveedor()
-				+"\"precio_compra\":\""+ producto.getPrecio_compra()
-				+"\"iva_compra\":\""+ producto.getIva_compra()
-				+"\"precio_venta\":\""+ producto.getPrecio_venta()
+				+"\"codigo_producto\":"+ proprueba.getCodigo_producto()
+				+"\" , \"nombre_producto\":\""+ proprueba.getNombre_producto()
 				+"\"}";
+		System.out.println(data);
 		byte[] out = data.getBytes(StandardCharsets.UTF_8);
 		OutputStream stream = http.getOutputStream();
 		stream.write(out);
-		int respuesta = http.getResponseCode();
+		Productos producto = new Productos();
+		try(BufferedReader br = new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
+			StringBuilder response = new StringBuilder();
+			String responseLine = null;
+			while ((responseLine = br.readLine()) != null) {
+				response.append(responseLine.trim());
+			}
+			String respuestatxt = response.toString();
+			System.out.println(respuestatxt);
+			JSONParser jsonParser = new JSONParser();
+			JSONObject respuesta2 = (JSONObject) jsonParser.parse(respuestatxt);
+			producto.setCodigo_producto((long) respuesta2.get("codigo_producto"));
+			producto.setNombre_producto((String) respuesta2.get("nombre_producto"));
+		}
 		http.disconnect();
-		return respuesta;
-		
+		System.out.println(producto.toString());
+		return producto;
 	}
-	
 }

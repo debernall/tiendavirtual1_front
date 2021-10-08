@@ -1,17 +1,39 @@
 package co.edu.unbosque.tiendavirtual1_front.model;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class Clientes {
+@Table(name = "clientes")
+public class Clientes implements Serializable{
 	
 	@Id
+	@Column(unique = true, nullable = false)
 	private long cedula_cliente;
 	private String nombre_cliente;
 	private String email_cliente;
 	private String direccion_cliente;
 	private long telefono_cliente;
+	
+	
+	public Clientes() {
+		super();
+		
+	}
+
+	public Clientes(long cedula_cliente, String nombre_cliente, String email_cliente, String direccion_cliente,
+			long telefono_cliente) {
+		super();
+		this.cedula_cliente = cedula_cliente;
+		this.nombre_cliente = nombre_cliente;
+		this.email_cliente = email_cliente;
+		this.direccion_cliente = direccion_cliente;
+		this.telefono_cliente = telefono_cliente;
+	}
 	
 	public long getCedula_cliente() {
 		return cedula_cliente;
