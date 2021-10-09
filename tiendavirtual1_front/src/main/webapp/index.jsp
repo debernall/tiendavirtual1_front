@@ -98,6 +98,16 @@
 				<script>alert('No ingresó un número de cédula');</script>
 			<%
 	  }
+	  else if(request.getAttribute("status_cargar")=="true"){
+		  %>
+			<script>alert('Archivo cargado exitosamente');</script>
+		<%
+	  }
+	  else if(request.getAttribute("status_cargar")=="false"){
+		  %>
+			<script>alert('Archivo no fue cargado');</script>
+		<%
+	  }
 	  else if(login == true){
 		  %><script>alert('Ingreso exitoso');</script>
 		  <%
@@ -322,14 +332,16 @@
     </section>
     <section  id="interaccion-4" class="oculto info-4"> 
      <h3>Productos</h3>
+     	<form method="post" action="./ProductoServlet" enctype="multipart/form-data">
 			<table class="productos">
 				<tr>
 					<td><label>Nombre del archivo:</label></td>
-					<td><input type="file" name="archioProduct"></td>
+					<td><input type="file" name="archivoProductos"></td>
 					<td><label></label></td>
-					<td><input type="submit" value="Enviar datos"></td>
+					<td><input type="submit" value="Enviardatos" name="Enviardatos"></td>
 				</tr>	
 			</table>
+		</form>
 			<br>
 		<script type="text/javascript">
 		function mostrar(name){
@@ -350,6 +362,14 @@
 		}
 		</script>
     </section>
+    
+        <%
+		if(request.getAttribute("status_form") == "producto"){
+			%> <script> window.onload = mostrar('interaccion-4') </script>
+			<%
+		}
+	%>
+	
     <section  id="interaccion-5" class="oculto info-5"> 
      <h3>Ventas</h3>
      <form>
