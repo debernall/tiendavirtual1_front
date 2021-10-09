@@ -1,28 +1,58 @@
 body {
 	font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
-	color: Black;
-	background-color: #EAF2F8;
+	background: #fff;
 }
+
+div#titulot{
+
+    position: absolute;
+  	top: 30%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+}
+div#botonl{
+	
+	position: absolute;
+  	top: 70%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+  	
+}
+
+div#body2{
+	
+	background: #56ab2f;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #a8e063, #56ab2f);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #a8e063, #56ab2f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	padding: 40px 0;
+	box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+	border-radius:10px
+}
+
 h1 {
     text-align: center;
+    font-family: "Lucida Console";
+    font-size: 30px;
 }
 h3{
 text-align: center;
-color: #04AA6D;
+color: black;
+font-size: 30px;
+font-family: "Courier New";
 }
 /* estilo login*/
-form {
-  border: 3px solid #f1f1f1;
-}
+
 table.regitro {
-    border: 1px solid #ccc;
-    width: 33%;
+    width: 30%;
     margin: auto;
-    aling-items: center;
-    justify-content: center;
+	padding: 15px;
+	position: absolute;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
 }
 .regitro1 {
-  width: 93%;
+  width: 100%;
 
 
 }
@@ -32,22 +62,28 @@ input {
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
-  border: 1px solid #ccc;
+  border: 1px solid black;
   box-sizing: border-box;
+  border-radius: 10px;
 }
 button.signupbtn {
-    margin-left: 35%;
-    width: 30%;
+    display: block;
+    margin:auto;
+    width: 100%;
+    height: 60px;
+    font-size: 25px;
+    box-shadow: 0 0 6px 0 rgba(255, 255, 255, 0.8);
 }
 /* Set a style for all buttons */
 button {
-  background-color: #04AA6D;
-  color: white;
+  background-color:#9FDB28;
+  color: black;
   padding: 14px 20px;
-  margin: 8px 0;
   border: none;
   cursor: pointer;
   width: 20%;
+  border-radius: 10px;
+  border: 1px solid black;
 }
 
 /* Add a hover effect for buttons */
@@ -76,17 +112,17 @@ button:hover {
 .navbar-nav1>li.capa{width: 16%;}
 
 .navbar-nav1>li a {
-    border: 1px solid #ccc;
-    color: #555;
+    border: 1px solid black;
+    color: black;
     padding: 5%;
     margin: 0px auto;
     float: left;
     text-align: center;
     width: 100%;
-    background: #ccc;
+    background: #FFFFFF;
     cursor: pointer;
     font-weight: 500;
-  font-size:1.1vw;
+  	font-size:1.1vw;
 }
 .navbar-nav1>li a:hover{
     background: #fff;
@@ -164,7 +200,10 @@ div#navbarResponsive{
     margin-left: 20%;
 }
 table.Usuarios {
-    margin: auto;
+    width: 90%; 
+    margin: aoto;
+	padding: auto;
+	border-spacing: 10px;
 }
 table.ventas {
     width: 90%; 
@@ -177,6 +216,28 @@ table.totalventas {
     float: right;
     margin-right: 121px;
 }
+
+table.Clientes {
+	width: 90%; 
+    margin: aoto;
+	padding: auto;
+	border-spacing: 10px;
+}
+
+table.proveedores {
+	width: 90%; 
+    margin: aoto;
+	padding: auto;
+	border-spacing: 10px;
+}
+
+table.productos {
+	width: 90%; 
+    margin: aoto;
+	padding: auto;
+	
+}
+
 button.consultaVentas {
     width: 100%;
 }
