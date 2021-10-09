@@ -10,13 +10,17 @@
 </head>
 <body>
 <% boolean login = false;%>
-<h1>Bienvenido a Tienda Los chicos del Barrio</h1>
+
 
 	<form action="./UsuarioServlet" method="post" <%
 	if(request.getAttribute("estado") == "true" && login == false){
 		%>style="display:none"<%
 	}
 	%>>
+	<div class="body2" id="body2">
+	<div class="titulol" id="titulot"><h1>Iniciar Sesion</h1></div>
+
+
 		<table class="regitro">
 			<tr>
 				 <td><label class="regitro1" for="uname"><b>Usuario</b></label></td>
@@ -28,10 +32,13 @@
 			</tr>
 
 		</table>
-			<div class="log">
+			<div class="botonl" id="botonl">
      		 <button type="submit" class="signupbtn" value="Ingresar" name="Ingresar">Ingresar</button>
     		</div>
+     	</div>
 	</form> 
+	
+	
 	<%if(request.getAttribute("estado") == "true"){
 		login = true;
 	}else if (request.getAttribute("estado") == "false") {
@@ -42,71 +49,183 @@
 	
 	<%String status_crear = request.getParameter("status_crear"); 
 	  String status_consultar = request.getParameter("status_consultar");
-	  if(request.getAttribute("status_crear") == "true"){
-		  %>
-			<script>alert('Usuario ingresado de manera exitosa');</script>
-		<%
-	  }else if(request.getAttribute("status_crear") == "false"){
-		  %>
-			<script>alert('Datos incorrectos');</script>
-		<%
-	  }else if(request.getAttribute("status_crear") == "empty"){
-		  %>
-			<script>alert('Faltan datos del usuario');</script>
-		<%
-	  }
-	  else if(request.getAttribute("status_consultar") == "true"){
-		%>
-			<script>alert('Consulta usuario exitosa');</script>
-		<% 
-	  }
-	  else if(request.getAttribute("status_consultar") == "empty"){
-		  %>
-			<script>alert('Usuario inexistente');</script>
-		<%
-	  }
-	  else if(request.getAttribute("status_consultar") == "empty_id"){
-		  %>
-			<script>alert('No ingresó un número de cédula');</script>
-		<%
-	  }
-	  else if(request.getAttribute("status_actualizar") == "true"){
-		  %>
-			<script>alert('Usuario actualizado de manera exitosa');</script>
-		<%
-	  }else if(request.getAttribute("status_actualizar") == "false"){
-		  %>
-			<script>alert('Datos incorrectos');</script>
-		<%
-	  }else if(request.getAttribute("status_actualizar") == "empty"){
-		  %>
-			<script>alert('Faltan datos del usuario');</script>
-		<%
-	  }
-	  else if(request.getAttribute("status_borrar") == "true"){
+	  if(request.getAttribute("status_form")== "usuarios"){
+	  
+		  if(request.getAttribute("status_crear") == "true"){
+			  %>
+				<script>alert('Usuario ingresado de manera exitosa');</script>
+			<%
+	  	  
+		  }else if(request.getAttribute("status_crear") == "false"){
+			  %>
+				<script>alert('Datos incorrectos');</script>
+			<%
+		  }else if(request.getAttribute("status_crear") == "empty"){
+			  %>
+				<script>alert('Faltan datos del usuario');</script>
+			<%
+		  }
+		  else if(request.getAttribute("status_consultar") == "true"){
 			%>
-				<script>alert('Datos del usuario borrados');</script>
+				<script>alert('Consulta usuario exitosa');</script>
 			<% 
-	  }
-	  else if(request.getAttribute("status_borrar") == "false"){
+		  }
+		  else if(request.getAttribute("status_consultar") == "empty"){
 			  %>
 				<script>alert('Usuario inexistente');</script>
 			<%
-	  }
-	  else if(request.getAttribute("status_borrar") == "empty"){
+		  }
+		  else if(request.getAttribute("status_consultar") == "empty_id"){
 			  %>
 				<script>alert('No ingresó un número de cédula');</script>
 			<%
+		  }
+		  else if(request.getAttribute("status_actualizar") == "true"){
+			  %>
+				<script>alert('Usuario actualizado de manera exitosa');</script>
+			<%
+		  }else if(request.getAttribute("status_actualizar") == "false"){
+			  %>
+				<script>alert('Datos incorrectos');</script>
+			<%
+		  }else if(request.getAttribute("status_actualizar") == "empty"){
+			  %>
+				<script>alert('Faltan datos del usuario');</script>
+			<%
+		  }
+		  else if(request.getAttribute("status_borrar") == "true"){
+				%>
+					<script>alert('Datos del usuario borrados');</script>
+				<% 
+		  }else if(request.getAttribute("status_borrar") == "false"){
+			  %>
+				<script>alert('Usuario inexistente');</script>
+			<%
+		  }
+		  else if(request.getAttribute("status_borrar") == "empty"){
+				  %>
+					<script>alert('No ingresó un número de cédula');</script>
+				<%
+		  }
 	  }
-	  else if(request.getAttribute("status_cargar")=="true"){
-		  %>
-			<script>alert('Archivo cargado exitosamente');</script>
-		<%
+	  else if(request.getAttribute("status_form")== "clientes"){
+		  
+	  
+		  if(request.getAttribute("status_crear") == "true"){
+			  %>
+				<script>alert('Cliente ingresado de manera exitosa');</script>
+			<%
+		  }else if(request.getAttribute("status_crear") == "false"){
+			  %>
+				<script>alert('Datos incorrectos');</script>
+			<%
+		  }else if(request.getAttribute("status_crear") == "empty"){
+			  %>
+				<script>alert('Faltan datos del cliente');</script>
+			<%
+		  }
+		  else if(request.getAttribute("status_consultar") == "true"){
+			%>
+				<script>alert('Consulta cliente exitosa');</script>
+			<% 
+		  }
+		  else if(request.getAttribute("status_consultar") == "empty"){
+			  %>
+				<script>alert('Cliente inexistente');</script>
+			<%
+		  }
+		  else if(request.getAttribute("status_consultar") == "empty_id"){
+			  %>
+				<script>alert('No ingresó un número de cédula');</script>
+			<%
+		  }
+		  else if(request.getAttribute("status_actualizar") == "true"){
+			  %>
+				<script>alert('Cliente actualizado de manera exitosa');</script>
+			<%
+		  }else if(request.getAttribute("status_actualizar") == "false"){
+			  %>
+				<script>alert('Datos incorrectos');</script>
+			<%
+		  }else if(request.getAttribute("status_actualizar") == "empty"){
+			  %>
+				<script>alert('Faltan datos del cliente');</script>
+			<%
+		  }
+		  else if(request.getAttribute("status_borrar") == "true"){
+				%>
+					<script>alert('Datos del cliente borrados');</script>
+				<% 
+		  }
+		  else if(request.getAttribute("status_borrar") == "false"){
+				  %>
+					<script>alert('Cliente inexistente');</script>
+				<%
+		  }
+		  else if(request.getAttribute("status_borrar") == "empty"){
+				  %>
+					<script>alert('No ingresó un número de cédula');</script>
+				<%
+		  }
 	  }
-	  else if(request.getAttribute("status_cargar")=="false"){
+	  else if(request.getAttribute("status_form")== "proveedores"){
+	  
+		  if(request.getAttribute("status_crear") == "true"){
 		  %>
-			<script>alert('Archivo no fue cargado');</script>
+			<script>alert('Proveedor ingresado de manera exitosa');</script>
 		<%
+		  }else if(request.getAttribute("status_crear") == "false"){
+			  %>
+				<script>alert('Datos incorrectos');</script>
+			<%
+		  }else if(request.getAttribute("status_crear") == "empty"){
+			  %>
+				<script>alert('Faltan datos del proveedor');</script>
+			<%
+		  }
+		  else if(request.getAttribute("status_consultar") == "true"){
+			%>
+				<script>alert('Consulta proveedor exitosa');</script>
+			<% 
+		  }
+		  else if(request.getAttribute("status_consultar") == "empty"){
+			  %>
+				<script>alert('Proveedor inexistente');</script>
+			<%
+		  }
+		  else if(request.getAttribute("status_consultar") == "empty_id"){
+			  %>
+				<script>alert('No ingresó un número de NIT');</script>
+			<%
+		  }
+		  else if(request.getAttribute("status_actualizar") == "true"){
+			  %>
+				<script>alert('Proveedor actualizado de manera exitosa');</script>
+			<%
+		  }else if(request.getAttribute("status_actualizar") == "false"){
+			  %>
+				<script>alert('Datos incorrectos');</script>
+			<%
+		  }else if(request.getAttribute("status_actualizar") == "empty"){
+			  %>
+				<script>alert('Faltan datos del proveedor');</script>
+			<%
+		  }
+		  else if(request.getAttribute("status_borrar") == "true"){
+				%>
+					<script>alert('Datos del proveedor borrados');</script>
+				<% 
+		  }
+		  else if(request.getAttribute("status_borrar") == "false"){
+				  %>
+					<script>alert('Proveedor inexistente');</script>
+				<%
+		  }
+		  else if(request.getAttribute("status_borrar") == "empty"){
+				  %>
+					<script>alert('No ingresó un número de NIT');</script>
+				<%
+		  }
 	  }
 	  else if(login == true){
 		  %><script>alert('Ingreso exitoso');</script>
@@ -237,22 +356,63 @@
 	%>
     <section  id="interaccion-2" class="oculto info-2"> 
      <h3>Clientes</h3>
+     	<form method="post" action="./ClienteServlet">
 			<table class="Clientes">
 				<tr>
 					<td><label>Cédula:</label></td>
-					<td><input type="text" name="cedula"></td>
+					<td><input type="text" name="cedula"
+					<%
+						if(request.getAttribute("status_consultar") == "true"){
+							%> 
+							value=<%= request.getAttribute("cedula")%> 
+							<%
+						}
+					%>
+					></td>
 					<td><label>Teléfono:</label></td>
-					<td><input type="text" name="telefono"></td>
+					<td><input type="text" name="telefono"
+					<%
+						if(request.getAttribute("status_consultar") == "true"){
+							%> 
+							value=<%= request.getAttribute("telefono")%> 
+							<%
+						}
+					%>
+					></td>
 				</tr>	
 				<tr>
 					<td><label>Nombre Completo:</label></td><br>
-					<td><input type="text" name="nombre_completo"></td>
+					<td><input type="text" name="nombre_completo"
+					<%
+						if(request.getAttribute("status_consultar") == "true"){
+							%> 
+							value=<%= request.getAttribute("nombre")%> 
+							<%
+						}
+					%>
+					></td>
 					<td><label>Correo Electrónico:</label></td>
-					<td><input type="text" name="email"></td><br>
+					<td><input type="text" name="email"
+					<%
+						if(request.getAttribute("status_consultar") == "true"){
+							%> 
+							value=<%= request.getAttribute("email")%> 
+							<%
+						}
+					%>
+					></td><br>
 				</tr>	
 				<tr>
 					<td><label>Dirección:</label></td>
-					<td><input type="text" name="direccion"></td>
+					<td><input type="text" name="direccion"
+					<%
+						if(request.getAttribute("status_consultar") == "true"){
+							%> 
+							value=<%= request.getAttribute("direccion")%> 
+							<%
+						}
+					%>
+					></td>
 				</tr>
 			</table>
 			<br>
@@ -275,32 +435,79 @@
 		}
 		</script> 
 			<div class="botones">
-					<button name="Consultar" type="button">Consulta</button>
-					<button name="Crear" type="button">Crear</button>
-					<button name="Actualizar" type="button">Actualizar</button>
-					<button name="Borrar" type="button">Borrar</button>
+					<button name="Consultar" type="submit">Consulta</button>
+					<button name="Crear" type="submit">Crear</button>
+					<button name="Actualizar" type="submit">Actualizar</button>
+					<button name="Borrar" type="submit">Borrar</button>
 			</div>
+			</form>
     </section>
-    </section>
+   	<%
+		if(request.getAttribute("status_form") == "clientes"){
+			%> <script> window.onload = mostrar('interaccion-2') </script>
+			<%
+		}
+	%>
     <section  id="interaccion-3" class="oculto info-3"> 
      <h3>Proveedores</h3>
-     <form>
+     <form method="post" action="./ProveedorServlet">
+    
 			<table class="proveedores">
 				<tr>
 					<td><label>NIT:</label></td>
-					<td><input type="text" name="nit"></td>
+					<td><input type="text" name="nit"
+					<%
+						if(request.getAttribute("status_consultar") == "true"){
+							%> 
+							value=<%= request.getAttribute("NIT")%> 
+							<%
+						}
+					%>
+					></td>
 					<td><label>Teléfono:</label></td>
-					<td><input type="text" name="telefono"></td>
+					<td><input type="text" name="telefono"
+					<%
+						if(request.getAttribute("status_consultar") == "true"){
+							%> 
+							value=<%= request.getAttribute("telefono")%> 
+							<%
+						}
+					%>
+					></td>
 				</tr>	
 				<tr>
 					<td><label>Nombre Proveedor:</label></td><br>
-					<td><input type="text" name="nombre_proveedor"></td>
+					<td><input type="text" name="nombre_proveedor"
+					<%
+						if(request.getAttribute("status_consultar") == "true"){
+							%> 
+							value=<%= request.getAttribute("nombre")%> 
+							<%
+						}
+					%>
+					></td>
 					<td><label>Ciudad:</label></td>
-					<td><input type="text" name="ciudad"></td><br>
+					<td><input type="text" name="ciudad"
+					<%
+						if(request.getAttribute("status_consultar") == "true"){
+							%> 
+							value=<%= request.getAttribute("ciudad")%> 
+							<%
+						}
+					%>
+					></td><br>
 				</tr>	
 				<tr>
 					<td><label>Dirección:</label></td>
-					<td><input type="text" name="direccion"></td>
+					<td><input type="text" name="direccion"
+					<%
+						if(request.getAttribute("status_consultar") == "true"){
+							%> 
+							value=<%= request.getAttribute("direccion")%> 
+							<%
+						}
+					%>
+					></td>
 				</tr>
 			</table>
 			<br>
@@ -322,26 +529,30 @@
 			window.smoothScroll(el, 1000);
 		}
 		</script>
-	</form> 
 			<div class="botones">
-					<button name="Consultar" type="button">Consulta</button>
-					<button name="Crear" type="button">Crear</button>
-					<button name="Actualizar" type="button">Actualizar</button>
-					<button name="Borrar" type="button">Borrar</button>
+					<button name="Consultar" type="submit">Consulta</button>
+					<button name="Crear" type="submit">Crear</button>
+					<button name="Actualizar" type="submit">Actualizar</button>
+					<button name="Borrar" type="submit">Borrar</button>
 			</div>
+	</form>
     </section>
+    <%
+		if(request.getAttribute("status_form") == "proveedores"){
+			%> <script> window.onload = mostrar('interaccion-3') </script>
+			<%
+		}
+	%>
     <section  id="interaccion-4" class="oculto info-4"> 
      <h3>Productos</h3>
-     	<form method="post" action="./ProductoServlet" enctype="multipart/form-data">
 			<table class="productos">
 				<tr>
 					<td><label>Nombre del archivo:</label></td>
-					<td><input type="file" name="archivoProductos"></td>
+					<td><input type="file" name="archioProduct"></td>
 					<td><label></label></td>
-					<td><input type="submit" value="Enviardatos" name="Enviardatos"></td>
+					<td><input type="submit" value="Enviar datos"></td>
 				</tr>	
 			</table>
-		</form>
 			<br>
 		<script type="text/javascript">
 		function mostrar(name){
@@ -362,14 +573,6 @@
 		}
 		</script>
     </section>
-    
-        <%
-		if(request.getAttribute("status_form") == "producto"){
-			%> <script> window.onload = mostrar('interaccion-4') </script>
-			<%
-		}
-	%>
-	
     <section  id="interaccion-5" class="oculto info-5"> 
      <h3>Ventas</h3>
      <form>
