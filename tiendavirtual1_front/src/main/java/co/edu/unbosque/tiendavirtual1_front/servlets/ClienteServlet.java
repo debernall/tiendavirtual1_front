@@ -48,7 +48,7 @@ public class ClienteServlet extends HttpServlet {
 	public void crear(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("status_form", "clientes");
 		if (request.getParameter("cedula") == "" || 
-			request.getParameter("nombre") == "" ||
+			request.getParameter("nombre_completo") == "" ||
 			request.getParameter("email") == "" ||
 			request.getParameter("direccion") == "" ||
 			request.getParameter("telefono") == "") {
@@ -58,7 +58,7 @@ public class ClienteServlet extends HttpServlet {
 		}else {
 			Clientes clientes = new Clientes();
 			clientes.setCedula_cliente(Long.parseLong(request.getParameter("cedula")));
-			clientes.setNombre_cliente(request.getParameter("nombre"));
+			clientes.setNombre_cliente(request.getParameter("nombre_completo"));
 			clientes.setEmail_cliente(request.getParameter("email"));
 			clientes.setDireccion_cliente(request.getParameter("direccion"));
 			clientes.setTelefono_cliente(Long.parseLong(request.getParameter("telefono")));
@@ -93,10 +93,10 @@ public class ClienteServlet extends HttpServlet {
 					request.setAttribute("estado", "true");
 					request.setAttribute("status_consultar", "true");
 					request.setAttribute("cedula", id);
+					request.setAttribute("telefono", respuesta.getTelefono_cliente());
 					request.setAttribute("nombre", respuesta.getNombre_cliente());
 					request.setAttribute("email", respuesta.getEmail_cliente());
-					request.setAttribute("usuario", respuesta.getDireccion_cliente());
-					request.setAttribute("password", respuesta.getTelefono_cliente());
+					request.setAttribute("direccion", respuesta.getDireccion_cliente());
 					request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
 		}
@@ -116,7 +116,7 @@ public class ClienteServlet extends HttpServlet {
 	public void actualizar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("status_form", "clientes");
 		if (request.getParameter("cedula") == "" || 
-				request.getParameter("nombre") == "" ||
+				request.getParameter("nombre_completo") == "" ||
 				request.getParameter("email") == "" ||
 				request.getParameter("direccion") == "" ||
 				request.getParameter("telefono") == "") {
@@ -126,7 +126,7 @@ public class ClienteServlet extends HttpServlet {
 			}else {
 				Clientes clientes = new Clientes();
 				clientes.setCedula_cliente(Long.parseLong(request.getParameter("cedula")));
-				clientes.setNombre_cliente(request.getParameter("nombre"));
+				clientes.setNombre_cliente(request.getParameter("nombre_completo"));
 				clientes.setEmail_cliente(request.getParameter("email"));
 				clientes.setDireccion_cliente(request.getParameter("direccion"));
 				clientes.setTelefono_cliente(Long.parseLong(request.getParameter("telefono")));
@@ -154,7 +154,7 @@ public class ClienteServlet extends HttpServlet {
 		long cedula = 0;
 		try {
 			cedula =  Long.parseLong(request.getParameter("cedula"));
-			int respuesta = UsuarioTestJSON.getJSON2(cedula);
+			int respuesta = TestJSONclientes.getJSON2(cedula);
 			if (respuesta == 200) {
 				request.setAttribute("estado", "true");
 				request.setAttribute("status_borrar", "true");
