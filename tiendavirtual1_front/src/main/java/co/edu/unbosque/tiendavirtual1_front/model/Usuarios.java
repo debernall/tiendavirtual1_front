@@ -1,22 +1,9 @@
 package co.edu.unbosque.tiendavirtual1_front.model;
 
-
-import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "usuarios")
-public class Usuarios implements Serializable {
-	@Id
-	@Column(unique = true, nullable = false)
+public class Usuarios {
 	private long cedula_usuario;
 	private String nombre_usuario;
 	private String email_usuario;
-	@Column(unique = true)
 	private String usuario;
 	private String password;
 	

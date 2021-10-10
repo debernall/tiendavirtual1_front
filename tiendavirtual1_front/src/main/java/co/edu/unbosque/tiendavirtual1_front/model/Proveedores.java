@@ -1,18 +1,7 @@
 package co.edu.unbosque.tiendavirtual1_front.model;
 
-import java.io.Serializable;
+public class Proveedores {
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "proveedores")
-public class Proveedores implements Serializable{
-	
-	@Id
-	@Column(unique = true, nullable = false)
 	private long NIT_proveedor;
 	private String nombre_proveedor;
 	private String ciudad;
