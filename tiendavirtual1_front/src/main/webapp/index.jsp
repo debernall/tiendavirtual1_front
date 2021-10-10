@@ -455,7 +455,7 @@
 			<table class="proveedores">
 				<tr>
 					<td><label>NIT:</label></td>
-					<td><input type="text" name="nit"
+					<td><input type="text" name="NIT"
 					<%
 						if(request.getAttribute("status_consultar") == "true"){
 							%> 

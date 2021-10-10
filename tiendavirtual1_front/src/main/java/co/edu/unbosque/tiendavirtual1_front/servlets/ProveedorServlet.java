@@ -49,7 +49,7 @@ public class ProveedorServlet extends HttpServlet {
 	public void crear(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	request.setAttribute("status_form", "proveedores");
 	if(request.getParameter("NIT") == "" ||
-	   request.getParameter("nombre") == "" ||
+	   request.getParameter("nombre_proveedor") == "" ||
 	   request.getParameter("direccion") == "" ||
 	   request.getParameter("ciudad") == "" ||
 	   request.getParameter("telefono") == "") {
@@ -59,7 +59,7 @@ public class ProveedorServlet extends HttpServlet {
 		}else {
 			Proveedores proveedores = new Proveedores();
 			proveedores.setNIT_proveedor(Long.parseLong(request.getParameter(("NIT"))));
-			proveedores.setNombre_proveedor(request.getParameter("nombre"));
+			proveedores.setNombre_proveedor(request.getParameter("nombre_proveedor"));
 			proveedores.setDireccion_proveedor(request.getParameter("direccion"));
 			proveedores.setCiudad(request.getParameter("ciudad"));
 			proveedores.setTelefono_proveedor(Long.parseLong(request.getParameter("telefono")));
@@ -93,11 +93,11 @@ public class ProveedorServlet extends HttpServlet {
 				if(id !=0) {
 					request.setAttribute("estado", "true");
 					request.setAttribute("status_consultar", "true");
-					request.setAttribute("NIT", response);
-					request.setAttribute("nombre", respuesta.getNombre_proveedor());
-					request.setAttribute("direccion", respuesta.getDireccion_proveedor());
-					request.setAttribute("ciudad", respuesta.getCiudad());
+					request.setAttribute("NIT", id);
 					request.setAttribute("telefono", respuesta.getTelefono_proveedor());
+					request.setAttribute("nombre", respuesta.getNombre_proveedor());
+					request.setAttribute("ciudad", respuesta.getCiudad());
+					request.setAttribute("direccion", respuesta.getDireccion_proveedor());
 					request.getRequestDispatcher("index.jsp").forward(request, response);
 				}
 			}
@@ -117,7 +117,7 @@ public class ProveedorServlet extends HttpServlet {
 	public void actualizar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("status_form", "proveedores");
 		if(request.getParameter("NIT") == "" ||
-				   request.getParameter("nombre") == "" ||
+				   request.getParameter("nombre_proveedor") == "" ||
 				   request.getParameter("direccion") == "" ||
 				   request.getParameter("ciudad") == "" ||
 				   request.getParameter("telefono") == "") {
@@ -127,7 +127,7 @@ public class ProveedorServlet extends HttpServlet {
 					}else {
 						Proveedores proveedores = new Proveedores();
 						proveedores.setNIT_proveedor(Long.parseLong(request.getParameter(("NIT"))));
-						proveedores.setNombre_proveedor(request.getParameter("nombre"));
+						proveedores.setNombre_proveedor(request.getParameter("nombre_proveedor"));
 						proveedores.setDireccion_proveedor(request.getParameter("direccion"));
 						proveedores.setCiudad(request.getParameter("ciudad"));
 						proveedores.setTelefono_proveedor(Long.parseLong(request.getParameter("telefono")));
