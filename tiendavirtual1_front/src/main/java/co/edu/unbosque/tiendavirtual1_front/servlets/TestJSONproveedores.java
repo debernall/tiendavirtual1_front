@@ -23,7 +23,7 @@ import co.edu.unbosque.tiendavirtual1_front.model.Proveedores;
 public class TestJSONproveedores {
 	
 	private static URL url;
-	private static String sitio = "http://localhost:8080/";
+	private static String sitio = "http://localhost:5000/";
 	
 	public static ArrayList<Proveedores> getJSON() throws IOException, ParseException{
 		url = new URL(sitio+"proveedores/listar");

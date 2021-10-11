@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import='co.edu.unbosque.tiendavirtual1_front.model.Usuarios'  %>
+<%@ page import='co.edu.unbosque.tiendavirtual1_front.model.Clientes'  %>
+<%@ page import='co.edu.unbosque.tiendavirtual1_front.model.Proveedores'  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -657,7 +659,33 @@
     </section>
      <section  id="interaccion-6" class="oculto info-6"> 
      <h3>Reportes</h3>
-	<!-- contenido Reportes -->
+  		<table class="listados">
+  		<tr>
+			<button name="Borrar" type="submit">Lista Usuarios</button>
+		</tr>
+		<tr>
+			<button name="Borrar" type="submit">Lista Clientes</button>
+		</tr>
+		</table>
+	<script type="text/javascript">
+		function mostrar(name){
+			closeAll();
+			let el = document.getElementById(name);
+			el.style.height = 'auto';
+			irA(name);
+		}
+		function closeAll(){
+			let info = document.getElementsByClassName('oculto');
+			for(i = 0; i < info.length; i++){
+				info[i].style.height = '0';
+			} 
+		}
+		function irA(name){
+			let el = document.getElementById(name);
+			window.smoothScroll(el, 1000);
+		}
+		</script>
+		
     </section>
 </body>
 </html>

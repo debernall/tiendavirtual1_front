@@ -14,10 +14,10 @@ public class Proveedores {
 		
 	}
 
-	public Proveedores(long nIT_proveedor, String nombre_proveedor, String ciudad, String direccion_proveedor,
+	public Proveedores(long NIT_proveedor, String nombre_proveedor, String ciudad, String direccion_proveedor,
 			long telefono_proveedor) {
 		super();
-		this.NIT_proveedor = nIT_proveedor;
+		this.NIT_proveedor = NIT_proveedor;
 		this.nombre_proveedor = nombre_proveedor;
 		this.ciudad = ciudad;
 		this.direccion_proveedor = direccion_proveedor;

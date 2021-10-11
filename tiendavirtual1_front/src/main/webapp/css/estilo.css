@@ -19,6 +19,15 @@ div#botonl{
   	
 }
 
+table.listados{
+	
+	position: absolute;
+  	top: 70%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+
+}
+
 div#body2{
 	
 	background: #56ab2f;  /* fallback for old browsers */

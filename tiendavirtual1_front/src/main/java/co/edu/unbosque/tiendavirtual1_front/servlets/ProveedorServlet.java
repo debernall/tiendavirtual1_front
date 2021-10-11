@@ -121,7 +121,7 @@ public class ProveedorServlet extends HttpServlet {
 				   request.getParameter("direccion") == "" ||
 				   request.getParameter("ciudad") == "" ||
 				   request.getParameter("telefono") == "") {
-				   request.setAttribute("status_crear", "empty");
+				   request.setAttribute("status_actualizar", "empty");
 				   request.setAttribute("estado", "true");
 				   request.getRequestDispatcher("index.jsp").forward(request, response);	
 					}else {
@@ -134,14 +134,14 @@ public class ProveedorServlet extends HttpServlet {
 						try {
 							int respuesta = TestJSONproveedores.postJSON(proveedores);
 							if (respuesta==200) {
-								request.setAttribute("estado", "true");
-								request.setAttribute("status_actualizar", "true");
-								request.getRequestDispatcher("index.jsp").forward(request, response);
-						}else {
-							request.setAttribute("estado", "true");
-							request.setAttribute("status_actualizar", "false");
-							request.getRequestDispatcher("index.jsp").forward(request, response);
-							}
+									request.setAttribute("estado", "true");
+									request.setAttribute("status_actualizar", "true");
+									request.getRequestDispatcher("index.jsp").forward(request, response);
+							}else {
+									request.setAttribute("estado", "true");
+									request.setAttribute("status_actualizar", "false");
+									request.getRequestDispatcher("index.jsp").forward(request, response);
+								}
 					
 						}
 						catch (Exception e) {
