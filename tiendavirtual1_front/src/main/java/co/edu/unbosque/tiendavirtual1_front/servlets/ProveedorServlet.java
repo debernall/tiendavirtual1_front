@@ -88,7 +88,9 @@ public class ProveedorServlet extends HttpServlet {
 			NIT = Long.parseLong(request.getParameter("NIT"));
 			Proveedores respuesta = new Proveedores();
 			try {
+				System.out.println("yyyyyyyyyyy");
 				respuesta = (Proveedores) TestJSONproveedores.getJSON1(NIT);
+				System.out.println("xxxxxxxxxxxx");
 				long id = respuesta.getNIT_proveedor();
 				if(id !=0) {
 					request.setAttribute("estado", "true");
@@ -102,6 +104,7 @@ public class ProveedorServlet extends HttpServlet {
 				}
 			}
 			catch (Exception e) {
+				System.out.println(e);
 				request.setAttribute("estado", "true");
 				request.setAttribute("status_consultar", "empty");
 				request.getRequestDispatcher("index.jsp").forward(request, response);

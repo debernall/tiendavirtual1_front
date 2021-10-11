@@ -547,12 +547,13 @@
 	%>
     <section  id="interaccion-4" class="oculto info-4"> 
      <h3>Productos</h3>
+     	<form method="post" action="./ProductoServlet" enctype="multipart/form-data">
 			<table class="productos">
 				<tr>
 					<td><label>Nombre del archivo:</label></td>
-					<td><input type="file" name="archioProduct"></td>
+					<td><input type="file" name="archivoProductos"></td>
 					<td><label></label></td>
-					<td><input type="submit" value="Enviar datos"></td>
+					<td><input type="submit" value="Enviar datos" name="Enviardatos"></td>
 				</tr>	
 			</table>
 			<br>
@@ -573,7 +574,9 @@
 			let el = document.getElementById(name);
 			window.smoothScroll(el, 1000);
 		}
+		
 		</script>
+		</form>
     </section>
     <section  id="interaccion-5" class="oculto info-5"> 
      <h3>Ventas</h3>

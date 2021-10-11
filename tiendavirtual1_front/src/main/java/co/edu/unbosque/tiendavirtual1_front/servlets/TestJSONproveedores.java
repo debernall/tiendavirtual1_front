@@ -52,7 +52,7 @@ public class TestJSONproveedores {
 		while(i.hasNext()) {
 			JSONObject innerObj = (JSONObject) i.next();
 			Proveedores proveedor= new Proveedores();
-			proveedor.setNIT_proveedor((long) innerObj.get("NIT_proveedor"));
+			proveedor.setNIT_proveedor((long) innerObj.get("nit_proveedor"));
 			proveedor.setCiudad(innerObj.get("ciudad").toString());
 			proveedor.setNombre_proveedor(innerObj.get("nombre_proveedor").toString());
 			proveedor.setDireccion_proveedor(innerObj.get("direccion_proveedor").toString());
@@ -78,7 +78,7 @@ public class TestJSONproveedores {
 		http.setRequestProperty("Accept", "application/json");
 		http.setRequestProperty("Content-Type", "application/json");
 		String data = "{"
-				+"\"NIT_proveedor\":"+ proveedor.getNIT_proveedor()
+				+"\"nit_proveedor\":"+ proveedor.getNIT_proveedor()
 				+", \"ciudad\":\""+ proveedor.getCiudad()
 				+"\", \"nombre_proveedor\":\""+ proveedor.getNombre_proveedor()
 				+"\", \"direccion_proveedor\":\""+ proveedor.getDireccion_proveedor()
@@ -109,7 +109,7 @@ public class TestJSONproveedores {
 		Proveedores proprueba = new Proveedores();
 		proprueba.setNIT_proveedor(NIT);
 		String data = "{"
-				+"\"NIT_proveedor\":"+ proprueba.getNIT_proveedor()
+				+"\"nit_proveedor\":"+ proprueba.getNIT_proveedor()
 				+", \"ciudad\":\""+ proprueba.getCiudad()
 				+"\", \"nombre_proveedor\":\""+ proprueba.getNombre_proveedor()
 				+"\", \"direccion_proveedor\":\""+ proprueba.getDireccion_proveedor()
@@ -130,7 +130,7 @@ public class TestJSONproveedores {
 					System.out.println(respuestatxt);
 					JSONParser jsonParser = new JSONParser();
 					JSONObject respuesta2 = (JSONObject) jsonParser.parse(respuestatxt);
-					proveedor.setNIT_proveedor((long) respuesta2.get("NIT_proveedor"));
+					proveedor.setNIT_proveedor((long) respuesta2.get("nit_proveedor"));
 					proveedor.setNombre_proveedor((String) respuesta2.get("nombre_proveedor"));
 					proveedor.setDireccion_proveedor((String) respuesta2.get("direccion_proveedor"));
 					proveedor.setCiudad((String) respuesta2.get("ciudad"));
@@ -156,7 +156,7 @@ public class TestJSONproveedores {
 		Proveedores proprueba = new Proveedores();
 		proprueba.setNIT_proveedor(NIT);
 		String data = "{"
-				+"\"NIT_proveedor\":"+ proprueba.getNIT_proveedor()
+				+"\"nit_proveedor\":"+ proprueba.getNIT_proveedor()
 				+", \"ciudad\":\""+ proprueba.getCiudad()
 				+"\", \"nombre_proveedor\":\""+ proprueba.getNombre_proveedor()
 				+"\", \"direccion_proveedor\":\""+ proprueba.getDireccion_proveedor()

@@ -23,7 +23,7 @@ import co.edu.unbosque.tiendavirtual1_front.model.Productos;
 public class TestJSONproductos {
 	
 	private static URL url;
-	private static String sitio = "http://localhost:8080/";
+	private static String sitio = "http://localhost:5000/";
 	
 	public static ArrayList<Productos> getJSON() throws IOException, ParseException{
 		url = new URL(sitio+"productos/listar");
@@ -54,7 +54,7 @@ public class TestJSONproductos {
 			Productos producto= new Productos();
 			producto.setCodigo_producto((long) innerObj.get("codigo_producto"));
 			producto.setNombre_producto(innerObj.get("nombre_producto").toString());
-			producto.setNITproveedor((long)innerObj.get("NITproveedor"));
+			producto.setNitproveedor((long)innerObj.get("NITproveedor"));
 			producto.setPrecio_compra((long)innerObj.get("precio_compra"));
 			producto.setIva_compra((long)innerObj.get("iva_compra"));
 			producto.setPrecio_venta((long)innerObj.get("precio_venta"));
@@ -62,6 +62,36 @@ public class TestJSONproductos {
 		}
 		
 		return lista;
+		
+	}
+	
+	public static int postJSON(Productos producto) throws IOException{
+		url = new URL(sitio+"productos/guardar");
+		
+		HttpURLConnection http;
+		http = (HttpURLConnection)url.openConnection();
+		try {
+			http.setRequestMethod("POST");
+		} catch(ProtocolException e) {
+			e.printStackTrace();
+		}
+		http.setDoOutput(true);
+		http.setRequestProperty("Accept", "application/json");
+		http.setRequestProperty("Content-Type", "application/json");
+		String data = "{"
+				+"\"codigo_producto\": "+ producto.getCodigo_producto()
+				+", \"nombre_producto\": \""+ producto.getNombre_producto()
+				+"\", \"nitproveedor\": "+ producto.getNitproveedor()
+				+", \"precio_compra\": "+ producto.getPrecio_compra()
+				+", \"iva_compra\": "+ producto.getIva_compra()
+				+", \"precio_venta\": "+ producto.getPrecio_venta()
+				+"}";
+		byte[] out = data.getBytes(StandardCharsets.UTF_8);
+		OutputStream stream = http.getOutputStream();
+		stream.write(out);
+		int respuesta = http.getResponseCode();
+		http.disconnect();
+		return respuesta;
 		
 	}
 	
@@ -105,4 +135,7 @@ public class TestJSONproductos {
 		System.out.println(producto.toString());
 		return producto;
 	}
+	
+	
+	
 }
