@@ -110,6 +110,7 @@
 		  if(request.getAttribute("status_load") == "true"){%><script>alert('Archivo cargado exitosamente');</script><% 
 		  }else if(request.getAttribute("status_load") == "false"){%><script>alert('Error: formato de archivo inválido');</script><%
 		  }else if(request.getAttribute("status_load") == "empty"){%><script>alert('Error: no se seleccionó archivo para cargar');</script><%
+		  }else if(request.getAttribute("status_load") == "error"){%><script>alert('Error: datos leídos inválidos');</script><%
 		  }
 	  }
 	  else if(login == true){%><script>alert('Ingreso exitoso');</script><%}%>	

@@ -68,27 +68,31 @@ public class ProductoServlet extends HttpServlet {
 			System.out.println("Voy a salir hacia el for");
 			System.out.println(lista.size());
 			if (lista.size()!=0) {
-				for (int i=1;i<lista.size();i++) {
-					String linea = Arrays.toString(lista.get(i));
-					linea = linea.replaceAll("\\]","");
-					linea = linea.replaceAll("\\[","");
-					List<String> elem = Arrays.asList(linea.split(";"));
-					Productos producto = new Productos();
-					producto.setCodigo_producto(Long.parseLong(elem.get(0)));
-					producto.setNombre_producto(elem.get(1));
-					producto.setNitproveedor(Long.parseLong(elem.get(2)));
-					producto.setPrecio_compra(Long.parseLong(elem.get(3)));
-					producto.setIva_compra(Long.parseLong(elem.get(4)));
-					producto.setPrecio_venta(Long.parseLong(elem.get(5)));
-					int respuesta = TestJSONproductos.postJSON(producto);
-					if (respuesta==200) {
-						System.out.println("estamos insertando 1 producto");
-						request.setAttribute("status_load", "true");
-					}else {
-						System.out.println("no hicimos nada");
+				try {
+					for (int i=1;i<lista.size();i++) {
+						String linea = Arrays.toString(lista.get(i));
+						linea = linea.replaceAll("\\]","");
+						linea = linea.replaceAll("\\[","");
+						List<String> elem = Arrays.asList(linea.split(";"));
+						Productos producto = new Productos();
+							producto.setCodigo_producto(Long.parseLong(elem.get(0)));
+							producto.setNombre_producto(elem.get(1));
+							producto.setNitproveedor(Long.parseLong(elem.get(2)));
+							producto.setPrecio_compra(Long.parseLong(elem.get(3)));
+							producto.setIva_compra(Long.parseLong(elem.get(4)));
+							producto.setPrecio_venta(Long.parseLong(elem.get(5)));
+							int respuesta = TestJSONproductos.postJSON(producto);
+							if (respuesta==200) {
+								System.out.println("estamos insertando 1 producto");
+								request.setAttribute("status_load", "true");
+							}else {
+								request.setAttribute("status_load", "error");
+								System.out.println("no hicimos nada");
+							}
+						}
+				}catch(Exception e) {
+						request.setAttribute("status_load", "error");
 					}
-							
-				}
 			}else {
 				request.setAttribute("status_load", "empty");
 			}
