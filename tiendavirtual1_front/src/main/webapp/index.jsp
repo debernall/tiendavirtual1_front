@@ -7,6 +7,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/estilo.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/listas.css"/>
 <meta charset="UTF-8"/>
 <title>TIENDA VIRTUAL</title>
 </head>
@@ -14,15 +15,13 @@
 <% boolean login = false;%>
 
 
-	<form action="./UsuarioServlet" method="post" <%
+	<form class="forma1" id="cuadro" action="./UsuarioServlet" method="post" <%
 	if(request.getAttribute("estado") == "true" && login == false){
 		%>style="display:none"<%
 	}
 	%>>
-	<div class="body2" id="body2">
 	<div class="titulol" id="titulot"><h1>Iniciar Sesion</h1></div>
-
-
+		<img class="imglog" alt="login" src="img/user.png">
 		<table class="regitro">
 			<tr>
 				 <td><label class="regitro1" for="uname"><b>Usuario</b></label></td>
@@ -37,7 +36,6 @@
 			<div class="botonl" id="botonl">
      		 <button type="submit" class="signupbtn" value="Ingresar" name="Ingresar">Ingresar</button>
     		</div>
-     	</div>
 	</form> 
 	
 	
@@ -124,6 +122,7 @@
 		%>style="display:none"<%
 	}
 %>>
+<div class="body2" id="body2">
           <ul class="navbar-nav1 ml-auto">
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" onClick="mostrar('interaccion-1');">Usuarios</a> 
@@ -144,6 +143,7 @@
               <a class="nav-link js-scroll-trigger " onClick="mostrar('interaccion-6');">Reportes</a>
             </li>
            </ul>
+           </div>
   </div>
 
     <section  id="interaccion-1" class="oculto info-1"> 
@@ -543,16 +543,23 @@
 		</script>
 	</form> 
     </section>
+    
      <section  id="interaccion-6" class="oculto info-6"> 
      <h3>Reportes</h3>
-  		<table class="listados">
-  		<tr>
-			<button name="Borrar" type="submit">Lista Usuarios</button>
-		</tr>
-		<tr>
-			<button name="Borrar" type="submit">Lista Clientes</button>
-		</tr>
-		</table>
+   
+  		<ul class="navbar-nav2 ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" onClick="mostrar('interaccion-7');">Listado Usuarios</a> 
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger " onClick="mostrar('interaccion-8');">Listado Clientes</a>
+            </li> 
+           <li class="nav-item">
+              <a class="nav-link js-scroll-trigger " onClick="mostrar('interaccion-9');">Listado ventas por cliente</a>
+            </li> 
+           </ul>
+
+
 	<script type="text/javascript">
 		function mostrar(name){
 			closeAll();
@@ -573,5 +580,121 @@
 		</script>
 		
     </section>
+    
+    <section  id="interaccion-7" class="oculto info-7">
+		<h2>Listado Usuarios</h2>
+		<form action="">
+			<table class="listas">
+				<thead>
+						<tr>
+							<th>Cedula</th>
+							<th>Nombre</th>
+							<th>Correo Electronico</th>
+							<th>Usuario</th>
+							<th>Password</th>
+						</tr>
+				</thead>
+				<tbody class="listas" id="listas">
+				</tbody>
+			</table>
+			
+			
+		<script type="text/javascript">
+		function mostrar(name){
+			closeAll();
+			let el = document.getElementById(name);
+			el.style.height = 'auto';
+			irA(name);
+		}
+		function closeAll(){
+			let info = document.getElementsByClassName('oculto');
+			for(i = 0; i < info.length; i++){
+				info[i].style.height = '0';
+			} 
+		}
+		function irA(name){
+			let el = document.getElementById(name);
+			window.smoothScroll(el, 1000);
+		}
+		</script>
+		</form>
+		</section>
+		
+		<section  id="interaccion-8" class="oculto info-8">
+		<h2>Listado Clientes</h2>
+		<form action="">
+			<table class="listas">
+				<thead>
+						<tr>
+							<th>Cedula</th>
+							<th>Nombre</th>
+							<th>Correo Electronico</th>
+							<th>Direccion</th>
+							<th>Telefono</th>
+						</tr>
+				</thead>
+				<tbody class="listas" id="listas">
+				</tbody>
+			</table>
+			
+			
+		<script type="text/javascript">
+		function mostrar(name){
+			closeAll();
+			let el = document.getElementById(name);
+			el.style.height = 'auto';
+			irA(name);
+		}
+		function closeAll(){
+			let info = document.getElementsByClassName('oculto');
+			for(i = 0; i < info.length; i++){
+				info[i].style.height = '0';
+			} 
+		}
+		function irA(name){
+			let el = document.getElementById(name);
+			window.smoothScroll(el, 1000);
+		}
+		</script>
+		</form>
+		</section>
+		
+		<section  id="interaccion-9" class="oculto info-9">
+		<h2>Listado Clientes</h2>
+		<form action="">
+			<table class="listas">
+				<thead>
+						<tr>
+							<th>Cedula</th>
+							<th>Nombre</th>
+							<th>Valor total ventas</th>
+						</tr>
+				</thead>
+				<tbody class="listas" id="listas">
+				</tbody>
+			</table>
+			
+			
+		<script type="text/javascript">
+		function mostrar(name){
+			closeAll();
+			let el = document.getElementById(name);
+			el.style.height = 'auto';
+			irA(name);
+		}
+		function closeAll(){
+			let info = document.getElementsByClassName('oculto');
+			for(i = 0; i < info.length; i++){
+				info[i].style.height = '0';
+			} 
+		}
+		function irA(name){
+			let el = document.getElementById(name);
+			window.smoothScroll(el, 1000);
+		}
+		</script>
+		</form>
+		</section>
+		
 </body>
 </html>

@@ -1,41 +1,57 @@
 body {
 	font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+	background: #A1D6E2;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #F1F1F2, #A1D6E2);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #F1F1F2, #A1D6E2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+form.forma1{
+	
+	height: 450px;
+	width: 400px;
+	margin: auto;
 	background: #fff;
+	box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.8);
+	border-radius:10px;
+	margin-top: 80px ;
+
+	
+}
+
+img.imglog{
+	
+	width: 100px;
+	height: 100px;
+	position: absolute;
+  	top: 35%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
 }
 
 div#titulot{
 
     position: absolute;
-  	top: 30%;
+  	top: 20%;
   	left: 50%;
   	transform: translate(-50%, -50%);
 }
 div#botonl{
 	
 	position: absolute;
-  	top: 70%;
+  	top: 75%;
   	left: 50%;
   	transform: translate(-50%, -50%);
   	
 }
 
-table.listados{
-	
-	position: absolute;
-  	top: 70%;
-  	left: 50%;
-  	transform: translate(-50%, -50%);
 
-}
 
 div#body2{
 	
-	background: #56ab2f;  /* fallback for old browsers */
-	background: -webkit-linear-gradient(to right, #a8e063, #56ab2f);  /* Chrome 10-25, Safari 5.1-6 */
-	background: linear-gradient(to right, #a8e063, #56ab2f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-	padding: 40px 0;
-	box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
-	border-radius:10px
+	margin: auto;
+	background: #2471A3;
+	box-shadow: 0 0 6px 0 rgba(255, 255, 255, 0.8);
+	border: 6px;
 }
 
 h1 {
@@ -43,20 +59,27 @@ h1 {
     font-family: "Lucida Console";
     font-size: 30px;
 }
+
 h3{
+text-align: center;
+color: black;
+font-size: 40px;
+font-family: "Courier New";
+}
+
+h2{
 text-align: center;
 color: black;
 font-size: 30px;
 font-family: "Courier New";
 }
-/* estilo login*/
 
 table.regitro {
     width: 30%;
     margin: auto;
 	padding: 15px;
 	position: absolute;
-  	top: 50%;
+  	top: 55%;
   	left: 50%;
   	transform: translate(-50%, -50%);
 }
@@ -65,16 +88,33 @@ table.regitro {
 
 
 }
-/* Full-width inputs */
+
 input {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
+  background: #FFF;
   display: inline-block;
   border: 1px solid black;
   box-sizing: border-box;
   border-radius: 10px;
+  
+  
 }
+
+button {
+  background-color:#1995AD;
+  color: #FFF;
+  padding: 14px 20px;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+  border-radius: 10px;
+  border: 1px solid black;
+  font-size: 15px;
+  padding: auto;
+}
+
 button.signupbtn {
     display: block;
     margin:auto;
@@ -83,55 +123,37 @@ button.signupbtn {
     font-size: 25px;
     box-shadow: 0 0 6px 0 rgba(255, 255, 255, 0.8);
 }
-/* Set a style for all buttons */
-button {
-  background-color:#9FDB28;
-  color: black;
-  padding: 14px 20px;
-  border: none;
-  cursor: pointer;
-  width: 20%;
-  border-radius: 10px;
-  border: 1px solid black;
-}
 
-/* Add a hover effect for buttons */
+
 button:hover {
   opacity: 0.8;
 }
 
-/*fin estilo login
-.cuadro-ventas {
-    display: none !important;
-}
 
-.logged-in .cuadro-ventas {
-    display: block !important;
-}*/
-		.navbar-nav1>li {
+.navbar-nav1>li {
     margin: 0em 0px 3px 0;
     padding: 0px 0px;
-    width: 10%;
+    width: 15%;
     display: inline-block;
+   
 }
-/*#navbarResponsive{
-    overflow: auto;
-    white-space: nowrap;
-  }*/
+
 .navbar-nav1>li.capa{width: 16%;}
 
 .navbar-nav1>li a {
-    border: 1px solid black;
-    color: black;
+    /*border: 1px ;*/
+    color: #FFF;
     padding: 5%;
-    margin: 0px auto;
+    margin: auto;
     float: left;
     text-align: center;
     width: 100%;
-    background: #FFFFFF;
+    background: transparent;
     cursor: pointer;
-    font-weight: 500;
-  	font-size:1.1vw;
+    font-size: 20px;
+   /* font-weight: 500;
+  	font-size:1.1vw;*/
+  	
 }
 .navbar-nav1>li a:hover{
     background: #fff;
@@ -205,9 +227,7 @@ button:hover {
     filter: invert(1);
 }
 
-div#navbarResponsive{
-    margin-left: 20%;
-}
+
 table.Usuarios {
     width: 90%; 
     margin: aoto;
@@ -244,12 +264,115 @@ table.productos {
 	width: 90%; 
     margin: aoto;
 	padding: auto;
-	
 }
 
+
+button.lista{
+	 width: 100%;
+}
 button.consultaVentas {
     width: 100%;
+    
 }
+	
+
 .botones {
     margin-left: 9%;
 }
+
+.navbar-nav2>li {
+    margin: 0em 0px 3px 0;
+    padding: 0px 0px;
+    width: 30%;
+    display: inline-block;
+   
+}
+
+.navbar-nav2>li.capa{width:30%;}
+
+.navbar-nav2>li a {
+    border: 1px ;
+    color: #FFF;
+    padding: 5%;
+    margin: auto;
+    float: left;
+    text-align: center;
+    width: 100%;
+    background: #1995AD;
+    cursor: pointer;
+    font-size: 20px;
+   	font-weight: 500;
+  	font-size:1.1vw;
+  	
+}
+.navbar-nav2>li a:hover{
+    background: #fff;
+    color:#555;
+}
+    
+.navbar-nav2>li>a>span {
+    font-size: 26px;
+    vertical-align: bottom;
+    padding: 0 6px 0 0
+}
+.navbar-nav2 {
+    margin: -1em 0em 0em;
+    list-style: none;
+    width: 100%;
+    bottom: 0px;
+    display:inline;
+}
+@media only screen and (max-width: 768px){
+.navbar-nav2>li {
+    width: 24%; }
+  .navbar-nav2>li a{font-size:2vw;}
+}
+@media only screen and (max-width: 479px){
+.navbar-nav2>li {
+    width: 32%; }
+  .navbar-nav2>li a {font-size: 3vw;}
+}
+.page-id-335 .oculto {height: 0;
+    overflow-y: hidden;
+    position: relative;
+    width: 100%  !important;
+    margin: auto;}
+   
+.oculto {
+    height: 0;
+    overflow-y: hidden;
+    position: relative;
+    width: 65%;
+    margin: auto;
+}
+.oculto h5{
+    margin: 0rem auto 1.3rem;
+    color:#fff;
+}
+
+table.listas{
+	background: #fff;
+	text-align: center;
+	border-collapse: collapse;
+	width: 100%;
+	padding: 20px
+}
+
+th, td table.listas{
+	padding: 15px;
+}
+thead {
+	background-color: #1995AD;
+	border-bottom: solid 5px  #F1F1F2;
+  	color: black;	
+}
+
+tbody.listas tr:nth-child(even) {
+	background-color: #ddd;
+}
+
+tbody.listas tr:hover {
+	background-color:#F1F1F2 ;
+	color: black;
+}
+
