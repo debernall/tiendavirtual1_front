@@ -52,188 +52,70 @@
 	<%String status_crear = request.getParameter("status_crear"); 
 	  String status_consultar = request.getParameter("status_consultar");
 	  if(request.getAttribute("status_form")== "usuarios"){
-	  
-		  if(request.getAttribute("status_crear") == "true"){
-			  %>
-				<script>alert('Usuario ingresado de manera exitosa');</script>
-			<%
-	  	  
-		  }else if(request.getAttribute("status_crear") == "false"){
-			  %>
-				<script>alert('Datos incorrectos');</script>
-			<%
-		  }else if(request.getAttribute("status_crear") == "empty"){
-			  %>
-				<script>alert('Faltan datos del usuario');</script>
-			<%
-		  }
-		  else if(request.getAttribute("status_consultar") == "true"){
-			%>
-				<script>alert('Consulta usuario exitosa');</script>
-			<% 
-		  }
-		  else if(request.getAttribute("status_consultar") == "empty"){
-			  %>
-				<script>alert('Usuario inexistente');</script>
-			<%
-		  }
-		  else if(request.getAttribute("status_consultar") == "empty_id"){
-			  %>
-				<script>alert('No ingresó un número de cédula');</script>
-			<%
-		  }
-		  else if(request.getAttribute("status_actualizar") == "true"){
-			  %>
-				<script>alert('Usuario actualizado de manera exitosa');</script>
-			<%
-		  }else if(request.getAttribute("status_actualizar") == "false"){
-			  %>
-				<script>alert('Datos incorrectos');</script>
-			<%
-		  }else if(request.getAttribute("status_actualizar") == "empty"){
-			  %>
-				<script>alert('Faltan datos del usuario');</script>
-			<%
-		  }
-		  else if(request.getAttribute("status_borrar") == "true"){
-				%>
-					<script>alert('Datos del usuario borrados');</script>
-				<% 
-		  }else if(request.getAttribute("status_borrar") == "false"){
-			  %>
-				<script>alert('Usuario inexistente');</script>
-			<%
-		  }
-		  else if(request.getAttribute("status_borrar") == "empty"){
-				  %>
-					<script>alert('No ingresó un número de cédula');</script>
-				<%
-		  }
+		  
+		  if(request.getAttribute("status_crear") == "true"){%><script>alert('Usuario ingresado de manera exitosa');</script><%
+		  }else if(request.getAttribute("status_crear") == "false"){%><script>alert('Datos incorrectos');</script><%
+		  }else if(request.getAttribute("status_crear") == "empty"){%><script>alert('Faltan datos del usuario');</script><%
+		  
+		  }else if(request.getAttribute("status_consultar") == "true"){%><script>alert('Consulta usuario exitosa');</script><% 
+		  }else if(request.getAttribute("status_consultar") == "empty"){%><script>alert('Usuario inexistente');</script><%
+		  }else if(request.getAttribute("status_consultar") == "empty_id"){%><script>alert('No ingresó un número de cédula');</script><%
+		  
+		  }else if(request.getAttribute("status_actualizar") == "true"){%><script>alert('Usuario actualizado de manera exitosa');</script><%
+		  }else if(request.getAttribute("status_actualizar") == "false"){%><script>alert('Datos incorrectos');</script><%
+		  }else if(request.getAttribute("status_actualizar") == "empty"){%><script>alert('Faltan datos del usuario');</script><%
+		  
+		  }else if(request.getAttribute("status_borrar") == "true"){%><script>alert('Datos del usuario borrados');</script><% 
+		  }else if(request.getAttribute("status_borrar") == "false"){%><script>alert('Usuario inexistente');</script><%
+		  }else if(request.getAttribute("status_borrar") == "empty"){%><script>alert('No ingresó un número de cédula');</script><%
+		}
 	  }
 	  else if(request.getAttribute("status_form")== "clientes"){
 		  
-	  
-		  if(request.getAttribute("status_crear") == "true"){
-			  %>
-				<script>alert('Cliente ingresado de manera exitosa');</script>
-			<%
-		  }else if(request.getAttribute("status_crear") == "false"){
-			  %>
-				<script>alert('Datos incorrectos');</script>
-			<%
-		  }else if(request.getAttribute("status_crear") == "empty"){
-			  %>
-				<script>alert('Faltan datos del cliente');</script>
-			<%
-		  }
-		  else if(request.getAttribute("status_consultar") == "true"){
-			%>
-				<script>alert('Consulta cliente exitosa');</script>
-			<% 
-		  }
-		  else if(request.getAttribute("status_consultar") == "empty"){
-			  %>
-				<script>alert('Cliente inexistente');</script>
-			<%
-		  }
-		  else if(request.getAttribute("status_consultar") == "empty_id"){
-			  %>
-				<script>alert('No ingresó un número de cédula');</script>
-			<%
-		  }
-		  else if(request.getAttribute("status_actualizar") == "true"){
-			  %>
-				<script>alert('Cliente actualizado de manera exitosa');</script>
-			<%
-		  }else if(request.getAttribute("status_actualizar") == "false"){
-			  %>
-				<script>alert('Datos incorrectos');</script>
-			<%
-		  }else if(request.getAttribute("status_actualizar") == "empty"){
-			  %>
-				<script>alert('Faltan datos del cliente');</script>
-			<%
-		  }
-		  else if(request.getAttribute("status_borrar") == "true"){
-				%>
-					<script>alert('Datos del cliente borrados');</script>
-				<% 
-		  }
-		  else if(request.getAttribute("status_borrar") == "false"){
-				  %>
-					<script>alert('Cliente inexistente');</script>
-				<%
-		  }
-		  else if(request.getAttribute("status_borrar") == "empty"){
-				  %>
-					<script>alert('No ingresó un número de cédula');</script>
-				<%
-		  }
+		  if(request.getAttribute("status_crear") == "true"){%><script>alert('Cliente ingresado de manera exitosa');</script><%
+		  }else if(request.getAttribute("status_crear") == "false"){%><script>alert('Datos incorrectos');</script><%
+		  }else if(request.getAttribute("status_crear") == "empty"){%><script>alert('Faltan datos del cliente');</script><%
+		  
+		  }else if(request.getAttribute("status_consultar") == "true"){%><script>alert('Consulta cliente exitosa');</script><% 
+		  }else if(request.getAttribute("status_consultar") == "empty"){%><script>alert('Cliente inexistente');</script><%
+		  }else if(request.getAttribute("status_consultar") == "empty_id"){%><script>alert('No ingresó un número de cédula');</script><%
+		  
+		  }else if(request.getAttribute("status_actualizar") == "true"){%><script>alert('Cliente actualizado de manera exitosa');</script><%
+		  }else if(request.getAttribute("status_actualizar") == "false"){%><script>alert('Datos incorrectos');</script><%
+		  }else if(request.getAttribute("status_actualizar") == "empty"){%><script>alert('Faltan datos del cliente');</script><%
+		  
+		  }else if(request.getAttribute("status_borrar") == "true"){%><script>alert('Datos del cliente borrados');</script><% 
+		  }else if(request.getAttribute("status_borrar") == "false"){%><script>alert('Cliente inexistente');</script><%
+		  }else if(request.getAttribute("status_borrar") == "empty"){%><script>alert('No ingresó un número de cédula');</script><%
+		}
 	  }
 	  else if(request.getAttribute("status_form")== "proveedores"){
 	  
-		  if(request.getAttribute("status_crear") == "true"){
-		  %>
-			<script>alert('Proveedor ingresado de manera exitosa');</script>
-		<%
-		  }else if(request.getAttribute("status_crear") == "false"){
-			  %>
-				<script>alert('Datos incorrectos');</script>
-			<%
-		  }else if(request.getAttribute("status_crear") == "empty"){
-			  %>
-				<script>alert('Faltan datos del proveedor');</script>
-			<%
-		  }
-		  else if(request.getAttribute("status_consultar") == "true"){
-			%>
-				<script>alert('Consulta proveedor exitosa');</script>
-			<% 
-		  }
-		  else if(request.getAttribute("status_consultar") == "empty"){
-			  %>
-				<script>alert('Proveedor inexistente');</script>
-			<%
-		  }
-		  else if(request.getAttribute("status_consultar") == "empty_id"){
-			  %>
-				<script>alert('No ingresó un número de NIT');</script>
-			<%
-		  }
-		  else if(request.getAttribute("status_actualizar") == "true"){
-			  %>
-				<script>alert('Proveedor actualizado de manera exitosa');</script>
-			<%
-		  }else if(request.getAttribute("status_actualizar") == "false"){
-			  %>
-				<script>alert('Datos incorrectos');</script>
-			<%
-		  }else if(request.getAttribute("status_actualizar") == "empty"){
-			  %>
-				<script>alert('Faltan datos del proveedor');</script>
-			<%
-		  }
-		  else if(request.getAttribute("status_borrar") == "true"){
-				%>
-					<script>alert('Datos del proveedor borrados');</script>
-				<% 
-		  }
-		  else if(request.getAttribute("status_borrar") == "false"){
-				  %>
-					<script>alert('Proveedor inexistente');</script>
-				<%
-		  }
-		  else if(request.getAttribute("status_borrar") == "empty"){
-				  %>
-					<script>alert('No ingresó un número de NIT');</script>
-				<%
+		  if(request.getAttribute("status_crear") == "true"){%><script>alert('Proveedor ingresado de manera exitosa');</script><%
+		  }else if(request.getAttribute("status_crear") == "false"){%><script>alert('Datos incorrectos');</script><%
+		  }else if(request.getAttribute("status_crear") == "empty"){%><script>alert('Faltan datos del proveedor');</script><%
+		  }else if(request.getAttribute("status_consultar") == "true"){%><script>alert('Consulta proveedor exitosa');</script><% 
+		  }else if(request.getAttribute("status_consultar") == "empty"){%><script>alert('Proveedor inexistente');</script><%
+		  }else if(request.getAttribute("status_consultar") == "empty_id"){%><script>alert('No ingresó un número de NIT');</script><%
+		  }else if(request.getAttribute("status_actualizar") == "true"){%><script>alert('Proveedor actualizado de manera exitosa');</script><%
+		  }else if(request.getAttribute("status_actualizar") == "false"){%><script>alert('Datos incorrectos');</script><%
+		  }else if(request.getAttribute("status_actualizar") == "empty"){%><script>alert('Faltan datos del proveedor');</script><%
+		  }else if(request.getAttribute("status_borrar") == "true"){%><script>alert('Datos del proveedor borrados');</script><% 
+		  }else if(request.getAttribute("status_borrar") == "false"){%><script>alert('Proveedor inexistente');</script><%
+		  }else if(request.getAttribute("status_borrar") == "empty"){%><script>alert('No ingresó un número de NIT');</script><%
+		}
+	  }
+	  else if(request.getAttribute("status_form")== "producto"){
+		  
+		  if(request.getAttribute("status_load") == "true"){%><script>alert('Archivo cargado exitosamente');</script><% 
+		  }else if(request.getAttribute("status_load") == "false"){%><script>alert('Error: formato de archivo inválido');</script><%
+		  }else if(request.getAttribute("status_load") == "empty"){%><script>alert('Error: no se seleccionó archivo para cargar');</script><%
 		  }
 	  }
-	  else if(login == true){
-		  %><script>alert('Ingreso exitoso');</script>
-		  <%
-		}
-		%>	
+	  else if(login == true){%><script>alert('Ingreso exitoso');</script><%}%>	
+	  
+	  
+	  
 <div class="cuadro-ventas" id="navbarResponsive" <%
 	if(login == true){
 		%>style="display:block"<%		
