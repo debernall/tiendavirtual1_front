@@ -30,6 +30,7 @@ import java.util.List;
 
 import co.edu.unbosque.tiendavirtual1_front.CSVHelper;
 import co.edu.unbosque.tiendavirtual1_front.model.Productos;
+import co.edu.unbosque.tiendavirtual1_front.model.Proveedores;
 import co.edu.unbosque.tiendavirtual1_front.model.Usuarios;
 
 @MultipartConfig
@@ -77,7 +78,10 @@ public class ProductoServlet extends HttpServlet {
 						Productos producto = new Productos();
 							producto.setCodigo_producto(Long.parseLong(elem.get(0)));
 							producto.setNombre_producto(elem.get(1));
-							producto.setNitproveedor(Long.parseLong(elem.get(2)));
+							Long nit = Long.parseLong(elem.get(2));
+							Proveedores prove = new Proveedores();
+							prove.setNit_proveedor(nit);
+							producto.setProveedor(prove);
 							producto.setPrecio_compra(Long.parseLong(elem.get(3)));
 							producto.setIva_compra(Long.parseLong(elem.get(4)));
 							producto.setPrecio_venta(Long.parseLong(elem.get(5)));

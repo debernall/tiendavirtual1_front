@@ -1,16 +1,35 @@
 package co.edu.unbosque.tiendavirtual1_front.model;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "productos")
 public class Productos {
 	
+	@Id
+	@Column(unique = true, nullable = false)
 	private long codigo_producto;
 	private String nombre_producto;
-	private long nitproveedor;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "proveedores_id", nullable=false)
+	private Proveedores proveedor;
 	private long precio_compra;
 	private long iva_compra;
 	private long precio_venta;
+	@OneToMany(mappedBy = "producto", cascade=CascadeType.ALL)
+	private List<Detalleventas> detalle_ventas = new ArrayList<>();
 	
 	public Productos() {
 		super();
@@ -22,7 +41,7 @@ public class Productos {
 		super();
 		this.codigo_producto = codigo_producto;
 		this.nombre_producto = nombre_producto;
-		this.nitproveedor = nitproveedor;
+		this.proveedor = proveedor;
 		this.precio_compra = precio_compra;
 		this.iva_compra = iva_compra;
 		this.precio_venta = precio_venta;
@@ -44,12 +63,14 @@ public class Productos {
 		this.nombre_producto = nombre_producto;
 	}
 
-	public long getNitproveedor() {
-		return nitproveedor;
+
+
+	public Proveedores getProveedor() {
+		return proveedor;
 	}
 
-	public void setNitproveedor(long nitproveedor) {
-		this.nitproveedor = nitproveedor;
+	public void setProveedor(Proveedores proveedor) {
+		this.proveedor = proveedor;
 	}
 
 	public long getPrecio_compra() {
@@ -75,6 +96,7 @@ public class Productos {
 	public void setPrecio_venta(long precio_venta) {
 		this.precio_venta = precio_venta;
 	}
+
 	
 	
 	
