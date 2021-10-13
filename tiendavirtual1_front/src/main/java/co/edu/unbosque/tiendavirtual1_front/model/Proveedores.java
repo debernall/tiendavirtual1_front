@@ -1,12 +1,31 @@
 package co.edu.unbosque.tiendavirtual1_front.model;
 
-public class Proveedores {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
-	private long NIT_proveedor;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+
+
+@Entity
+@Table(name = "proveedores")
+public class Proveedores {
+	
+	@Id
+	@Column(unique = true, nullable = false)
+	private long nit_proveedor;
 	private String nombre_proveedor;
 	private String ciudad;
 	private String direccion_proveedor;
 	private long telefono_proveedor;
+	@OneToMany(mappedBy="proveedor", cascade=CascadeType.ALL)
+	private List<Productos> productos = new ArrayList<>();
 	
 	
 	public Proveedores() {
@@ -14,21 +33,22 @@ public class Proveedores {
 		
 	}
 
-	public Proveedores(long NIT_proveedor, String nombre_proveedor, String ciudad, String direccion_proveedor,
+	
+	public Proveedores(long nit_proveedor, String nombre_proveedor, String ciudad, String direccion_proveedor,
 			long telefono_proveedor) {
 		super();
-		this.NIT_proveedor = NIT_proveedor;
+		this.nit_proveedor = nit_proveedor;
 		this.nombre_proveedor = nombre_proveedor;
 		this.ciudad = ciudad;
 		this.direccion_proveedor = direccion_proveedor;
 		this.telefono_proveedor = telefono_proveedor;
 	}
 	
-	public long getNIT_proveedor() {
-		return NIT_proveedor;
+	public long getNit_proveedor() {
+		return nit_proveedor;
 	}
-	public void setNIT_proveedor(long NIT_proveedor) {
-		this.NIT_proveedor = NIT_proveedor;
+	public void setNit_proveedor(long nit_proveedor) {
+		this.nit_proveedor = nit_proveedor;
 	}
 	public String getNombre_proveedor() {
 		return nombre_proveedor;
@@ -54,5 +74,5 @@ public class Proveedores {
 	public void setTelefono_proveedor(long telefono_proveedor) {
 		this.telefono_proveedor = telefono_proveedor;
 	}
-
+	
 }

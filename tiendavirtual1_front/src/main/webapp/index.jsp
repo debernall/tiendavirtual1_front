@@ -92,12 +92,15 @@
 		  if(request.getAttribute("status_crear") == "true"){%><script>alert('Proveedor ingresado de manera exitosa');</script><%
 		  }else if(request.getAttribute("status_crear") == "false"){%><script>alert('Datos incorrectos');</script><%
 		  }else if(request.getAttribute("status_crear") == "empty"){%><script>alert('Faltan datos del proveedor');</script><%
+		  
 		  }else if(request.getAttribute("status_consultar") == "true"){%><script>alert('Consulta proveedor exitosa');</script><% 
 		  }else if(request.getAttribute("status_consultar") == "empty"){%><script>alert('Proveedor inexistente');</script><%
 		  }else if(request.getAttribute("status_consultar") == "empty_id"){%><script>alert('No ingresó un número de NIT');</script><%
+		  
 		  }else if(request.getAttribute("status_actualizar") == "true"){%><script>alert('Proveedor actualizado de manera exitosa');</script><%
 		  }else if(request.getAttribute("status_actualizar") == "false"){%><script>alert('Datos incorrectos');</script><%
 		  }else if(request.getAttribute("status_actualizar") == "empty"){%><script>alert('Faltan datos del proveedor');</script><%
+		  
 		  }else if(request.getAttribute("status_borrar") == "true"){%><script>alert('Datos del proveedor borrados');</script><% 
 		  }else if(request.getAttribute("status_borrar") == "false"){%><script>alert('Proveedor inexistente');</script><%
 		  }else if(request.getAttribute("status_borrar") == "empty"){%><script>alert('No ingresó un número de NIT');</script><%
@@ -461,6 +464,12 @@
 		</script>
 		</form>
     </section>
+       	<%
+		if(request.getAttribute("status_form") == "producto"){
+			%> <script> window.onload = mostrar('interaccion-4') </script>
+			<%
+		}
+	%>
     <section  id="interaccion-5" class="oculto info-5"> 
      <h3>Ventas</h3>
      <form>

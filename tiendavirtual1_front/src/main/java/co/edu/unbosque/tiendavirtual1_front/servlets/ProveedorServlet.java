@@ -58,7 +58,7 @@ public class ProveedorServlet extends HttpServlet {
 	   request.getRequestDispatcher("index.jsp").forward(request, response);	
 		}else {
 			Proveedores proveedores = new Proveedores();
-			proveedores.setNIT_proveedor(Long.parseLong(request.getParameter(("NIT"))));
+			proveedores.setNit_proveedor(Long.parseLong(request.getParameter(("NIT"))));
 			proveedores.setNombre_proveedor(request.getParameter("nombre_proveedor"));
 			proveedores.setDireccion_proveedor(request.getParameter("direccion"));
 			proveedores.setCiudad(request.getParameter("ciudad"));
@@ -91,7 +91,7 @@ public class ProveedorServlet extends HttpServlet {
 				System.out.println("yyyyyyyyyyy");
 				respuesta = (Proveedores) TestJSONproveedores.getJSON1(NIT);
 				System.out.println("xxxxxxxxxxxx");
-				long id = respuesta.getNIT_proveedor();
+				long id = respuesta.getNit_proveedor();
 				if(id !=0) {
 					request.setAttribute("estado", "true");
 					request.setAttribute("status_consultar", "true");
@@ -129,7 +129,7 @@ public class ProveedorServlet extends HttpServlet {
 				   request.getRequestDispatcher("index.jsp").forward(request, response);	
 					}else {
 						Proveedores proveedores = new Proveedores();
-						proveedores.setNIT_proveedor(Long.parseLong(request.getParameter(("NIT"))));
+						proveedores.setNit_proveedor(Long.parseLong(request.getParameter(("NIT"))));
 						proveedores.setNombre_proveedor(request.getParameter("nombre_proveedor"));
 						proveedores.setDireccion_proveedor(request.getParameter("direccion"));
 						proveedores.setCiudad(request.getParameter("ciudad"));

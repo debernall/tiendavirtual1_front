@@ -18,6 +18,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import co.edu.unbosque.tiendavirtual1_front.model.Productos;
+import co.edu.unbosque.tiendavirtual1_front.model.Proveedores;
 
 
 public class TestJSONproductos {
@@ -54,7 +55,7 @@ public class TestJSONproductos {
 			Productos producto= new Productos();
 			producto.setCodigo_producto((long) innerObj.get("codigo_producto"));
 			producto.setNombre_producto(innerObj.get("nombre_producto").toString());
-			producto.setNitproveedor((long)innerObj.get("NITproveedor"));
+			producto.setProveedor((Proveedores) innerObj.get("NITproveedor"));
 			producto.setPrecio_compra((long)innerObj.get("precio_compra"));
 			producto.setIva_compra((long)innerObj.get("iva_compra"));
 			producto.setPrecio_venta((long)innerObj.get("precio_venta"));
@@ -81,7 +82,13 @@ public class TestJSONproductos {
 		String data = "{"
 				+"\"codigo_producto\": "+ producto.getCodigo_producto()
 				+", \"nombre_producto\": \""+ producto.getNombre_producto()
-				+"\", \"nitproveedor\": "+ producto.getNitproveedor()
+				+"\", \"proveedor\": {"
+										+"\"nit_proveedor\":"+ producto.getProveedor().getNit_proveedor()
+										+", \"ciudad\":\""+ producto.getProveedor().getCiudad()
+										+"\", \"nombre_proveedor\":\""+ producto.getProveedor().getNombre_proveedor()
+										+"\", \"direccion_proveedor\":\""+ producto.getProveedor().getDireccion_proveedor()
+										+"\", \"telefono_proveedor\":\""+ producto.getProveedor().getTelefono_proveedor()
+										+"\"}"
 				+", \"precio_compra\": "+ producto.getPrecio_compra()
 				+", \"iva_compra\": "+ producto.getIva_compra()
 				+", \"precio_venta\": "+ producto.getPrecio_venta()
