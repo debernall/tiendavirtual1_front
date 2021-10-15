@@ -22,7 +22,7 @@ public class Productos {
 	@Column(unique = true, nullable = false)
 	private long codigo_producto;
 	private String nombre_producto;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "proveedores_id", nullable=false)
 	private Proveedores proveedor;
 	private long precio_compra;
@@ -97,8 +97,21 @@ public class Productos {
 		this.precio_venta = precio_venta;
 	}
 
-	
-	
-	
-
+	@Override
+	public String toString() {
+		return "{"
+				+"\"codigo_producto\": "+ codigo_producto
+				+", \"nombre_producto\": \""+ nombre_producto
+				+"\", \"proveedor\": {"
+										+"\"nit_proveedor\":"+ proveedor.getNit_proveedor()
+										+", \"ciudad\":\""+ proveedor.getCiudad()
+										+"\", \"nombre_proveedor\":\""+ proveedor.getNombre_proveedor()
+										+"\", \"direccion_proveedor\":\""+ proveedor.getDireccion_proveedor()
+										+"\", \"telefono_proveedor\":\""+ proveedor.getTelefono_proveedor()
+										+"\"}"
+				+", \"precio_compra\": "+ precio_compra
+				+", \"iva_compra\": "+ iva_compra
+				+", \"precio_venta\": "+ precio_venta
+				+"}";
+	}
 }

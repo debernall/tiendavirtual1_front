@@ -3,6 +3,13 @@
 <%@ page import='co.edu.unbosque.tiendavirtual1_front.model.Usuarios'  %>
 <%@ page import='co.edu.unbosque.tiendavirtual1_front.model.Clientes'  %>
 <%@ page import='co.edu.unbosque.tiendavirtual1_front.model.Proveedores'  %>
+<%@ page import='co.edu.unbosque.tiendavirtual1_front.model.Ventas'  %>
+<%@ page import='co.edu.unbosque.tiendavirtual1_front.model.Productos'  %>
+<%@ page import='org.json.simple.JSONObject'  %>
+<%@ page import='org.json.simple.parser.JSONParser'  %>
+<%@ page import='org.json.simple.parser.ParseException'  %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -113,6 +120,18 @@
 		  }else if(request.getAttribute("status_load") == "empty"){%><script>alert('Error: no se seleccionó archivo para cargar');</script><%
 		  }else if(request.getAttribute("status_load") == "error"){%><script>alert('Error: datos leídos inválidos');</script><%
 		  }
+	  }
+	  else if(request.getAttribute("status_form") == "ventas" ){
+		  
+		  if(request.getAttribute("status_consultarcliente") == "true"){%><script>alert('Consulta cliente exitosa');</script><% 
+	  	  	}else if(request.getAttribute("status_consultarcliente") == "empty"){%><script>alert('Cliente inexistente');</script><%
+	   	  	}else if(request.getAttribute("status_consultarcliente") == "empty_id"){%><script>alert('No ingresó un número de cédula');</script><%
+	      	}
+		  
+	  	  	 else if(request.getAttribute("status_consultarpro1") == "true"){%><script>alert('Consulta producto exitosa');</script><% 
+	   	  	}else if(request.getAttribute("status_consultarpro1") == "empty"){%><script>alert('Producto inexistente');</script><%
+	  		}else if(request.getAttribute("status_consultarpro1") == "empty_id"){%><script>alert('No ingresó un código de producto');</script><%
+			}
 	  }
 	  else if(login == true){%><script>alert('Ingreso exitoso');</script><%}%>	
 	  
@@ -472,14 +491,68 @@
 	%>
     <section  id="interaccion-5" class="oculto info-5"> 
      <h3>Ventas</h3>
-     <form>
+     <form method="post" action="./VentasServlet">
 			<table class="ventas">
 				<tr>
+					<%	Clientes cliente = new Clientes();
+						String b = new String();
+						if(request.getAttribute("cliente")!=null){
+							Object a = request.getAttribute("cliente");
+							b = (String) a;
+							JSONParser jsonParser = new JSONParser();
+							JSONObject json = (JSONObject) jsonParser.parse(b);
+							cliente.setCedula_cliente((long) json.get("cedula_cliente"));
+							cliente.setNombre_cliente((String) json.get("nombre_cliente"));
+						}
+						
+						Productos producto1 = new Productos();
+						String producto1txt = new String();
+						if (request.getAttribute("producto1")!= null){
+							Object producto1Obj = request.getAttribute("producto1");
+							producto1txt = (String) producto1Obj;
+							JSONParser jsonParser = new JSONParser();
+							JSONObject json = (JSONObject) jsonParser.parse(producto1txt);
+							producto1.setCodigo_producto((long) json.get("codigo_producto"));
+							producto1.setNombre_producto((String) json.get("nombre_producto"));
+							producto1.setPrecio_venta((long) json.get("precio_venta"));
+						}
+						
+						Productos producto2 = new Productos();
+						String producto2txt = new String();
+						if (request.getAttribute("producto2")!= null){
+							Object producto2Obj = request.getAttribute("producto2");
+							producto2txt = (String) producto2Obj;
+							JSONParser jsonParser = new JSONParser();
+							JSONObject json = (JSONObject) jsonParser.parse(producto2txt);
+							producto2.setCodigo_producto((long) json.get("codigo_producto"));
+							producto2.setNombre_producto((String) json.get("nombre_producto"));
+							producto2.setPrecio_venta((long) json.get("precio_venta"));
+						}
+						
+						Productos producto3 = new Productos();
+						String producto3txt = new String();
+						if (request.getAttribute("producto3")!= null){
+							Object producto3Obj = request.getAttribute("producto3");
+							producto3txt = (String) producto3Obj;
+							JSONParser jsonParser = new JSONParser();
+							JSONObject json3 = (JSONObject) jsonParser.parse(producto3txt);
+							producto3.setCodigo_producto((long) json3.get("codigo_producto"));
+							producto3.setNombre_producto((String) json3.get("nombre_producto"));
+							producto3.setPrecio_venta((long) json3.get("precio_venta"));
+						}
+						
+					%>
+					<td><textarea style="display:none;" name="cliente" rows="10" cols="40"><%if(cliente.getCedula_cliente()>0){%><%= b %><%} %></textarea></td>
+					<td><textarea style="display:none;" name="producto1" rows="10" cols="40"><%if(producto1.getCodigo_producto()>0){%><%= producto1txt %><%} %></textarea></td>
+					<td><textarea style="display:none;" name="producto2" rows="10" cols="40"><%if(producto2.getCodigo_producto()>0){%><%= producto2txt %><%} %></textarea></td>
+					<td><textarea style="display:none;" name="producto3" rows="10" cols="40"><%if(producto3.getCodigo_producto()>0){%><%= producto3txt %><%} %></textarea></td>
+				</tr>
+				<tr>
 					<td><label>Cédula:</label></td>
-					<td><input type="text" name="nit"></td>
-					<td><button class="consultaVentas" name="Consultar" type="button">Consulta</button></td>
-					<td><label>Clientes:</label></td>
-					<td><input type="text" name="telefono"></td>
+					<td><input type="text" name="cedula" <%if(cliente.getCedula_cliente()>0){%>value="<%= cliente.getCedula_cliente()%>"<%} %>></td>
+					<td><button class="consultaVentas" name="consultaCliente" type="submit">Consulta</button></td>
+					<td><label>Cliente:</label></td>
+					<td><input type="text" name="nombre_cliente" <%if(cliente.getCedula_cliente()>0){%>value="<%= cliente.getNombre_cliente() %>"<%} %>></td>
 					<td><label>Consecutivo:</label></td>
 					<td><input type="text" name="telefono"></td>
 				</tr>
@@ -487,33 +560,35 @@
 			<table class="ventas2">		
 				<tr>
 					<th>Cod.Producto</th>
+					
 					<th></th>
 					<th>Nombre Producto</th>
 					<th>Cant.</th>
 					<th>Vlr. Total</th>
 				</tr>	
 				<tr>
-					<td><input type="text" name="codigo1"></td>
-					<td><button class="consultaVentas" name="Consultar" type="button">Consulta</button></td>
-					<td><input type="text" name="nom-product"></td>
-					<td><input type="text" name="cantidad"></td>
-					<td><input type="text" name="valor-total"></td>
+					<td><input type="text" name="codigo1" <%if(producto1.getCodigo_producto()>0){%>value="<%= producto1.getCodigo_producto() %>"<%} %>></td>
+					<td><button class="consultaVentas" name="consultaProducto1" type="submit">Consulta</button></td>
+					<td><input type="text" name="nom-product" <%if(producto1.getCodigo_producto()>0){%>value="<%= producto1.getNombre_producto() %>"<%} %>></td>
+					<td><input type="text" name="cantidad1" <%if(request.getAttribute("cantidad1")!=null){%>value="<%= request.getAttribute("cantidad1") %>"<%} %>></td>
+					<td><input type="text" name="valor-total" <%if(request.getAttribute("cantidad1")!=null){%>value="<%= request.getAttribute("valor1") %>"<%} %>></td>
 				</tr>
 				<tr>
-					<td><input type="text" name="codigo2"></td>
-					<td><button class="consultaVentas" name="Consultar" type="button">Consulta</button></td>
-					<td><input type="text" name="nom-product2"></td>
-					<td><input type="text" name="cantidad2"></td>
-					<td><input type="text" name="valor-total2"></td>
+					<td><input type="text" name="codigo2" <%if(producto2.getCodigo_producto()>0){%>value="<%= producto2.getCodigo_producto() %>"<%} %>></td>
+					<td><button class="consultaVentas" name="consultaProducto2" type="submit">Consulta</button></td>
+					<td><input type="text" name="nom-product2" <%if(producto2.getCodigo_producto()>0){%>value="<%= producto2.getNombre_producto() %>"<%} %>></td>
+					<td><input type="text" name="cantidad2" <%if(request.getAttribute("cantidad2")!=null){%>value="<%= request.getAttribute("cantidad2") %>"<%} %>></td>
+					<td><input type="text" name="valor-total2" <%if(request.getAttribute("cantidad2")!=null){%>value="<%= request.getAttribute("valor2") %>"<%} %>></td>
 				</tr>
 				<tr>
-					<td><input type="text" name="codigo3"></td>
-					<td><button class="consultaVentas" name="Consultar" type="button">Consulta</button></td>
-					<td><input type="text" name="nom-product3"></td>
-					<td><input type="text" name="cantidad3"></td>
-					<td><input type="text" name="valor-total3"></td>
+					<td><input type="text" name="codigo3" <%if(producto3.getCodigo_producto()>0){%>value="<%= producto3.getCodigo_producto() %>"<%} %>></td>
+					<td><button class="consultaVentas" name="consultaProducto3" type="submit">Consulta</button></td>
+					<td><input type="text" name="nom-product3" <%if(producto3.getCodigo_producto()>0){%>value="<%= producto3.getNombre_producto() %>"<%} %>></td>
+					<td><input type="text" name="cantidad3" <%if(request.getAttribute("cantidad3")!=null){%>value="<%= request.getAttribute("cantidad3") %>"<%} %>></td>
+					<td><input type="text" name="valor-total3" <%if(request.getAttribute("cantidad3")!=null){%>value="<%= request.getAttribute("valor3") %>"<%} %>></td>
 				</tr>
 			</table>
+			
 			<table class="totalventas">
 				<tr>
 					<td></td>
@@ -526,9 +601,14 @@
 					<td><input type="text" name="total-iva"></td>
 				</tr>
 				<tr>
-					<td><button class="consultaVentas" name="Consultar" type="button">Consulta</button></td>
+					<td></td>
 					<th>Total con IVA</th>
 					<td><input type="text" name="total-con+iva"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><button class="consultaVentas" name="Calcular" type="submit">Calcular</button></td>
+					<td><button class="consultaVentas" name="Confirmar" type="submit">Confirmar</button></td>
 				</tr>
 			</table>
 			<br>
@@ -552,7 +632,12 @@
 		</script>
 	</form> 
     </section>
-    
+           	<%
+		if(request.getAttribute("status_form") == "ventas"){
+			%> <script> window.onload = mostrar('interaccion-5') </script>
+			<%
+		}
+	%>
      <section  id="interaccion-6" class="oculto info-6"> 
      <h3>Reportes</h3>
    

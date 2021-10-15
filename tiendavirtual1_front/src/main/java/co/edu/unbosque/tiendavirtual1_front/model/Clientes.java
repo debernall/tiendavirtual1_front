@@ -71,6 +71,17 @@ public class Clientes {
 		this.telefono_cliente = telefono_cliente;
 	}
 
+	@Override
+	public String toString() {
+		return "{"
+				+"\"cedula_cliente\":"+ cedula_cliente
+				+", \"email_cliente\":\""+ email_cliente
+				+"\", \"nombre_cliente\":\""+ nombre_cliente
+				+"\", \"direccion_cliente\":\""+ direccion_cliente
+				+"\", \"telefono_cliente\":\""+ telefono_cliente
+				+"\"}";
+	}
+
 	
 
 }

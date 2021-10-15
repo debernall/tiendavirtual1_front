@@ -3,6 +3,8 @@ package co.edu.unbosque.tiendavirtual1_front.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,12 +16,13 @@ public class Detalleventas {
 	
 	@Id
 	@Column(unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long codigo_detalle_venta;
 	private int cantidad_producto;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "productos_id", nullable=false)
 	private Productos producto;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "ventas_id", nullable=false)
 	private Ventas venta1;
 	private long valor_total;
