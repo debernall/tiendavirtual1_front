@@ -28,7 +28,7 @@
 	}
 	%>>
 	<div class="titulol" id="titulot"><h1>Iniciar Sesion</h1></div>
-		<img class="imglog" alt="login" src="img/user.png">
+		<img class="imglog" alt="login" src="img/usuarios.gif">
 		<table class="regitro">
 			<tr>
 				 <td><label class="regitro1" for="uname"><b>Usuario</b></label></td>
