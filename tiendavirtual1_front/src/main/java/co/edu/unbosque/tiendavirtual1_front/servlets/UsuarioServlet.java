@@ -36,6 +36,13 @@ public class UsuarioServlet extends HttpServlet {
 		String consultar = request.getParameter("Consultar");
 		String actualizar = request.getParameter("Actualizar");
 		String borrar = request.getParameter("Borrar");
+		String usuario = request.getParameter("usuarioreg");
+		
+		if(usuario != null) {
+			String usuariotxt = (String) request.getParameter("usuarioreg");
+			request.setAttribute("usuarioreg", usuariotxt);
+		}
+		
 		if(ingresar != null) {
 			login(request, response);
 		}
@@ -63,13 +70,14 @@ public class UsuarioServlet extends HttpServlet {
 		usuarios.setPassword(request.getParameter("password"));
 		if(usuarios.getUsuario().equals("admininicial") && usuarios.getPassword().equals("admin123456")) {
 			String estado = "true";
-			request.setAttribute("estado", estado);
-			
+			request.setAttribute("estado", estado);			
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}else {
 			try {
 				String respuesta = UsuarioTestJSON.postJSON1(usuarios);
 				request.setAttribute("estado", respuesta);
+				Usuarios usuarioreg = (Usuarios) UsuarioTestJSON.postJSON2(usuarios);
+				request.setAttribute("usuarioreg",usuarioreg.toString());
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
 			catch (Exception e) {

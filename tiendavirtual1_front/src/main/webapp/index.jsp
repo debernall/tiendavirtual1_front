@@ -14,13 +14,22 @@
 <html>
 <head>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/estilo.css"/>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/listas.css"/>
 <meta charset="UTF-8"/>
 <title>TIENDA VIRTUAL</title>
 </head>
 <body>
 <% boolean login = false;%>
-
+	<textarea rows="4" cols="40" name="usuarioreg" style="display:none" >
+	<%
+	Usuarios usuario = new Usuarios();
+	if(request.getAttribute("usuarioreg")!=null){
+		String usuariotxt = (String) request.getAttribute("usuarioreg");
+		JSONParser jsonParser = new JSONParser();
+		JSONObject json = (JSONObject) jsonParser.parse(usuariotxt);
+		usuario.setCedula_usuario((long) json.get("cedula_usuario"));
+		usuario.setUsuario((String) json.get("usuario"));
+		%><%= usuario.toString() %><%
+		}%></textarea>
 
 	<form class="forma1" id="cuadro" action="./UsuarioServlet" method="post" <%
 	if(request.getAttribute("estado") == "true" && login == false){
@@ -133,6 +142,7 @@
 	  		}else if(request.getAttribute("status_consultarpro1") == "empty_id"){%><script>alert('No ingresó un código de producto');</script><%
 			}
 	  }
+	  
 	  else if(login == true){%><script>alert('Ingreso exitoso');</script><%}%>	
 	  
 	  
@@ -171,6 +181,7 @@
     <section  id="interaccion-1" class="oculto info-1"> 
     <h3>Usuarios</h3>
 	    <form method="post" action="./UsuarioServlet">
+			<textarea style="display:none;" name="usuarioreg" rows="10" cols="40"><%=usuario.toString() %></textarea>
 			<table class="Usuarios">
 				<tr>
 					<td><label>Cédula:</label></td>
@@ -264,6 +275,7 @@
     <section  id="interaccion-2" class="oculto info-2"> 
      <h3>Clientes</h3>
      	<form method="post" action="./ClienteServlet">
+	     	<textarea style="display:none;" name="usuarioreg" rows="10" cols="40"><%=usuario.toString() %></textarea>
 			<table class="Clientes">
 				<tr>
 					<td><label>Cédula:</label></td>
@@ -358,7 +370,7 @@
     <section  id="interaccion-3" class="oculto info-3"> 
      <h3>Proveedores</h3>
      <form method="post" action="./ProveedorServlet">
-    
+    	<textarea style="display:none;" name="usuarioreg" rows="10" cols="40"><%=usuario.toString() %></textarea>
 			<table class="proveedores">
 				<tr>
 					<td><label>NIT:</label></td>
@@ -453,6 +465,7 @@
     <section  id="interaccion-4" class="oculto info-4"> 
      <h3>Productos</h3>
      	<form method="post" action="./ProductoServlet" enctype="multipart/form-data">
+     		<textarea style="display:none;" name="usuarioreg" rows="10" cols="40"><%=usuario.toString() %></textarea>
 			<table class="productos">
 				<tr>
 					<td><label>Nombre del archivo:</label></td>
@@ -492,6 +505,7 @@
     <section  id="interaccion-5" class="oculto info-5"> 
      <h3>Ventas</h3>
      <form method="post" action="./VentasServlet">
+     	<textarea style="display:none;" name="usuarioreg" rows="10" cols="40"><%=usuario.toString() %></textarea>
 			<table class="ventas">
 				<tr>
 					<%	Clientes cliente = new Clientes();
@@ -554,7 +568,7 @@
 					<td><label>Cliente:</label></td>
 					<td><input type="text" name="nombre_cliente" <%if(cliente.getCedula_cliente()>0){%>value="<%= cliente.getNombre_cliente() %>"<%} %>></td>
 					<td><label>Consecutivo:</label></td>
-					<td><input type="text" name="telefono"></td>
+					<td><input type="text" name="consecutivo" <%if(request.getAttribute("consecutivo")!=null){%>value="<%=request.getAttribute("consecutivo")  %>"<%} %>></td>
 				</tr>
 			</table>
 			<table class="ventas2">		
@@ -598,12 +612,12 @@
 				<tr>
 					<td></td>
 					<th class="ttv">Total IVA</th>
-					<td><input type="text" name="total-iva"></td>
+					<td><input type="text" name="total-iva" <%if(request.getAttribute("iva")!=null){%>value="<%= request.getAttribute("iva") %>"<%} %>></td>
 				</tr>
 				<tr>
 					<td></td>
 					<th>Total con IVA</th>
-					<td><input type="text" name="total-con+iva"></td>
+					<td><input type="text" name="total-con+iva" <%if(request.getAttribute("total")!=null){%>value="<%= request.getAttribute("total") %>"<%} %>></td>
 				</tr>
 				<tr>
 					<td></td>
@@ -645,9 +659,14 @@
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" onClick="mostrar('interaccion-7');">Listado Usuarios</a> 
             </li>
+           
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger " onClick="mostrar('interaccion-8');">Listado Clientes</a>
-            </li> 
+             <form method="post" action="./ClienteServlet" type="hidden">
+              <button name="Listar" type="submit">cliente</button>
+             <!--<a class="nav-link js-scroll-trigger " name="Listar" type="submit" onClick="mostrar('interaccion-8');">Listado Clientes</a>-->
+           	 </form>
+            </li>
+            
            <li class="nav-item">
               <a class="nav-link js-scroll-trigger " onClick="mostrar('interaccion-9');">Listado ventas por cliente</a>
             </li> 
@@ -677,7 +696,7 @@
     
     <section  id="interaccion-7" class="oculto info-7">
 		<h2>Listado Usuarios</h2>
-		<form action="">
+		<form method="post" action="./ClienteServlet">
 			<table class="listas">
 				<thead>
 						<tr>
@@ -689,6 +708,9 @@
 						</tr>
 				</thead>
 				<tbody class="listas" id="listas">
+					<tr>
+					
+					</tr>
 				</tbody>
 			</table>
 			
@@ -716,7 +738,12 @@
 		
 		<section  id="interaccion-8" class="oculto info-8">
 		<h2>Listado Clientes</h2>
-		<form action="">
+		<%String cliente2 = new String ();
+		if(request.getAttribute("cliente")!=null){
+			cliente2 = (String) request.getAttribute("cliente");
+			
+		} %>
+			<h2><%=cliente2 %></h2>
 			<table class="listas">
 				<thead>
 						<tr>
@@ -728,6 +755,9 @@
 						</tr>
 				</thead>
 				<tbody class="listas" id="listas">
+				
+                  <tr >
+                  </tr>
 				</tbody>
 			</table>
 			

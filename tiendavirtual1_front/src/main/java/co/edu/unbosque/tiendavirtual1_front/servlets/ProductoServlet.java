@@ -46,6 +46,13 @@ public class ProductoServlet extends HttpServlet {
     @Bean
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {;
 		String enviardatos = request.getParameter("Enviardatos");
+		String usuario = request.getParameter("usuarioreg");
+		
+		if(usuario != null) {
+			String usuariotxt = (String) request.getParameter("usuarioreg");
+			request.setAttribute("usuarioreg", usuariotxt);
+		}
+		
 		if (enviardatos != null) {
 			enviardatos(request,response);
 			

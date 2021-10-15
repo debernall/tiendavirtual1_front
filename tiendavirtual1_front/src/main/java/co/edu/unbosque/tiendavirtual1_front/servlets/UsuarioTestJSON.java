@@ -140,6 +140,49 @@ public class UsuarioTestJSON {
 		return respuesta3;
 	}
 	
+	public static Usuarios postJSON2(Usuarios usuarios) throws IOException, ParseException {
+		url = new URL(sitio+"usuarios/traerid");
+		HttpURLConnection http;
+		http = (HttpURLConnection)url.openConnection();
+		try {
+			http.setRequestMethod("POST");
+		} catch(ProtocolException e) {
+			e.printStackTrace();
+		}
+		http.setDoOutput(true);
+		http.setRequestProperty("Accept", "application/json");
+		http.setRequestProperty("Content-Type", "application/json");
+		String data = "{"
+				+"\"cedula_usuario\":"+ usuarios.getCedula_usuario()
+				+", \"nombre_usuario\":\""+ usuarios.getNombre_usuario()
+				+"\" , \"email_usuario\":\""+ usuarios.getEmail_usuario()
+				+"\" , \"usuario\":\""+ usuarios.getUsuario()
+				+"\" , \"password\":\""+ usuarios.getPassword()
+				+"\"}";
+		System.out.println(data);
+		byte[] out = data.getBytes(StandardCharsets.UTF_8);
+		OutputStream stream = http.getOutputStream();
+		stream.write(out);
+		Usuarios usuario = new Usuarios();
+		try(BufferedReader br = new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
+			StringBuilder response = new StringBuilder();
+			String responseLine = null;
+			while ((responseLine = br.readLine()) != null) {
+				response.append(responseLine.trim());
+			}
+			String respuestatxt = response.toString();
+			
+			JSONParser jsonParser = new JSONParser();
+			JSONObject respuesta2 = (JSONObject) jsonParser.parse(respuestatxt);
+			usuario.setCedula_usuario((long) respuesta2.get("cedula_usuario"));
+			usuario.setUsuario((String) respuesta2.get("usuario"));
+			System.out.println(usuario.toString());
+		}
+		http.disconnect();
+		System.out.println(usuario.toString());
+		return usuario;
+	}
+	
 	public static Usuarios getJSON1(long cedula) throws IOException, ParseException {
 		url = new URL(sitio+"usuarios/consultar");
 		HttpURLConnection http;

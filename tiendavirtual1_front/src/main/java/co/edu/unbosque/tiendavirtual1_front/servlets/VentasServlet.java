@@ -14,6 +14,7 @@ import org.json.simple.parser.ParseException;
 import org.springframework.context.annotation.Bean;
 
 import co.edu.unbosque.tiendavirtual1_front.model.Clientes;
+import co.edu.unbosque.tiendavirtual1_front.model.Detalleventas;
 import co.edu.unbosque.tiendavirtual1_front.model.Productos;
 import co.edu.unbosque.tiendavirtual1_front.model.Proveedores;
 import co.edu.unbosque.tiendavirtual1_front.model.Usuarios;
@@ -30,18 +31,45 @@ public class VentasServlet extends HttpServlet {
 
     @Bean
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {;	
+		request.setAttribute("status_form", "ventas");
+		request.setAttribute("estado", "true");
 		String consultacliente = request.getParameter("consultaCliente");
 		String consultaproducto1 = request.getParameter("consultaProducto1");
 		String consultaproducto2 = request.getParameter("consultaProducto2");
 		String consultaproducto3 = request.getParameter("consultaProducto3");
 		String calcular = request.getParameter("Calcular");
+		String confirmar = request.getParameter("Confirmar");
+		String usuario = request.getParameter("usuarioreg");
+		String consecutivo = request.getParameter("consecutivo");
+		
+		request.setAttribute("consecutivo", consecutivo);
+		
+		Usuarios usuario1 = new Usuarios();		
+		if(usuario != null) {
+			String usuariotxt = (String) request.getParameter("usuarioreg");
+			JSONParser jsonParser = new JSONParser();
+			JSONObject jsonu;
+			try {
+				jsonu = (JSONObject) jsonParser.parse(usuariotxt);
+				usuario1.setCedula_usuario((long) jsonu.get("cedula_usuario"));
+				usuario1.setUsuario((String) jsonu.get("usuario"));
+				request.setAttribute("usuarioreg", usuariotxt);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		
 		Productos producto1 = new Productos();
 		Productos producto2 = new Productos();
 		Productos producto3 = new Productos();
 		
 		String cliente2 = request.getParameter("cliente");
+		Clientes cliente = new Clientes();
+		
 		if (cliente2!="") {
-			Clientes cliente = new Clientes();
 			String clientetxt = request.getParameter("cliente");
 			JSONParser jsonParser = new JSONParser();
 			try {
@@ -66,6 +94,7 @@ public class VentasServlet extends HttpServlet {
 				producto1.setPrecio_venta((long) json.get("precio_venta"));
 				Proveedores proveedor = new Proveedores();
 				producto1.setProveedor(proveedor);
+				producto1.setIva_compra((long) json.get("iva_compra"));
 				request.setAttribute("producto1", producto1.toString());
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
@@ -84,6 +113,7 @@ public class VentasServlet extends HttpServlet {
 				producto2.setPrecio_venta((long) json2.get("precio_venta"));
 				Proveedores proveedor = new Proveedores();
 				producto2.setProveedor(proveedor);
+				producto2.setIva_compra((long) json2.get("iva_compra"));
 				request.setAttribute("producto2", producto2.toString());
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
@@ -102,6 +132,7 @@ public class VentasServlet extends HttpServlet {
 				producto3.setPrecio_venta((long) json3.get("precio_venta"));
 				Proveedores proveedor = new Proveedores();
 				producto3.setProveedor(proveedor);
+				producto3.setIva_compra((long) json3.get("iva_compra"));
 				request.setAttribute("producto3", producto3.toString());
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
@@ -109,7 +140,8 @@ public class VentasServlet extends HttpServlet {
 			}
 		}
 		
-		long totalventa = 0;
+		float totalventa = 0;
+		float totaliva = 0;
 		
 		if (producto1.getCodigo_producto()>0) {
 			String cantidad1 = request.getParameter("cantidad1");
@@ -118,6 +150,8 @@ public class VentasServlet extends HttpServlet {
 				long valor1 = (Long.parseLong(request.getParameter("cantidad1")))*(producto1.getPrecio_venta());
 				request.setAttribute("cantidad1", cantidad1);
 				request.setAttribute("valor1",valor1);
+				
+				totaliva = totaliva + (producto1.getIva_compra()*valor1)/100;
 				totalventa = totalventa+valor1;
 			}
 		}
@@ -133,6 +167,7 @@ public class VentasServlet extends HttpServlet {
 				long valor2 = (Long.parseLong(request.getParameter("cantidad2")))*(producto2.getPrecio_venta());
 				request.setAttribute("cantidad2", cantidad2);
 				request.setAttribute("valor2",valor2 );
+				totaliva = totaliva + (producto2.getIva_compra()*valor2)/100;
 				totalventa = totalventa+valor2;
 			}
 		}
@@ -148,15 +183,21 @@ public class VentasServlet extends HttpServlet {
 				long valor3 = (Long.parseLong(request.getParameter("cantidad3")))*(producto3.getPrecio_venta());
 				request.setAttribute("cantidad3", cantidad3);
 				request.setAttribute("valor3",valor3);
+				totaliva = totaliva + (producto3.getIva_compra()*valor3)/100;
 				totalventa = totalventa+valor3;
 			}
 		}
 		else {
 			request.setAttribute("cantidad3", 0);
 			request.setAttribute("valor3", 0);
+			request.setAttribute("iva", 0);
 		}
 		
-		request.setAttribute("valortotal", totalventa);
+		int totaliva1 = (int)(Math.round(totaliva));
+		int totalventa1 = (int)(Math.round(totalventa));
+		request.setAttribute("valortotal", totalventa1);
+		request.setAttribute("iva", totaliva1);
+		request.setAttribute("total", totalventa1+totaliva1);
 		
 		if (consultacliente != null) {
 			consultarcliente(request,response);
@@ -172,6 +213,92 @@ public class VentasServlet extends HttpServlet {
 		}
 		else if(calcular != null) {
 			calcular(request,response);
+		}
+		else if(confirmar != null) {
+			
+			Ventas venta = new Ventas();
+			venta.setCliente(cliente);
+			venta.setUsuario(usuario1);
+			venta.setIvaventa(totaliva1);
+			venta.setTotal_venta(totalventa1);
+			venta.setValor_venta(totalventa1+totaliva1);
+			System.out.println(venta.toString());
+			try {
+				long codventa = VentasTestJSON.getJSON3(venta);
+				venta.setCodigoventa(codventa);
+				request.setAttribute("consecutivo", codventa);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			/* AQUI SE REGISTRA LA VENTA*/
+			
+			
+			Detalleventas detalle1 = new Detalleventas();
+			Detalleventas detalle2 = new Detalleventas();
+			Detalleventas detalle3 = new Detalleventas();
+			
+			if(producto1.getCodigo_producto()>0) {
+				detalle1.setProducto(producto1);
+				int cantidad = Integer.parseInt(request.getParameter("cantidad1"));
+				detalle1.setCantidad_producto(cantidad);
+				detalle1.setProducto(producto1);
+				detalle1.setVenta1(venta);
+				long valortotal = cantidad*producto1.getPrecio_venta();
+				float valoriva = (valortotal*producto1.getIva_compra())/100;
+				int valoriva1 = (int)(Math.round(valoriva));
+				detalle1.setValor_total(valortotal);
+				detalle1.setValoriva(valoriva1);
+				detalle1.setValor_venta(valortotal+valoriva1);
+				try {
+					int respuesta = VentasTestJSON.getJSON4(detalle1);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				System.out.println(detalle1.toString());
+			}
+			if(producto2.getCodigo_producto()>0) {
+				detalle2.setProducto(producto2);
+				int cantidad = Integer.parseInt(request.getParameter("cantidad2"));
+				detalle2.setCantidad_producto(cantidad);
+				detalle2.setProducto(producto2);
+				detalle2.setVenta1(venta);
+				long valortotal = cantidad*producto2.getPrecio_venta();
+				float valoriva = (valortotal*producto2.getIva_compra())/100;
+				int valoriva1 = (int)(Math.round(valoriva));
+				detalle2.setValor_total(valortotal);
+				detalle2.setValoriva(valoriva1);
+				detalle2.setValor_venta(valortotal+valoriva1);
+				try {
+					int respuesta = VentasTestJSON.getJSON4(detalle2);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				System.out.println(detalle2.toString());
+				
+			}
+			if(producto3.getCodigo_producto()>0) {
+				detalle3.setProducto(producto3);
+				int cantidad = Integer.parseInt(request.getParameter("cantidad3"));
+				detalle3.setCantidad_producto(cantidad);
+				detalle3.setProducto(producto3);
+				detalle3.setVenta1(venta);
+				long valortotal = cantidad*producto3.getPrecio_venta();
+				float valoriva = (valortotal*producto3.getIva_compra())/100;
+				int valoriva1 = (int)(Math.round(valoriva));
+				detalle3.setValor_total(valortotal);
+				detalle3.setValoriva(valoriva1);
+				detalle3.setValor_venta(valortotal+valoriva1);
+				try {
+					int respuesta = VentasTestJSON.getJSON4(detalle3);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				System.out.println(detalle3.toString());
+				
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+			}
+			
 		}
 
 		
@@ -306,15 +433,10 @@ public class VentasServlet extends HttpServlet {
 		
 	}
 	
-	public void calcular(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void calcular(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("status_form", "ventas");
 		request.setAttribute("estado", "true");
-		
-		
-		
-		Ventas ventas = new Ventas();
-		System.out.println(ventas.getCodigo_venta());
-	
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 		
 	}
 	

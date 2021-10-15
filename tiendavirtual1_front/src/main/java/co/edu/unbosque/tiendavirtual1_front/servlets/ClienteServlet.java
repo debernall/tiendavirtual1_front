@@ -1,12 +1,16 @@
 package co.edu.unbosque.tiendavirtual1_front.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.parser.ParseException;
 import org.springframework.context.annotation.Bean;
 
 import co.edu.unbosque.tiendavirtual1_front.model.Clientes;
@@ -27,6 +31,14 @@ public class ClienteServlet extends HttpServlet {
 		String consultar = request.getParameter("Consultar");
 		String actualizar = request.getParameter("Actualizar");
 		String borrar = request.getParameter("Borrar");
+		String listar = request.getParameter("Listar");
+		String usuario = request.getParameter("usuarioreg");
+		
+		if(usuario != null) {
+			String usuariotxt = (String) request.getParameter("usuarioreg");
+			request.setAttribute("usuarioreg", usuariotxt);
+		}
+		
 		if(crear != null) {
 			crear(request,response);
 		}
@@ -38,6 +50,14 @@ public class ClienteServlet extends HttpServlet {
 		}
 		if(borrar != null) {
 			borrar(request,response);
+		}
+		if(listar != null) {
+			try {
+				listar(request,response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -176,4 +196,19 @@ public class ClienteServlet extends HttpServlet {
 		}
 	}
 	
+	
+	public void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException {
+		request.setAttribute("status_form", "clientes");
+		ArrayList<Clientes> lista = new ArrayList<Clientes>();
+		lista = (ArrayList<Clientes>) TestJSONclientes.getJSON();
+		Iterator i = lista.iterator();
+		ArrayList<String> listar = new ArrayList<String>();
+		while(i.hasNext()) {
+			String cliente1 = i.toString();
+			listar.add(cliente1);
+		}
+		System.out.println(listar);
+		request.setAttribute("cliente", listar);
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+	}
 }

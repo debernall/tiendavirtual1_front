@@ -101,6 +101,19 @@ public class Detalleventas {
 	public void setValoriva(long valoriva) {
 		this.valoriva = valoriva;
 	}
+
+	@Override
+	public String toString() {
+		return "{\"codigo_detalle_venta\": " + codigo_detalle_venta 
+				+ ", \"cantidad_producto\": " + cantidad_producto
+				+ ", \"producto\": " + producto.toString() 
+				+ ", \"venta1\": " + venta1.toString1() 
+				+ ", \"valor_total\": " + valor_total
+				+ ", \"valor_venta\":" + valor_venta 
+				+ ", \"valoriva\": " + valoriva 
+				+ "}";
+	}
+	
 	
 	
 

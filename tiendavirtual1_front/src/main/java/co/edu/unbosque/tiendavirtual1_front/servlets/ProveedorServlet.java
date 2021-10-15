@@ -27,6 +27,13 @@ public class ProveedorServlet extends HttpServlet {
 		String consultar = request.getParameter("Consultar");
 		String actualizar = request.getParameter("Actualizar");
 		String borrar = request.getParameter("Borrar");
+		String usuario = request.getParameter("usuarioreg");
+		
+		if(usuario != null) {
+			String usuariotxt = (String) request.getParameter("usuarioreg");
+			request.setAttribute("usuarioreg", usuariotxt);
+		}
+		
 		if(crear != null) {
 			crear(request,response);
 		}

@@ -14,8 +14,10 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import co.edu.unbosque.tiendavirtual1_front.model.Clientes;
+import co.edu.unbosque.tiendavirtual1_front.model.Detalleventas;
 import co.edu.unbosque.tiendavirtual1_front.model.Productos;
 import co.edu.unbosque.tiendavirtual1_front.model.Proveedores;
+import co.edu.unbosque.tiendavirtual1_front.model.Ventas;
 
 public class VentasTestJSON {
 	
@@ -118,6 +120,7 @@ public class VentasTestJSON {
 			producto1.setNombre_producto((String) respuesta2.get("nombre_producto"));
 			producto1.setPrecio_venta((long) respuesta2.get("precio_venta"));
 			producto1.setProveedor(proveedor);
+			producto1.setIva_compra((long) respuesta2.get("iva_compra"));
 			
 		}catch(Exception e) {
 			System.out.println(e);
@@ -125,6 +128,66 @@ public class VentasTestJSON {
 		http.disconnect();
 		return producto1;
 	}
+	
+	
+
+	public static long getJSON3(Ventas venta) throws IOException, ParseException {
+		
+		url = new URL(sitio+"ventas/guardar");
+		HttpURLConnection http;
+		http = (HttpURLConnection)url.openConnection();
+		try {
+			http.setRequestMethod("POST");
+		} catch(ProtocolException e) {
+			e.printStackTrace();
+		}
+		http.setDoOutput(true);
+		http.setRequestProperty("Accept", "application/json");
+		http.setRequestProperty("Content-Type", "application/json");
+		String data = venta.toString();
+		System.out.println(data);
+		byte[] out = data.getBytes(StandardCharsets.UTF_8);
+		OutputStream stream = http.getOutputStream();
+		stream.write(out);
+		long indice = 0;
+		try(BufferedReader br = new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"))) {
+			StringBuilder response = new StringBuilder();
+			String responseLine = null;
+			while ((responseLine = br.readLine()) != null) {
+				response.append(responseLine.trim());
+			}
+			String respuestatxt = response.toString();
+			indice = Long.parseLong(respuestatxt);	
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		http.disconnect();
+		return indice;
+	}
+	
+	public static int getJSON4(Detalleventas detalle) throws IOException, ParseException {
+		
+		url = new URL(sitio+"detalleventas/guardar");
+		HttpURLConnection http;
+		http = (HttpURLConnection)url.openConnection();
+		try {
+			http.setRequestMethod("POST");
+		} catch(ProtocolException e) {
+			e.printStackTrace();
+		}
+		http.setDoOutput(true);
+		http.setRequestProperty("Accept", "application/json");
+		http.setRequestProperty("Content-Type", "application/json");
+		String data = detalle.toString();
+		System.out.println(data);
+		byte[] out = data.getBytes(StandardCharsets.UTF_8);
+		OutputStream stream = http.getOutputStream();
+		stream.write(out);		
+		int respuesta = http.getResponseCode();
+		http.disconnect();
+		return respuesta;
+	}
+	
 	
 
 }
