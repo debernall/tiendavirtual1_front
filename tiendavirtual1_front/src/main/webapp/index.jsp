@@ -593,7 +593,7 @@
 				<tr>
 					<td></td>
 					<th class="ttv">Total Venta</th>
-					<td><input type="text" name="total-venta"></td>
+					<td><input type="text" name="total-venta" <%if(request.getAttribute("valortotal")!=null){%>value="<%= request.getAttribute("valortotal") %>"<%} %>></td>
 				</tr>
 				<tr>
 					<td></td>
