@@ -1,6 +1,6 @@
 body {
 	font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
-	background: url(../img/fondo.jpg);
+	background: url(webapp/img/fondo.jpg);
 	background-position-x: center;
     background-size: cover;
 	/*background: #A1D6E2;  /* fallback for old browsers */
