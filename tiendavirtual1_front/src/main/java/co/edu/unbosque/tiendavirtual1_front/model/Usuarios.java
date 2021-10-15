@@ -72,5 +72,19 @@ public class Usuarios {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "{"
+				+"\"cedula_usuario\":"+ cedula_usuario
+				+", \"nombre_usuario\":\""+ nombre_usuario
+				+"\" , \"email_usuario\":\""+ email_usuario
+				+"\" , \"usuario\":\""+ usuario
+				+"\" , \"password\":\""+ password
+				+"\"}";
+	}
+	
 	
 }

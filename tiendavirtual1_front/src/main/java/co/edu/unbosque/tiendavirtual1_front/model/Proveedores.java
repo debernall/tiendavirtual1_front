@@ -74,5 +74,17 @@ public class Proveedores {
 	public void setTelefono_proveedor(long telefono_proveedor) {
 		this.telefono_proveedor = telefono_proveedor;
 	}
+
+
+	@Override
+	public String toString() {
+		return  "{"
+				+"\"nit_proveedor\":"+ nit_proveedor
+				+", \"ciudad\":\""+ ciudad
+				+"\", \"nombre_proveedor\":\""+ nombre_proveedor
+				+"\", \"direccion_proveedor\":\""+ direccion_proveedor
+				+"\", \"telefono_proveedor\":\""+ telefono_proveedor
+				+"\"}";
+	}
 	
 }

@@ -154,14 +154,7 @@ public class UsuarioTestJSON {
 		http.setRequestProperty("Content-Type", "application/json");
 		Usuarios usprueba = new Usuarios();
 		usprueba.setCedula_usuario(cedula);
-		String data = "{"
-				+"\"cedula_usuario\":"+ usprueba.getCedula_usuario()
-				+", \"nombre_usuario\":\""+ usprueba.getNombre_usuario()
-				+"\" , \"email_usuario\":\""+ usprueba.getEmail_usuario()
-				+"\" , \"usuario\":\""+ usprueba.getUsuario()
-				+"\" , \"password\":\""+ usprueba.getPassword()
-				+"\"}";
-		System.out.println(data);
+		String data = usprueba.toString();;
 		byte[] out = data.getBytes(StandardCharsets.UTF_8);
 		OutputStream stream = http.getOutputStream();
 		stream.write(out);

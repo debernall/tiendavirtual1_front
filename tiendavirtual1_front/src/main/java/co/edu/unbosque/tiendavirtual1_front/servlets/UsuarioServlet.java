@@ -64,6 +64,7 @@ public class UsuarioServlet extends HttpServlet {
 		if(usuarios.getUsuario().equals("admininicial") && usuarios.getPassword().equals("admin123456")) {
 			String estado = "true";
 			request.setAttribute("estado", estado);
+			
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}else {
 			try {

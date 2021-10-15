@@ -7,6 +7,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,11 +21,12 @@ public class Ventas {
 	
 	@Id
 	@Column(unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long codigo_venta;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "clientes_id", nullable = false)
 	private Clientes cliente;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "usuarios_id", nullable = false)
 	private Usuarios usuario;
 	private long ivaventa;
@@ -83,6 +86,7 @@ public class Ventas {
 	public void setValor_venta(long valor_venta) {
 		this.valor_venta = valor_venta;
 	}
+
 	
 	
 
