@@ -118,7 +118,7 @@ public class VentasServlet extends HttpServlet {
 				long valor1 = (Long.parseLong(request.getParameter("cantidad1")))*(producto1.getPrecio_venta());
 				request.setAttribute("cantidad1", cantidad1);
 				request.setAttribute("valor1",valor1);
-				
+				totalventa = totalventa+valor1;
 			}
 		}
 		else {
@@ -133,6 +133,7 @@ public class VentasServlet extends HttpServlet {
 				long valor2 = (Long.parseLong(request.getParameter("cantidad2")))*(producto2.getPrecio_venta());
 				request.setAttribute("cantidad2", cantidad2);
 				request.setAttribute("valor2",valor2 );
+				totalventa = totalventa+valor2;
 			}
 		}
 		else {
@@ -147,6 +148,7 @@ public class VentasServlet extends HttpServlet {
 				long valor3 = (Long.parseLong(request.getParameter("cantidad3")))*(producto3.getPrecio_venta());
 				request.setAttribute("cantidad3", cantidad3);
 				request.setAttribute("valor3",valor3);
+				totalventa = totalventa+valor3;
 			}
 		}
 		else {
@@ -154,6 +156,7 @@ public class VentasServlet extends HttpServlet {
 			request.setAttribute("valor3", 0);
 		}
 		
+		request.setAttribute("valortotal", totalventa);
 		
 		if (consultacliente != null) {
 			consultarcliente(request,response);
