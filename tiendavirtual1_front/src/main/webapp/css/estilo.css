@@ -382,3 +382,13 @@ tbody.listas tr:hover {
 	color: black;
 }
 
+table.reportes{
+	width: 100%;
+}
+th, td table.reportes{
+	padding: 15px;
+}
+
+button.lista {
+	width: 100%;
+}
