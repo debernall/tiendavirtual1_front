@@ -13,6 +13,7 @@ import org.json.simple.parser.ParseException;
 import org.springframework.context.annotation.Bean;
 
 import co.edu.unbosque.tiendavirtual1_front.model.Clientes;
+import co.edu.unbosque.tiendavirtual1_front.model.Reporte;
 import co.edu.unbosque.tiendavirtual1_front.model.Usuarios;
 
 @WebServlet("/ReportesServlet")
@@ -28,6 +29,7 @@ public class ReportesServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {;
 		String listarusuarios = request.getParameter("ListarUsuarios");
 		String listarclientes = request.getParameter("ListarClientes");
+		String ventasCliente = request.getParameter("VentasCliente");
 		
 		String usuario = request.getParameter("usuarioreg");
 		
@@ -35,7 +37,8 @@ public class ReportesServlet extends HttpServlet {
 			String usuariotxt = (String) request.getParameter("usuarioreg");
 			request.setAttribute("usuarioreg", usuariotxt);
 		}
-		else if (listarusuarios != null) {
+		
+		if (listarusuarios != null) {
 			try {
 				listarusuarios(request,response);
 			} catch (Exception e) {
@@ -48,6 +51,13 @@ public class ReportesServlet extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
+		else if(ventasCliente != null) {
+			try {
+				VentasCliente(request,response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}			
 		}
 	}
 
@@ -71,6 +81,15 @@ public class ReportesServlet extends HttpServlet {
 		ArrayList<Clientes> listaclientes = new ArrayList<Clientes>();
 		listaclientes = TestJSONclientes.getJSON();
 		request.setAttribute("listaclientes", listaclientes);
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+	}
+	
+	public void VentasCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException {
+		request.setAttribute("status_form", "reportes");
+		request.setAttribute("estado", "true");
+		ArrayList<Reporte> reporte = new ArrayList<Reporte>();
+		reporte = TestJSONclientes.getJSON3();
+		request.setAttribute("reporte", reporte);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 	

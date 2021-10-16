@@ -5,6 +5,7 @@
 <%@ page import='co.edu.unbosque.tiendavirtual1_front.model.Proveedores'  %>
 <%@ page import='co.edu.unbosque.tiendavirtual1_front.model.Ventas'  %>
 <%@ page import='co.edu.unbosque.tiendavirtual1_front.model.Productos'  %>
+<%@ page import='co.edu.unbosque.tiendavirtual1_front.model.Reporte'  %>
 <%@ page import='org.json.simple.JSONObject'  %>
 <%@ page import='org.json.simple.parser.JSONParser'  %>
 <%@ page import='org.json.simple.parser.ParseException'  %>
@@ -144,7 +145,7 @@
 			}
 	  }
 	  
-	  else if(login == true){%><script>alert('Ingreso exitoso');</script><%}%>	
+	  else if(login == true && request.getAttribute("status_form") != "reportes" ){%><script>alert('Ingreso exitoso');</script><%}%>	
 	  
 	  
 	  
@@ -210,7 +211,7 @@
 					<td><input type="text" name="nombre" <%
 						if(request.getAttribute("status_consultar") == "true"){
 							%> 
-							value=<%= request.getAttribute("nombre")%> 
+							value="<%= request.getAttribute("nombre")%>" 
 							<%
 						}
 					%>
@@ -306,7 +307,7 @@
 					<%
 						if(request.getAttribute("status_consultar") == "true"){
 							%> 
-							value=<%= request.getAttribute("nombre")%> 
+							value="<%= request.getAttribute("nombre")%>" 
 							<%
 						}
 					%>
@@ -328,7 +329,7 @@
 					<%
 						if(request.getAttribute("status_consultar") == "true"){
 							%> 
-							value=<%= request.getAttribute("direccion")%> 
+							value="<%= request.getAttribute("direccion")%>" 
 							<%
 						}
 					%>
@@ -401,7 +402,7 @@
 					<%
 						if(request.getAttribute("status_consultar") == "true"){
 							%> 
-							value=<%= request.getAttribute("nombre")%> 
+							value="<%= request.getAttribute("nombre")%>" 
 							<%
 						}
 					%>
@@ -411,7 +412,7 @@
 					<%
 						if(request.getAttribute("status_consultar") == "true"){
 							%> 
-							value=<%= request.getAttribute("ciudad")%> 
+							value="<%= request.getAttribute("ciudad")%>" 
 							<%
 						}
 					%>
@@ -423,7 +424,7 @@
 					<%
 						if(request.getAttribute("status_consultar") == "true"){
 							%> 
-							value=<%= request.getAttribute("direccion")%> 
+							value="<%= request.getAttribute("direccion")%>" 
 							<%
 						}
 					%>
@@ -657,9 +658,9 @@
      <h3>Reportes</h3>
    		<form method="post" action="./ReportesServlet">
    			<div class = "botones">
-   					<button name="ListarUsuarios" type="submit">Listado Usuarios</button>
-   					<button name="ListarClientes" type="submit">Listado Clientes</button> 
-   					<button name="VentasCliente" type="submit">Ventas por Cliente</button>
+   				<button name="ListarUsuarios" type="submit">Listado Usuarios</button>
+   				<button name="ListarClientes" type="submit">Listado Clientes</button> 
+   				<button name="VentasCliente" type="submit">Ventas por Cliente</button>
    			</div>
    		</form>
    		
@@ -736,6 +737,37 @@
 	
    		} %>
    		
+   		<%	ArrayList<Reporte> listareporte = new ArrayList<Reporte>();
+   			if(request.getAttribute("reporte")!=null){
+   			Object listaobjeto = request.getAttribute("reporte");
+   			listareporte = (ArrayList<Reporte>)listaobjeto;
+   			%>
+   			<table class="listas">
+				<thead>
+					<tr>
+						<th>Cedula</th>
+						<th>Nombres</th>
+						<th>Valor Total</th>
+					</tr><br>
+				</thead>
+				<tbody class="listas" id="listas">
+   			<%
+   			for (int i=0;i<listareporte.size();i++){
+   				System.out.println(listareporte.get(i).getClass());
+   				%>
+   				<tr>
+   					<td><%= listareporte.get(i).getCedula_cliente() %></td>
+   					<td><%= listareporte.get(i).getNombre_cliente() %></td>
+   					<td><%= listareporte.get(i).getValor_total() %></td>
+   				</tr>			
+			<%
+   			}
+   			%>
+   				</tbody>
+			</table>
+   			<%
+	
+   		} %>
    		<!-- 
   		<ul class="navbar-nav2 ml-auto">
             <li class="nav-item">

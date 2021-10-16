@@ -18,6 +18,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import co.edu.unbosque.tiendavirtual1_front.model.Clientes;
+import co.edu.unbosque.tiendavirtual1_front.model.Reporte;
 
 
 public class TestJSONclientes {
@@ -58,6 +59,43 @@ public class TestJSONclientes {
 			cliente.setDireccion_cliente(innerObj.get("direccion_cliente").toString());
 			cliente.setTelefono_cliente((long)innerObj.get("telefono_cliente"));
 			lista.add(cliente);
+		}
+		
+		return lista;
+		
+	}
+	
+	public static ArrayList<Reporte> getJSON3() throws IOException, ParseException{
+		url = new URL(sitio+"clientes/reporte");
+		HttpURLConnection http = (HttpURLConnection)url.openConnection();
+		http.setRequestMethod("POST");
+		http.setRequestProperty("Accept", "application/json");
+		System.out.println("antes del get input stream");
+		InputStream respuesta = http.getInputStream();
+		System.out.println("despues del get input stream");
+		byte[] inp = respuesta.readAllBytes();
+		String json = "";
+		for (int i = 0; i<inp.length ; i++) {
+			json += (char)inp[i];
+		}
+		ArrayList<Reporte> lista = new ArrayList<Reporte>();
+		lista = parsingReportes(json);
+		http.disconnect();
+		return lista;
+	}
+	
+	public static ArrayList<Reporte> parsingReportes(String json) throws ParseException{
+		JSONParser jsonParser = new JSONParser();
+		ArrayList<Reporte> lista = new ArrayList<Reporte>();
+		JSONArray reportes = (JSONArray) jsonParser.parse(json);
+		Iterator i = reportes.iterator();
+		while(i.hasNext()) {
+			JSONObject innerObj = (JSONObject) i.next();
+			Reporte reporte = new Reporte();
+			reporte.setCedula_cliente((long) innerObj.get("cedula_cliente"));
+			reporte.setNombre_cliente(innerObj.get("nombre_cliente").toString());
+			reporte.setValor_total((long) innerObj.get("valor_total"));
+			lista.add(reporte);
 		}
 		
 		return lista;
