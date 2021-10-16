@@ -8,7 +8,8 @@
 <%@ page import='org.json.simple.JSONObject'  %>
 <%@ page import='org.json.simple.parser.JSONParser'  %>
 <%@ page import='org.json.simple.parser.ParseException'  %>
-
+<%@ page import='java.util.ArrayList'  %>
+<%@ page import='java.util.Iterator'  %>
 
 <!DOCTYPE html>
 <html>
@@ -654,24 +655,72 @@
 	%>
      <section  id="interaccion-6" class="oculto info-6"> 
      <h3>Reportes</h3>
-   
+   		<form method="post" action="./ReportesServlet">
+   			<div class = "botones">
+   					<button name="ListarUsuarios" type="submit">Listado Usuarios</button>
+   					<button name="ListarClientes" type="submit">Listado Clientes</button> 
+   					<button name="VentasCliente" type="submit">Ventas por Cliente</button>
+   			</div>
+   		</form>
+   		
+   		<%	ArrayList<Usuarios> listausuarios = new ArrayList<Usuarios>();
+   			String as = new String();
+   			if(request.getAttribute("listausuarios")!=null){
+   			Object listaobjeto = request.getAttribute("listausuarios");
+   			listausuarios = (ArrayList<Usuarios>)listaobjeto;
+   			%>
+   			<table class="listas">
+				<thead>
+					<tr>
+						<th>Cedula</th>
+						<th>Nombres</th>
+						<th>Correo electrónico</th>
+						<th>Usuario</th>
+						<th>Password</th>
+					</tr><br>
+				</thead>
+				<tbody class="listas" id="listas">
+   			<%
+   			for (int i=0;i<listausuarios.size();i++){
+   				System.out.println(listausuarios.get(i).getClass());
+   				%>
+   				<tr>
+   					<td><%= listausuarios.get(i).getCedula_usuario() %></td>
+   					<td><%= listausuarios.get(i).getNombre_usuario() %></td>
+   					<td><%= listausuarios.get(i).getEmail_usuario() %></td>
+   					<td><%= listausuarios.get(i).getUsuario() %></td>
+   					<td><%= listausuarios.get(i).getPassword() %></td>
+   				</tr>			
+			<%
+   			}
+   			%>
+   				</tbody>
+			</table>
+   			<%
+   			System.out.println("xxxxxxxxxxxxxxxxxx");
+   			System.out.println(listausuarios.toString() );	
+   		} %>
+   		
+   		
+   		
+   		<!-- 
   		<ul class="navbar-nav2 ml-auto">
             <li class="nav-item">
+
               <a class="nav-link js-scroll-trigger" onClick="mostrar('interaccion-7');">Listado Usuarios</a> 
+            
             </li>
            
             <li class="nav-item">
-             <form method="post" action="./ClienteServlet" type="hidden">
-              <button name="Listar" type="submit">cliente</button>
-             <!--<a class="nav-link js-scroll-trigger " name="Listar" type="submit" onClick="mostrar('interaccion-8');">Listado Clientes</a>-->
-           	 </form>
+             <a class="nav-link js-scroll-trigger " onClick="mostrar('interaccion-8');">Listado Clientes</a>
+
             </li>
             
            <li class="nav-item">
               <a class="nav-link js-scroll-trigger " onClick="mostrar('interaccion-9');">Listado ventas por cliente</a>
             </li> 
            </ul>
-
+		-->
 
 	<script type="text/javascript">
 		function mostrar(name){
@@ -693,7 +742,12 @@
 		</script>
 		
     </section>
-    
+    <%
+		if(request.getAttribute("status_form") == "reportes"){
+			%> <script> window.onload = mostrar('interaccion-6') </script>
+			<%
+		}
+	%>
     <section  id="interaccion-7" class="oculto info-7">
 		<h2>Listado Usuarios</h2>
 		<form method="post" action="./ClienteServlet">
@@ -737,13 +791,7 @@
 		</section>
 		
 		<section  id="interaccion-8" class="oculto info-8">
-		<h2>Listado Clientes</h2>
-		<%String cliente2 = new String ();
-		if(request.getAttribute("cliente")!=null){
-			cliente2 = (String) request.getAttribute("cliente");
-			
-		} %>
-			<h2><%=cliente2 %></h2>
+
 			<table class="listas">
 				<thead>
 						<tr>
