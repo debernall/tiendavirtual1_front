@@ -664,7 +664,6 @@
    		</form>
    		
    		<%	ArrayList<Usuarios> listausuarios = new ArrayList<Usuarios>();
-   			String as = new String();
    			if(request.getAttribute("listausuarios")!=null){
    			Object listaobjeto = request.getAttribute("listausuarios");
    			listausuarios = (ArrayList<Usuarios>)listaobjeto;
@@ -701,7 +700,41 @@
    			System.out.println(listausuarios.toString() );	
    		} %>
    		
-   		
+   		<%	ArrayList<Clientes> listaclientes = new ArrayList<Clientes>();
+   			if(request.getAttribute("listaclientes")!=null){
+   			Object listaobjeto = request.getAttribute("listaclientes");
+   			listaclientes = (ArrayList<Clientes>)listaobjeto;
+   			%>
+   			<table class="listas">
+				<thead>
+					<tr>
+						<th>Cedula</th>
+						<th>Nombres</th>
+						<th>Correo electrónico</th>
+						<th>Direccion</th>
+						<th>Teléfono</th>
+					</tr><br>
+				</thead>
+				<tbody class="listas" id="listas">
+   			<%
+   			for (int i=0;i<listaclientes.size();i++){
+   				System.out.println(listaclientes.get(i).getClass());
+   				%>
+   				<tr>
+   					<td><%= listaclientes.get(i).getCedula_cliente() %></td>
+   					<td><%= listaclientes.get(i).getNombre_cliente() %></td>
+   					<td><%= listaclientes.get(i).getEmail_cliente() %></td>
+   					<td><%= listaclientes.get(i).getDireccion_cliente() %></td>
+   					<td><%= listaclientes.get(i).getTelefono_cliente() %></td>
+   				</tr>			
+			<%
+   			}
+   			%>
+   				</tbody>
+			</table>
+   			<%
+	
+   		} %>
    		
    		<!-- 
   		<ul class="navbar-nav2 ml-auto">

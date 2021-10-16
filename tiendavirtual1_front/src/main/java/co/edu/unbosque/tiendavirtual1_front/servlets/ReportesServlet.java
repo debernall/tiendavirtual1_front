@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.parser.ParseException;
 import org.springframework.context.annotation.Bean;
 
+import co.edu.unbosque.tiendavirtual1_front.model.Clientes;
 import co.edu.unbosque.tiendavirtual1_front.model.Usuarios;
 
 @WebServlet("/ReportesServlet")
@@ -26,6 +27,7 @@ public class ReportesServlet extends HttpServlet {
     @Bean
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {;
 		String listarusuarios = request.getParameter("ListarUsuarios");
+		String listarclientes = request.getParameter("ListarClientes");
 		
 		String usuario = request.getParameter("usuarioreg");
 		
@@ -40,8 +42,13 @@ public class ReportesServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
-		
+		else if(listarclientes != null) {
+			try {
+				listarclientes(request,response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -55,12 +62,17 @@ public class ReportesServlet extends HttpServlet {
 		ArrayList<Usuarios> listausuarios = new ArrayList<Usuarios>();
 		listausuarios = UsuarioTestJSON.getJSON();
 		request.setAttribute("listausuarios", listausuarios);
-		System.out.println(listausuarios);
-		
-		
-		
-		
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
+	
+	public void listarclientes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException {
+		request.setAttribute("status_form", "reportes");
+		request.setAttribute("estado", "true");
+		ArrayList<Clientes> listaclientes = new ArrayList<Clientes>();
+		listaclientes = TestJSONclientes.getJSON();
+		request.setAttribute("listaclientes", listaclientes);
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+	}
+	
 }
 
