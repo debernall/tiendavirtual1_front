@@ -657,11 +657,13 @@
      <section  id="interaccion-6" class="oculto info-6"> 
      <h3>Reportes</h3>
    		<form method="post" action="./ReportesServlet">
-   			<div class = "botones">
-   				<button name="ListarUsuarios" type="submit">Listado Usuarios</button>
-   				<button name="ListarClientes" type="submit">Listado Clientes</button> 
-   				<button name="VentasCliente" type="submit">Ventas por Cliente</button>
-   			</div>
+   			<table class = "reportes">
+   				<tr>
+   					<th><button class="lista" name="ListarUsuarios" type="submit">Listado Usuarios</button></th>
+   					<th><button class="lista" name="ListarClientes" type="submit">Listado Clientes</button></th> 
+   					<th><button class="lista" name="VentasCliente" type="submit">Ventas por Cliente</button></th>
+   				</tr>	
+   			</table>
    		</form>
    		
    		<%	ArrayList<Usuarios> listausuarios = new ArrayList<Usuarios>();
@@ -768,24 +770,7 @@
    			<%
 	
    		} %>
-   		<!-- 
-  		<ul class="navbar-nav2 ml-auto">
-            <li class="nav-item">
 
-              <a class="nav-link js-scroll-trigger" onClick="mostrar('interaccion-7');">Listado Usuarios</a> 
-            
-            </li>
-           
-            <li class="nav-item">
-             <a class="nav-link js-scroll-trigger " onClick="mostrar('interaccion-8');">Listado Clientes</a>
-
-            </li>
-            
-           <li class="nav-item">
-              <a class="nav-link js-scroll-trigger " onClick="mostrar('interaccion-9');">Listado ventas por cliente</a>
-            </li> 
-           </ul>
-		-->
 
 	<script type="text/javascript">
 		function mostrar(name){
@@ -807,131 +792,8 @@
 		</script>
 		
     </section>
-    <%
-		if(request.getAttribute("status_form") == "reportes"){
-			%> <script> window.onload = mostrar('interaccion-6') </script>
-			<%
-		}
-	%>
-    <section  id="interaccion-7" class="oculto info-7">
-		<h2>Listado Usuarios</h2>
-		<form method="post" action="./ClienteServlet">
-			<table class="listas">
-				<thead>
-						<tr>
-							<th>Cedula</th>
-							<th>Nombre</th>
-							<th>Correo Electronico</th>
-							<th>Usuario</th>
-							<th>Password</th>
-						</tr>
-				</thead>
-				<tbody class="listas" id="listas">
-					<tr>
-					
-					</tr>
-				</tbody>
-			</table>
-			
-			
-		<script type="text/javascript">
-		function mostrar(name){
-			closeAll();
-			let el = document.getElementById(name);
-			el.style.height = 'auto';
-			irA(name);
-		}
-		function closeAll(){
-			let info = document.getElementsByClassName('oculto');
-			for(i = 0; i < info.length; i++){
-				info[i].style.height = '0';
-			} 
-		}
-		function irA(name){
-			let el = document.getElementById(name);
-			window.smoothScroll(el, 1000);
-		}
-		</script>
-		</form>
-		</section>
-		
-		<section  id="interaccion-8" class="oculto info-8">
 
-			<table class="listas">
-				<thead>
-						<tr>
-							<th>Cedula</th>
-							<th>Nombre</th>
-							<th>Correo Electronico</th>
-							<th>Direccion</th>
-							<th>Telefono</th>
-						</tr>
-				</thead>
-				<tbody class="listas" id="listas">
-				
-                  <tr >
-                  </tr>
-				</tbody>
-			</table>
-			
-			
-		<script type="text/javascript">
-		function mostrar(name){
-			closeAll();
-			let el = document.getElementById(name);
-			el.style.height = 'auto';
-			irA(name);
-		}
-		function closeAll(){
-			let info = document.getElementsByClassName('oculto');
-			for(i = 0; i < info.length; i++){
-				info[i].style.height = '0';
-			} 
-		}
-		function irA(name){
-			let el = document.getElementById(name);
-			window.smoothScroll(el, 1000);
-		}
-		</script>
-		</form>
-		</section>
-		
-		<section  id="interaccion-9" class="oculto info-9">
-		<h2>Listado Clientes</h2>
-		<form action="">
-			<table class="listas">
-				<thead>
-						<tr>
-							<th>Cedula</th>
-							<th>Nombre</th>
-							<th>Valor total ventas</th>
-						</tr>
-				</thead>
-				<tbody class="listas" id="listas">
-				</tbody>
-			</table>
-			
-			
-		<script type="text/javascript">
-		function mostrar(name){
-			closeAll();
-			let el = document.getElementById(name);
-			el.style.height = 'auto';
-			irA(name);
-		}
-		function closeAll(){
-			let info = document.getElementsByClassName('oculto');
-			for(i = 0; i < info.length; i++){
-				info[i].style.height = '0';
-			} 
-		}
-		function irA(name){
-			let el = document.getElementById(name);
-			window.smoothScroll(el, 1000);
-		}
-		</script>
-		</form>
-		</section>
+
 		
 </body>
 </html>
