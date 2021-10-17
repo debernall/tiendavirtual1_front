@@ -31,9 +31,7 @@ public class TestJSONclientes {
 		HttpURLConnection http = (HttpURLConnection)url.openConnection();
 		http.setRequestMethod("GET");
 		http.setRequestProperty("Accept", "application/json");
-		System.out.println("antes del get input stream");
 		InputStream respuesta = http.getInputStream();
-		System.out.println("despues del get input stream");
 		byte[] inp = respuesta.readAllBytes();
 		String json = "";
 		for (int i = 0; i<inp.length ; i++) {
@@ -70,9 +68,7 @@ public class TestJSONclientes {
 		HttpURLConnection http = (HttpURLConnection)url.openConnection();
 		http.setRequestMethod("POST");
 		http.setRequestProperty("Accept", "application/json");
-		System.out.println("antes del get input stream");
 		InputStream respuesta = http.getInputStream();
-		System.out.println("despues del get input stream");
 		byte[] inp = respuesta.readAllBytes();
 		String json = "";
 		for (int i = 0; i<inp.length ; i++) {
@@ -122,7 +118,6 @@ public class TestJSONclientes {
 				+"\", \"direccion_cliente\":\""+ cliente.getDireccion_cliente()
 				+"\", \"telefono_cliente\":\""+ cliente.getTelefono_cliente()
 				+"\"}";
-		System.out.println(data);
 		byte[] out = data.getBytes(StandardCharsets.UTF_8);
 		OutputStream stream = http.getOutputStream();
 		stream.write(out);
@@ -153,7 +148,6 @@ public class TestJSONclientes {
 				+"\", \"direccion_cliente\":\""+ cliprueba.getDireccion_cliente()
 				+"\", \"telefono_cliente\":\""+ cliprueba.getTelefono_cliente()
 				+"\"}";
-		System.out.println(data);
 		byte[] out = data.getBytes(StandardCharsets.UTF_8);
 		OutputStream stream = http.getOutputStream();
 		stream.write(out);
@@ -165,7 +159,6 @@ public class TestJSONclientes {
 				response.append(responseLine.trim());
 			}
 			String respuestatxt = response.toString();
-			System.out.println(respuestatxt);
 			JSONParser jsonParser = new JSONParser();
 			JSONObject respuesta2 = (JSONObject) jsonParser.parse(respuestatxt);
 			cliente.setCedula_cliente((long) respuesta2.get("cedula_cliente"));
@@ -176,7 +169,6 @@ public class TestJSONclientes {
 			
 		}
 		http.disconnect();
-		System.out.println(cliente.toString());
 		return cliente;
 	}
 	
@@ -201,12 +193,10 @@ public class TestJSONclientes {
 				+"\", \"direccion_cliente\":\""+ cliprueba.getDireccion_cliente()
 				+"\", \"telefono_cliente\":\""+ cliprueba.getTelefono_cliente()
 				+"\"}";
-		System.out.println(data);
 		byte[] out = data.getBytes(StandardCharsets.UTF_8);
 		OutputStream stream = http.getOutputStream();
 		stream.write(out);
 		int respuesta = http.getResponseCode();
-		System.out.println(respuesta);
 		http.disconnect();
 		return respuesta;
 	}

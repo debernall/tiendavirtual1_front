@@ -83,11 +83,9 @@ public class VentasTestJSON {
 		http.setRequestProperty("Accept", "application/json");
 		http.setRequestProperty("Content-Type", "application/json");
 		Productos producto = new Productos();
-		System.out.println("PRODUCTOS GETJSON2 ENTRANDO");
 		producto.setCodigo_producto(codigo);
 		Proveedores proveedor = new Proveedores();
 		producto.setProveedor(proveedor);
-		System.out.println("PRODUCTOS GETJSON2 ENTRANDO");
 		String data = "{"
 				+"\"codigo_producto\": "+ producto.getCodigo_producto()
 				+", \"nombre_producto\": \""+ producto.getNombre_producto()
@@ -102,7 +100,6 @@ public class VentasTestJSON {
 				+", \"iva_compra\": "+ producto.getIva_compra()
 				+", \"precio_venta\": "+ producto.getPrecio_venta()
 				+"}";
-		System.out.println(data);
 		byte[] out = data.getBytes(StandardCharsets.UTF_8);
 		OutputStream stream = http.getOutputStream();
 		stream.write(out);
@@ -123,7 +120,7 @@ public class VentasTestJSON {
 			producto1.setIva_compra((long) respuesta2.get("iva_compra"));
 			
 		}catch(Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		http.disconnect();
 		return producto1;
@@ -145,7 +142,6 @@ public class VentasTestJSON {
 		http.setRequestProperty("Accept", "application/json");
 		http.setRequestProperty("Content-Type", "application/json");
 		String data = venta.toString();
-		System.out.println(data);
 		byte[] out = data.getBytes(StandardCharsets.UTF_8);
 		OutputStream stream = http.getOutputStream();
 		stream.write(out);
@@ -159,7 +155,7 @@ public class VentasTestJSON {
 			String respuestatxt = response.toString();
 			indice = Long.parseLong(respuestatxt);	
 		}catch(Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		http.disconnect();
 		return indice;
@@ -179,7 +175,6 @@ public class VentasTestJSON {
 		http.setRequestProperty("Accept", "application/json");
 		http.setRequestProperty("Content-Type", "application/json");
 		String data = detalle.toString();
-		System.out.println(data);
 		byte[] out = data.getBytes(StandardCharsets.UTF_8);
 		OutputStream stream = http.getOutputStream();
 		stream.write(out);		

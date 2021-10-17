@@ -30,9 +30,7 @@ public class TestJSONproveedores {
 		HttpURLConnection http = (HttpURLConnection)url.openConnection();
 		http.setRequestMethod("GET");
 		http.setRequestProperty("Accept", "application/json");
-		System.out.println("antes del get input stream");
 		InputStream respuesta = http.getInputStream();
-		System.out.println("despues del get input stream");
 		byte[] inp = respuesta.readAllBytes();
 		String json = "";
 		for (int i = 0; i<inp.length ; i++) {
@@ -84,7 +82,6 @@ public class TestJSONproveedores {
 				+"\", \"direccion_proveedor\":\""+ proveedor.getDireccion_proveedor()
 				+"\", \"telefono_proveedor\":\""+ proveedor.getTelefono_proveedor()
 				+"\"}";
-		System.out.println(data);
 		byte[] out = data.getBytes(StandardCharsets.UTF_8);
 		OutputStream stream = http.getOutputStream();
 		stream.write(out);
@@ -115,7 +112,6 @@ public class TestJSONproveedores {
 				+"\", \"direccion_proveedor\":\""+ proprueba.getDireccion_proveedor()
 				+"\", \"telefono_proveedor\":\""+ proprueba.getTelefono_proveedor()
 				+"\"}";
-		System.out.println(data);
 		byte[] out = data.getBytes(StandardCharsets.UTF_8);
 		OutputStream stream = http.getOutputStream();
 		stream.write(out);
@@ -127,7 +123,6 @@ public class TestJSONproveedores {
 						response.append(responseLine.trim());
 					}
 					String respuestatxt = response.toString();
-					System.out.println(respuestatxt);
 					JSONParser jsonParser = new JSONParser();
 					JSONObject respuesta2 = (JSONObject) jsonParser.parse(respuestatxt);
 					proveedor.setNit_proveedor((long) respuesta2.get("nit_proveedor"));
@@ -137,7 +132,6 @@ public class TestJSONproveedores {
 					proveedor.setTelefono_proveedor((long) respuesta2.get("telefono_proveedor"));
 				}
 				http.disconnect();
-				System.out.println(proveedor.toString());
 				return proveedor;
 	}
 	
@@ -162,12 +156,10 @@ public class TestJSONproveedores {
 				+"\", \"direccion_proveedor\":\""+ proprueba.getDireccion_proveedor()
 				+"\", \"telefono_proveedor\":\""+ proprueba.getTelefono_proveedor()
 				+"\"}";
-		System.out.println(data);
 		byte[] out = data.getBytes(StandardCharsets.UTF_8);
 		OutputStream stream = http.getOutputStream();
 		stream.write(out);
 		int respuesta = http.getResponseCode();
-		System.out.println(respuesta);
 		http.disconnect();
 		return respuesta;
 	}

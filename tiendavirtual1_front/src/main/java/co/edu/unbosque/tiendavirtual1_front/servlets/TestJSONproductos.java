@@ -31,9 +31,7 @@ public class TestJSONproductos {
 		HttpURLConnection http = (HttpURLConnection)url.openConnection();
 		http.setRequestMethod("GET");
 		http.setRequestProperty("Accept", "application/json");
-		System.out.println("antes del get input stream");
 		InputStream respuesta = http.getInputStream();
-		System.out.println("despues del get input stream");
 		byte[] inp = respuesta.readAllBytes();
 		String json = "";
 		for (int i = 0; i<inp.length ; i++) {
@@ -130,7 +128,6 @@ public class TestJSONproductos {
 				+", \"iva_compra\": "+ producto.getIva_compra()
 				+", \"precio_venta\": "+ producto.getPrecio_venta()
 				+"}";
-		System.out.println(data);
 		byte[] out = data.getBytes(StandardCharsets.UTF_8);
 		OutputStream stream = http.getOutputStream();
 		stream.write(out);
@@ -142,7 +139,6 @@ public class TestJSONproductos {
 				response.append(responseLine.trim());
 			}
 			String respuestatxt = response.toString();
-			System.out.println(respuestatxt);
 			JSONParser jsonParser = new JSONParser();
 			JSONObject respuesta2 = (JSONObject) jsonParser.parse(respuestatxt);
 			
@@ -150,7 +146,6 @@ public class TestJSONproductos {
 			producto1.setNombre_producto((String) respuesta2.get("nombre_producto"));
 		}
 		http.disconnect();
-		System.out.println(producto.toString());
 		return producto1;
 	}
 	

@@ -69,12 +69,9 @@ public class ProductoServlet extends HttpServlet {
 		request.setAttribute("status_form", "producto");
 		
 		try {
-			System.out.println("Voy a entrar aqui");
 			Part csv = request.getPart("archivoProductos");
 			DataInputStream input = new DataInputStream(csv.getInputStream());
 			ArrayList<String[]> lista = CSVHelper.csvToTutorials(input);
-			System.out.println("Voy a salir hacia el for");
-			System.out.println(lista.size());
 			if (lista.size()!=0) {
 				try {
 					for (int i=1;i<lista.size();i++) {
@@ -94,11 +91,9 @@ public class ProductoServlet extends HttpServlet {
 							producto.setPrecio_venta(Long.parseLong(elem.get(5)));
 							int respuesta = TestJSONproductos.postJSON(producto);
 							if (respuesta==200) {
-								System.out.println("estamos insertando 1 producto");
 								request.setAttribute("status_load", "true");
 							}else {
 								request.setAttribute("status_load", "error");
-								System.out.println("no hicimos nada");
 							}
 						}
 				}catch(Exception e) {
@@ -109,7 +104,7 @@ public class ProductoServlet extends HttpServlet {
 			}
 		}
 		catch(Exception e){
-			System.out.println(e);
+			e.printStackTrace();
 			request.setAttribute("status_load", "false");
 		}
 		

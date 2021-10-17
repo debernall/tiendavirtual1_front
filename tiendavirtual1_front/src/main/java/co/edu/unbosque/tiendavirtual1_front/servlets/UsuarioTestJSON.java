@@ -30,9 +30,7 @@ public class UsuarioTestJSON {
 		HttpURLConnection http = (HttpURLConnection) url.openConnection();
 		http.setRequestMethod("GET");
 		http.setRequestProperty("Accept", "application/json");
-		System.out.println("antes del get input stream");
 		InputStream respuesta = http.getInputStream();
-		System.out.println("despues del get input stream");
 		byte[] inp = respuesta.readAllBytes();
 		String json = "";
 		for (int i = 0; i<inp.length ; i++) {
@@ -84,7 +82,6 @@ public class UsuarioTestJSON {
 				+"\", \"usuario\":\""+ usuario.getUsuario()
 				+"\", \"password\":\""+ usuario.getPassword()
 				+"\"}";
-		System.out.println(data);
 		byte[] out = data.getBytes(StandardCharsets.UTF_8);
 		OutputStream stream = http.getOutputStream();
 		stream.write(out);
@@ -113,7 +110,6 @@ public class UsuarioTestJSON {
 				+"\" , \"usuario\":\""+ usuarios.getUsuario()
 				+"\" , \"password\":\""+ usuarios.getPassword()
 				+"\"}";
-		System.out.println(data);
 		byte[] out = data.getBytes(StandardCharsets.UTF_8);
 		OutputStream stream = http.getOutputStream();
 		stream.write(out);
@@ -125,7 +121,6 @@ public class UsuarioTestJSON {
 				response.append(responseLine.trim());
 			}
 			String respuestatxt = response.toString();
-			System.out.println(respuestatxt);
 			JSONParser jsonParser = new JSONParser();
 			JSONObject respuesta2 = (JSONObject) jsonParser.parse(respuestatxt);
 			respuesta3 = (String) respuesta2.get("status");	
@@ -136,7 +131,6 @@ public class UsuarioTestJSON {
 			}
 		}
 		http.disconnect();
-		System.out.println(respuesta3);
 		return respuesta3;
 	}
 	
@@ -159,7 +153,6 @@ public class UsuarioTestJSON {
 				+"\" , \"usuario\":\""+ usuarios.getUsuario()
 				+"\" , \"password\":\""+ usuarios.getPassword()
 				+"\"}";
-		System.out.println(data);
 		byte[] out = data.getBytes(StandardCharsets.UTF_8);
 		OutputStream stream = http.getOutputStream();
 		stream.write(out);
@@ -176,10 +169,8 @@ public class UsuarioTestJSON {
 			JSONObject respuesta2 = (JSONObject) jsonParser.parse(respuestatxt);
 			usuario.setCedula_usuario((long) respuesta2.get("cedula_usuario"));
 			usuario.setUsuario((String) respuesta2.get("usuario"));
-			System.out.println(usuario.toString());
 		}
 		http.disconnect();
-		System.out.println(usuario.toString());
 		return usuario;
 	}
 	
@@ -209,7 +200,6 @@ public class UsuarioTestJSON {
 				response.append(responseLine.trim());
 			}
 			String respuestatxt = response.toString();
-			System.out.println(respuestatxt);
 			JSONParser jsonParser = new JSONParser();
 			JSONObject respuesta2 = (JSONObject) jsonParser.parse(respuestatxt);
 			usuario.setCedula_usuario((long) respuesta2.get("cedula_usuario"));
@@ -219,7 +209,6 @@ public class UsuarioTestJSON {
 			usuario.setPassword((String) respuesta2.get("password"));
 		}
 		http.disconnect();
-		System.out.println(usuario.toString());
 		return usuario;
 	}
 	
@@ -244,12 +233,10 @@ public class UsuarioTestJSON {
 				+"\" , \"usuario\":\""+ usprueba.getUsuario()
 				+"\" , \"password\":\""+ usprueba.getPassword()
 				+"\"}";
-		System.out.println(data);
 		byte[] out = data.getBytes(StandardCharsets.UTF_8);
 		OutputStream stream = http.getOutputStream();
 		stream.write(out);
 		int respuesta = http.getResponseCode();
-		System.out.println(respuesta);
 		http.disconnect();
 		return respuesta;
 	}

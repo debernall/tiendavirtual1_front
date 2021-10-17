@@ -146,7 +146,6 @@ public class VentasServlet extends HttpServlet {
 		if (producto1.getCodigo_producto()>0) {
 			String cantidad1 = request.getParameter("cantidad1");
 			if (cantidad1 !="") {
-				System.out.println(cantidad1);
 				long valor1 = (Long.parseLong(request.getParameter("cantidad1")))*(producto1.getPrecio_venta());
 				request.setAttribute("cantidad1", cantidad1);
 				request.setAttribute("valor1",valor1);
@@ -163,7 +162,6 @@ public class VentasServlet extends HttpServlet {
 		if (producto2.getCodigo_producto()>0) {
 			String cantidad2 = request.getParameter("cantidad2");
 			if (cantidad2 !="") {
-				System.out.println(cantidad2);
 				long valor2 = (Long.parseLong(request.getParameter("cantidad2")))*(producto2.getPrecio_venta());
 				request.setAttribute("cantidad2", cantidad2);
 				request.setAttribute("valor2",valor2 );
@@ -179,7 +177,6 @@ public class VentasServlet extends HttpServlet {
 		if (producto3.getCodigo_producto()>0) {
 			String cantidad3 = request.getParameter("cantidad3");
 			if (cantidad3 !="") {
-				System.out.println(cantidad3);
 				long valor3 = (Long.parseLong(request.getParameter("cantidad3")))*(producto3.getPrecio_venta());
 				request.setAttribute("cantidad3", cantidad3);
 				request.setAttribute("valor3",valor3);
@@ -222,7 +219,6 @@ public class VentasServlet extends HttpServlet {
 			venta.setIvaventa(totaliva1);
 			venta.setTotal_venta(totalventa1);
 			venta.setValor_venta(totalventa1+totaliva1);
-			System.out.println(venta.toString());
 			try {
 				long codventa = VentasTestJSON.getJSON3(venta);
 				venta.setCodigoventa(codventa);
@@ -255,7 +251,6 @@ public class VentasServlet extends HttpServlet {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				System.out.println(detalle1.toString());
 			}
 			if(producto2.getCodigo_producto()>0) {
 				detalle2.setProducto(producto2);
@@ -274,7 +269,6 @@ public class VentasServlet extends HttpServlet {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				System.out.println(detalle2.toString());
 				
 			}
 			if(producto3.getCodigo_producto()>0) {
@@ -294,7 +288,6 @@ public class VentasServlet extends HttpServlet {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				System.out.println(detalle3.toString());
 				
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
@@ -321,7 +314,6 @@ public class VentasServlet extends HttpServlet {
 					request.setAttribute("estado", "true");
 					request.setAttribute("status_consultarcliente", "true");
 					String cliente1 = cliente.toString();
-					System.out.println(cliente1);
 					
 					request.setAttribute("cliente", cliente1);
 					request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -347,11 +339,8 @@ public class VentasServlet extends HttpServlet {
 			long codigo_pro = Long.parseLong(request.getParameter("codigo1"));
 			Productos producto = new Productos();
 			try {
-				System.out.println("Antes del getJSON2 de ventas");
 				producto = (Productos) VentasTestJSON.getJSON2(codigo_pro);
-				System.out.println("Despues del getJSON2 de ventas");
 				long id = producto.getCodigo_producto();
-				System.out.println(id);
 				if (id != 0) {
 					request.setAttribute("producto1", producto.toString());
 					request.setAttribute("status_consultarpro1", "true");
@@ -359,7 +348,7 @@ public class VentasServlet extends HttpServlet {
 					request.setAttribute("status_consultarpro1", "empty");
 				}
 			}catch (Exception e) {
-				System.out.println(e);
+				e.printStackTrace();
 				request.setAttribute("status_consultarpro1", "empty");
 			}
 			
@@ -379,9 +368,7 @@ public class VentasServlet extends HttpServlet {
 			long codigo_pro = Long.parseLong(request.getParameter("codigo2"));
 			Productos producto = new Productos();
 			try {
-				System.out.println("Antes del getJSON2 de ventas");
 				producto = (Productos) VentasTestJSON.getJSON2(codigo_pro);
-				System.out.println("Despues del getJSON2 de ventas");
 				long id = producto.getCodigo_producto();
 				if (id != 0) {
 					request.setAttribute("producto2", producto.toString());
@@ -390,7 +377,7 @@ public class VentasServlet extends HttpServlet {
 					request.setAttribute("status_consultarpro1", "empty");
 				}
 			}catch (Exception e) {
-				System.out.println(e);
+				e.printStackTrace();
 				request.setAttribute("status_consultarpro1", "empty");
 			}
 			
@@ -410,9 +397,7 @@ public class VentasServlet extends HttpServlet {
 			long codigo_pro = Long.parseLong(request.getParameter("codigo3"));
 			Productos producto = new Productos();
 			try {
-				System.out.println("Antes del getJSON2 de ventas");
 				producto = (Productos) VentasTestJSON.getJSON2(codigo_pro);
-				System.out.println("Despues del getJSON2 de ventas");
 				long id = producto.getCodigo_producto();
 				if (id != 0) {
 					request.setAttribute("producto3", producto.toString());
@@ -421,7 +406,7 @@ public class VentasServlet extends HttpServlet {
 					request.setAttribute("status_consultarpro1", "empty");
 				}
 			}catch (Exception e) {
-				System.out.println(e);
+				e.printStackTrace();
 				request.setAttribute("status_consultarpro1", "empty");
 			}
 			

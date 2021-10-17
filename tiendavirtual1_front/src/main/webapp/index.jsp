@@ -657,6 +657,7 @@
      <section  id="interaccion-6" class="oculto info-6"> 
      <h3>Reportes</h3>
    		<form method="post" action="./ReportesServlet">
+   		<textarea style="display:none;" name="usuarioreg" rows="10" cols="40"><%=usuario.toString() %></textarea>
    			<table class = "reportes">
    				<tr>
    					<th><button class="lista" name="ListarUsuarios" type="submit">Listado Usuarios</button></th>
@@ -684,7 +685,6 @@
 				<tbody class="listas" id="listas">
    			<%
    			for (int i=0;i<listausuarios.size();i++){
-   				System.out.println(listausuarios.get(i).getClass());
    				%>
    				<tr>
    					<td><%= listausuarios.get(i).getCedula_usuario() %></td>
@@ -699,8 +699,6 @@
    				</tbody>
 			</table>
    			<%
-   			System.out.println("xxxxxxxxxxxxxxxxxx");
-   			System.out.println(listausuarios.toString() );	
    		} %>
    		
    		<%	ArrayList<Clientes> listaclientes = new ArrayList<Clientes>();
@@ -721,7 +719,6 @@
 				<tbody class="listas" id="listas">
    			<%
    			for (int i=0;i<listaclientes.size();i++){
-   				System.out.println(listaclientes.get(i).getClass());
    				%>
    				<tr>
    					<td><%= listaclientes.get(i).getCedula_cliente() %></td>
@@ -755,7 +752,6 @@
 				<tbody class="listas" id="listas">
    			<%
    			for (int i=0;i<listareporte.size();i++){
-   				System.out.println(listareporte.get(i).getClass());
    				%>
    				<tr>
    					<td><%= listareporte.get(i).getCedula_cliente() %></td>
@@ -792,7 +788,12 @@
 		</script>
 		
     </section>
-
+<%
+		if(request.getAttribute("status_form") == "reportes"){
+			%> <script> window.onload = mostrar('interaccion-6') </script>
+			<%
+		}
+	%>
 
 		
 </body>

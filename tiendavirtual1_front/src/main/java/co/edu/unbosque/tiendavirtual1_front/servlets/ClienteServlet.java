@@ -107,10 +107,8 @@ public class ClienteServlet extends HttpServlet {
 			cedula =  Long.parseLong(request.getParameter("cedula"));
 			Clientes respuesta = new Clientes();
 			try {
-				System.out.println("voy a intentar algo");
 				respuesta = (Clientes) TestJSONclientes.getJSON1(cedula);
 				long id = respuesta.getCedula_cliente();
-				System.out.println("voy a intentar algo");
 				if (id != 0) {
 					request.setAttribute("estado", "true");
 					request.setAttribute("status_consultar", "true");
@@ -120,7 +118,6 @@ public class ClienteServlet extends HttpServlet {
 					request.setAttribute("email", respuesta.getEmail_cliente());
 					request.setAttribute("direccion", respuesta.getDireccion_cliente());
 					request.getRequestDispatcher("index.jsp").forward(request, response);
-					System.out.println("voy a intentar algo");
 			}
 		}
 			catch (Exception e) {
@@ -207,7 +204,6 @@ public class ClienteServlet extends HttpServlet {
 			String cliente1 = i.toString();
 			listar.add(cliente1);
 		}
-		System.out.println(listar);
 		request.setAttribute("cliente", listar);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
